@@ -1,0 +1,42 @@
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    border-radius: 5px;
+    background-color: #f6f9fd;
+}
+
+.input-large {
+    width: 800px;
+    height: 50px;
+}
+
+.input-textarea {
+    height: 70px;
+}
+
+.input-medium {
+    width: 470px;
+    height: 50px;
+}
+
+.icon-container {
+    margin-right: 15px;
+    margin-left: 20px;
+}
+
+.input-container:focus-within {
+    border: solid 1px #489df0;
+}
+
+.input-container > input {
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    height: 100%;
+}
+
+.input-container > input:focus {
+    background-color: transparent;
+    outline: none
+}
