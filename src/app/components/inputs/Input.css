@@ -1,5 +1,5 @@
 .input-container {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     align-items: center;
     border-radius: 5px;
