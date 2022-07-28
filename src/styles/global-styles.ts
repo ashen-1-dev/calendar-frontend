@@ -55,7 +55,7 @@ export const GlobalStyle = createGlobalStyle`
   select {
     font: inherit;
   }
-
+  
   @media (prefers-reduced-motion: reduce) {
     * {
       animation-duration: 0.01ms !important;
@@ -64,8 +64,8 @@ export const GlobalStyle = createGlobalStyle`
       scroll-behavior: auto !important;
     }
   }
-
+  
   #root {
-    min-width: 1280px;
+    min-width: 1280px;  
   }
 `;
