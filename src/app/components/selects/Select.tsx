@@ -17,8 +17,8 @@ const SelectHeader = styled('div')`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 351px;
-  height: 50px;
+  width: 21.9em;
+  height: 3.125em;
   font-weight: bold;
   padding-left: 20px;
   padding-right: 5px;
@@ -28,7 +28,7 @@ const SelectHeader = styled('div')`
 `;
 const DropdownList = styled('ul')`
   display: flex;
-  gap: 10px;
+  gap: 0.625em;
   flex-direction: column;
   background-color: inherit;
   border-radius: inherit;
@@ -36,7 +36,7 @@ const DropdownList = styled('ul')`
 `;
 const ListItem = styled('li')`
   background-color: inherit;
-  padding-left: 20px;
+  padding-left: 1.25em;
 `;
 
 const Select = () => {
