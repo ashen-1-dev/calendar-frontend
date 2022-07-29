@@ -3,7 +3,7 @@
     flex-direction: row;
     align-items: center;
     border-radius: 5px;
-    background-color: #f6f9fd;
+    background-color: var(--light-grey);
 }
 
 .input-large {
@@ -26,7 +26,7 @@
 }
 
 .input-container:focus-within {
-    border: solid 1px #489df0;
+    border: solid 1px var(--blue);
 }
 
 .input-container > input {

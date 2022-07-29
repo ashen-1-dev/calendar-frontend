@@ -1,5 +1,4 @@
 import React from 'react';
-import { Colors } from '../../../styles/colors';
 import { ReactComponent as PlusSvg } from './assets/plus.svg';
 import Button from './Button';
 import classNames from 'classnames';
