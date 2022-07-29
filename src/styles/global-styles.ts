@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import { Colors } from './colors';
 
 export const GlobalStyle = createGlobalStyle`
+  
+  
   *,
   *::before,
   *::after {
@@ -28,12 +29,12 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body {
-    font-family: Roboto, serif;
+    font-family: Roboto, sans-serif;
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
-    color: ${Colors.White};
+    color: white;
   }
   ul[class],
   ol[class] {

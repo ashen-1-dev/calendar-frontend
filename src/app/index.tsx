@@ -14,6 +14,7 @@ import { GlobalStyle } from 'styles/global-styles';
 
 import { HomePage } from './pages/HomePage/Loadable';
 import { useTranslation } from 'react-i18next';
+import '../styles/global.css';
 
 export function App() {
   const { i18n } = useTranslation();
