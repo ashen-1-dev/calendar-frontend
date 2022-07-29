@@ -7,22 +7,22 @@
 }
 
 .input-large {
-    width: 800px;
-    height: 50px;
+    width: 50em;
+    height: 3.125em;
 }
 
 .input-textarea {
-    height: 70px;
+    height: 4.375em;
 }
 
 .input-medium {
-    width: 470px;
-    height: 50px;
+    width: 29.375em;
+    height: 3.125em;
 }
 
 .icon-container {
-    margin-right: 15px;
-    margin-left: 20px;
+    margin-right: 0.9375em;
+    margin-left: 1.25em;
 }
 
 .input-container:focus-within {
