@@ -1,5 +1,3 @@
-
-
 .btn {
     display: flex;
     border: none;
@@ -39,16 +37,16 @@
 }
 
 .btn-primary {
-    background-color: #489df0;
+    background-color: var(--blue);
 }
 
 .btn-secondary {
     background-color: white;
-    border: solid 1px #489df0;
+    border: solid 1px var(--blue);
 }
 
 .btn-secondary > .btn-text {
-    color: #489df0;
+    color: var(--blue);
 }
 
 .btn-round {
