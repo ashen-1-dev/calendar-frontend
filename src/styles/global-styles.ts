@@ -1,29 +1,72 @@
 import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
-  html,
+  
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+  ul[class],
+  ol[class] {
+    padding: 0;
+  }
+  body,
+  h1,
+  h2,
+  h3,
+  h4,
+  p,
+  ul[class],
+  ol[class],
+  li,
+  figure,
+  figcaption,
+  blockquote,
+  dl,
+  dd {
+    margin: 0;
+  }
   body {
-    height: 100%;
-    width: 100%;
+    font-family: Roboto, sans-serif;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+    text-rendering: optimizeSpeed;
+    line-height: 1.5;
+    color: white;
+  }
+  ul[class],
+  ol[class] {
+    list-style: none;
+  }
+  a:not([class]) {
+    text-decoration-skip-ink: auto;
+  }
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  article > * + * {
+    margin-top: 1em;
+  }
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
   }
 
-  body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  @media (prefers-reduced-motion: reduce) {
+    * {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 
   #root {
-    min-height: 100%;
-    min-width: 100%;
-  }
-
-  p,
-  label {
-    font-family: Georgia, Times, 'Times New Roman', serif;
-    line-height: 1.5em;
-  }
-
-  input, select {
-    font-family: inherit;
-    font-size: inherit;
+    min-width: 1280px;
   }
 `;
