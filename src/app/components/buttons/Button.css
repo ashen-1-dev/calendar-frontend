@@ -1,0 +1,57 @@
+.btn {
+    display: flex;
+    border: none;
+    border-radius: 5px;
+}
+
+.btn-size-very-small {
+    width: 30px;
+    height: 30px;
+}
+
+.btn-size-small {
+    width: 50px;
+    height: 50px;
+}
+
+.btn-size-medium {
+    width: 103px;
+    height: 50px;
+}
+
+.btn-size-medium. {
+    width: 103px;
+    height: 50px;
+}
+
+.btn-size-large {
+    width: 192px;
+    height: 50px;
+}
+
+.btn-text {
+    margin: auto;
+    font-size: 16px;
+    color: white;
+    display: block;
+}
+
+.btn-primary {
+    background-color: var(--blue);
+}
+
+.btn-secondary {
+    background-color: white;
+    border: solid 1px var(--blue);
+}
+
+.btn-secondary > .btn-text {
+    color: var(--blue);
+}
+
+.btn-round {
+    border-radius: 25px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.05);
+}
+
+
