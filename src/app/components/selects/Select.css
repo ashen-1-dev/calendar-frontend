@@ -1,0 +1,25 @@
+.select-container:focus-within {
+    border: solid 1px #489df0;
+}
+
+.select {
+    appearance: none;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    padding-left: 20px;
+}
+
+.select:focus {
+    outline: none;
+}
+
+.select-container > .icon-wrapper {
+    margin: auto;
+    z-index: 1;
+}
+
+.select > option {
+    width: 500px;
+    height: 500px;
+}

@@ -5,6 +5,7 @@ import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
 import Input from 'app/components/inputs/TextInput';
+import Select from '../../components/selects/Select';
 
 export function HomePage() {
   return (
@@ -34,6 +35,8 @@ export function HomePage() {
       <Input placeholder={'Поиск по тегам'} />
       <br />
       <Input placeholder={'Поиск по тегам'} size={'large'} />
+      <br />
+      <Select></Select>
     </div>
   );
 }
