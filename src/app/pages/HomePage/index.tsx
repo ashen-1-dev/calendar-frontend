@@ -4,6 +4,7 @@ import Button from '../../components/buttons/Button';
 import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
+import Radio from '../../components/radio/Radio';
 
 export function HomePage() {
   return (
@@ -29,6 +30,8 @@ export function HomePage() {
       <Button size={'very-small'} variant={'primary'}>
         <DeleteSvg />
       </Button>
+      <br />
+      <Radio>Праздник</Radio>
     </div>
   );
 }
