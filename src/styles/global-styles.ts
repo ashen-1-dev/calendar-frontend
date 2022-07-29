@@ -29,7 +29,7 @@ export const GlobalStyle = createGlobalStyle`
     margin: 0;
   }
   body {
-    font-family: Roboto, serif;
+    font-family: Roboto, sans-serif;
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
