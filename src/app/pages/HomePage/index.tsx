@@ -31,7 +31,10 @@ export function HomePage() {
         <DeleteSvg />
       </Button>
       <br />
-      <Radio>Праздник</Radio>
+      <br />
+      <Radio type="event">Событие</Radio>
+      <Radio type="holiday">Событие</Radio>
+      <Radio type="other">Событие</Radio>
     </div>
   );
 }
