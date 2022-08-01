@@ -20,7 +20,8 @@ const RadioGroup: React.FC<RadioGroupProps> = ({ options }) => {
         return (
           <Radio
             key={option.type}
-            option={{ ...option, selected: option.type == selectedId }}
+            option={option}
+            selected={option.type == selectedId}
             onChange={() => setSelectedId(option.type)}
           />
         );

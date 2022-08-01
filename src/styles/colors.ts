@@ -5,6 +5,7 @@ export enum Colors {
 
   LightGrey = '#f6f9fd',
   LightGrey2 = '#b6cfe9',
+  LightGrey3 = '#f8fafe',
   HoverGrey = '#eef6fe',
 
   Green = '#4ac45d',
