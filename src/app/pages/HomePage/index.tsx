@@ -4,9 +4,15 @@ import Button from '../../components/buttons/Button';
 import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
-import Radio from '../../components/radio/Radio';
+import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
+import RadioGroup from 'app/components/radio/RadioGroup';
 
 export function HomePage() {
+  const options: RadioOption[] = [
+    { type: 'holiday', label: 'Событие' },
+    { type: 'event', label: 'Событие' },
+    { type: 'other', label: 'Событие' },
+  ];
   return (
     <div>
       <Button size={'large'} variant={'primary'}>
@@ -32,9 +38,7 @@ export function HomePage() {
       </Button>
       <br />
       <br />
-      <Radio type="event">Событие</Radio>
-      <Radio type="holiday">Событие</Radio>
-      <Radio type="other">Событие</Radio>
+      <RadioGroup options={options} />
     </div>
   );
 }
