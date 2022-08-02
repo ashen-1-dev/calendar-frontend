@@ -6,6 +6,7 @@ import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
 import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
+import MyDatetimePicker from 'app/components/datepicker/MyDatetimePicker';
 
 export function HomePage() {
   const options: RadioOption[] = [
@@ -39,6 +40,8 @@ export function HomePage() {
       <br />
       <br />
       <RadioGroup options={options} />
+      <br />
+      <MyDatetimePicker />
     </div>
   );
 }
