@@ -3,20 +3,27 @@ import './Input.css';
 import { ReactComponent as SearchSvg } from './assets/search.svg';
 import classNames from 'classnames';
 
-export interface TextInputProps {
+export interface InputProps {
   placeholder?: string;
   size?: 'large' | 'medium';
+  showIcon?: boolean;
 }
 
-const TextInput: React.FC<TextInputProps> = ({ placeholder, size }) => {
+const Input: React.FC<InputProps> = ({
+  placeholder,
+  size,
+  showIcon = false,
+}) => {
   return (
     <div className={classNames('input-container', `input-${size || 'medium'}`)}>
-      <div className={'icon-container'}>
-        <SearchSvg />
-      </div>
-      <input placeholder={placeholder} accept={'text'} />
+      {showIcon && (
+        <div className={'icon-container'}>
+          <SearchSvg />
+        </div>
+      )}
+      <input placeholder={placeholder} />
     </div>
   );
 };
 
-export default TextInput;
+export default Input;
