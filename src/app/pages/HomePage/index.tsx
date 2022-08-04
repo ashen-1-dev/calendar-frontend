@@ -4,9 +4,17 @@ import Button from '../../components/buttons/Button';
 import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
+import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
+import RadioGroup from 'app/components/radio/RadioGroup';
 import Input from 'app/components/inputs/Input';
+import TagInput from '../../components/tag-input/TagInput';
 
 export function HomePage() {
+  const options: RadioOption[] = [
+    { type: 'holiday', label: 'Событие' },
+    { type: 'event', label: 'Праздник' },
+    { type: 'other', label: 'Другое' },
+  ];
   return (
     <div>
       <Button size={'large'} variant={'primary'}>
@@ -31,9 +39,17 @@ export function HomePage() {
         <DeleteSvg />
       </Button>
       <br />
-      <Input placeholder={'Поиск по тегам'} />
+      {/*<Input placeholder={'Поиск по тегам'} />*/}
       <br />
-      <Input showIcon placeholder={'Поиск по тегам'} size={'large'} />
+      {/*<Input showIcon placeholder={'Поиск по тегам'} size={'large'} />*/}
+      <br />
+      <br />
+      <RadioGroup options={options} />
+      <TagInput
+        placeholder={'Поиск по тегам'}
+        showIcon
+        size={'large'}
+      ></TagInput>
     </div>
   );
 }
