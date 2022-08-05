@@ -2,6 +2,7 @@ export enum Colors {
   DefaultDark = '#494949',
   White = '#fff',
   Blue = '#489df0',
+  Blue2 = '#3994ef',
 
   LightGrey = '#f6f9fd',
   LightGrey2 = '#b6cfe9',

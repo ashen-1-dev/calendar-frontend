@@ -32,6 +32,7 @@ export const GlobalStyle = createGlobalStyle`
     font-family: Roboto, sans-serif;
     font-size: 16px;
     color: var(--default-dark);
+    background-color: var(--light-grey3);
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;

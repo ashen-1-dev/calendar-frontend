@@ -14,16 +14,16 @@ const Item = styled.div`
   font-size: 0.875rem;
   background-color: ${Colors.Blue};
   white-space: nowrap;
-  :last-child {
-    margin-right: 1em;
-  }
 `;
 const ItemDescription = styled.div`
+  display: flex;
+  align-items: center;
   position: absolute;
+  margin-top: 0.125rem;
   width: 14.375rem;
   height: 2.275rem;
-  margin: 0.125rem 0 0;
   font-size: 0.75rem;
+  background-color: white;
 `;
 
 const TagItem: React.FC<{ item: Tag; onRemoval: () => void }> = props => {
@@ -40,7 +40,11 @@ const TagItem: React.FC<{ item: Tag; onRemoval: () => void }> = props => {
           <CloseSvg />
         </div>
       </Item>
-      {isHover && <ItemDescription>{item.description}</ItemDescription>}
+      {isHover && (
+        <ItemDescription>
+          <div>{item.description}</div>
+        </ItemDescription>
+      )}
     </div>
   );
 };

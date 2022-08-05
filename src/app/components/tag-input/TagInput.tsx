@@ -8,6 +8,7 @@ import DropDownTag from './DropDownTag';
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  position: relative;
 `;
 
 const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
@@ -58,7 +59,9 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
       >
         <TagList onRemoval={removeTag} items={tags} />
       </Input>
-      <DropDownTag items={searchedTags} onItemClick={addTag} />
+      {!!searchedTags.length && (
+        <DropDownTag items={searchedTags} onItemClick={addTag} />
+      )}
     </Wrapper>
   );
 };

@@ -15,6 +15,7 @@ import { GlobalStyle } from 'styles/global-styles';
 import { HomePage } from './pages/HomePage/Loadable';
 import { useTranslation } from 'react-i18next';
 import '../styles/global.css';
+import Header from './components/header/Header';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -27,7 +28,7 @@ export function App() {
       >
         <meta name="description" content="A React Boilerplate application" />
       </Helmet>
-
+      <Header />
       <Switch>
         <Route exact path="/" component={HomePage} />
       </Switch>
