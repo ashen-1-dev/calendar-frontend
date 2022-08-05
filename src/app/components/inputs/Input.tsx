@@ -5,7 +5,8 @@ import classNames from 'classnames';
 
 export interface InputProps {
   placeholder?: string;
-  size?: 'large' | 'medium';
+  size?: 'large' | 'medium' | 'small' | 'very-small';
+  label?: string;
   showIcon?: boolean;
   children?: ReactNode;
   value: string;
@@ -19,16 +20,22 @@ const Input: React.FC<InputProps> = ({
   children,
   value,
   onChange,
+  label,
 }) => {
   return (
-    <div className={classNames('input-container', `input-${size || 'medium'}`)}>
-      {showIcon && (
-        <div className={'icon-container'}>
-          <SearchSvg />
-        </div>
-      )}
-      {children}
-      <input value={value} onChange={onChange} placeholder={placeholder} />
+    <div style={{ position: 'relative' }}>
+      <div className={'input-label'}>{label}</div>
+      <div
+        className={classNames('input-container', `input-${size || 'medium'}`)}
+      >
+        {showIcon && (
+          <div className={'icon-container'}>
+            <SearchSvg />
+          </div>
+        )}
+        {children}
+        <input value={value} onChange={onChange} placeholder={placeholder} />
+      </div>
     </div>
   );
 };

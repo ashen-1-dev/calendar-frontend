@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { Helmet } from 'react-helmet-async';
 import Button from '../../components/buttons/Button';
 import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
@@ -8,6 +7,7 @@ import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
 import Input from 'app/components/inputs/Input';
 import TagInput from '../../components/tag-input/TagInput';
+import TagEditModal from '../../components/tag/tag-edit-modal';
 
 export function HomePage() {
   const options: RadioOption[] = [
@@ -50,6 +50,7 @@ export function HomePage() {
         showIcon
         size={'large'}
       ></TagInput>
+      <TagEditModal />
     </div>
   );
 }

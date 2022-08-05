@@ -7,14 +7,40 @@
     border: solid 1px transparent;
 }
 
+input::placeholder {
+    color: var(--light-grey2);
+}
+
+input {
+    padding-left: 1.25rem;
+}
+
 .input-large {
     font-size: 1rem;
     width: 50em;
     height: 3.125em;
 }
 
+.input-very-small {
+    width: 12.5rem;
+    height: 3.125rem;
+}
+
+.input-small {
+    width: 25rem;
+    height: 3.125rem;
+}
+
 .input-textarea {
     height: 4.375em;
+}
+
+.input-label {
+    position: absolute;
+    bottom: 3.4rem;
+    font-size: 0.875rem;
+    color: var(--default-dark);
+    font-weight: 500;
 }
 
 .input-medium {
@@ -24,7 +50,6 @@
 }
 
 .icon-container {
-    margin-right: 0.9375em;
     margin-left: 1.25em;
 }
 
