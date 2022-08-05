@@ -11,12 +11,12 @@ const Wrapper = styled.div`
 `;
 
 const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
-  const { placeholder, showIcon, size } = props;
+  let { placeholder, showIcon, size } = props;
   const [value, setValue] = useState('');
   const [tags, setTags] = useState<Tag[]>([]);
-  const allTags = [
+  const allTags: Tag[] = [
     { id: 1, name: 'Не важно', description: 'Да это не жестко' },
-    { id: 2, name: 'Важно', description: 'Да это жестко' },
+    { id: 2, name: 'Ва же', description: 'Да это жестко' },
   ];
 
   const removeTag = (id: number) => {
@@ -31,6 +31,7 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
     setValue('');
     setTags(prevTags => [...prevTags, tag]);
   };
+
   const searchedTags = useMemo(() => {
     if (value === '') {
       return [];
@@ -43,6 +44,9 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
     );
   }, [value, allTags]);
 
+  if (tags.length) {
+    placeholder = '';
+  }
   return (
     <Wrapper>
       <Input
