@@ -2,6 +2,7 @@
     display: flex;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .btn-size-very-small {
