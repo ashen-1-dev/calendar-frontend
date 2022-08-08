@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import TagInput from '../tag-input/TagInput';
 import Button from '../buttons/Button';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import CurrentTime from './CurrentTime';
+import Modal from '../Modal/Modal';
+import TagEdit from '../tag/tag-edit';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -20,16 +22,24 @@ const Logo = styled.div`
 `;
 
 const Header = () => {
+  const [modalActive, setModalActive] = useState(false);
   return (
     <Wrapper>
+      <Modal
+        active={modalActive}
+        label={'Редактрование тегов'}
+        setActive={setModalActive}
+      >
+        <TagEdit />
+      </Modal>
       <Logo>Календарь</Logo>
       <div style={{ display: 'flex', gap: '2.5rem' }}>
-        <TagInput
-          placeholder={'Поиск по тегам'}
-          showIcon={true}
+        <TagInput placeholder={'Поиск по тегам'} showIcon size={'large'} />
+        <Button
+          onClick={() => setModalActive(true)}
           size={'large'}
-        />
-        <Button size={'large'} variant={'primary'}>
+          variant={'primary'}
+        >
           Редактировать теги
         </Button>
       </div>
