@@ -2,31 +2,27 @@
     display: flex;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .btn-size-very-small {
-    width: 30px;
-    height: 30px;
+    width: 1.875em;
+    height: 1.875em;
 }
 
 .btn-size-small {
-    width: 50px;
-    height: 50px;
+    width: 3.125em;
+    height: 3.125em;
 }
 
 .btn-size-medium {
-    width: 103px;
-    height: 50px;
-}
-
-.btn-size-medium. {
-    width: 103px;
-    height: 50px;
+    width: 6.4em;
+    height: 3.125em;
 }
 
 .btn-size-large {
-    width: 192px;
-    height: 50px;
+    width: 12em;
+    height: 3.125em;
 }
 
 .btn-text {

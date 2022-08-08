@@ -17,25 +17,25 @@ export function HomePage() {
   ];
   return (
     <div>
-      <Button size={'large'} variant={'primary'}>
+      <Button onClick={() => null} size={'large'} variant={'primary'}>
         Редактировать теги
       </Button>
       <br />
-      <Button size={'medium'} variant={'primary'}>
+      <Button onClick={() => null} size={'medium'} variant={'primary'}>
         Удалить
       </Button>
       <br />
-      <Button size={'medium'} variant={'secondary'}>
+      <Button onClick={() => null} size={'medium'} variant={'secondary'}>
         Отмена
       </Button>
       <br />
-      <RoundButton />
+      <RoundButton onClick={() => null} />
       <br />
-      <Button size={'very-small'} variant={'primary'}>
+      <Button onClick={() => null} size={'very-small'} variant={'primary'}>
         <EditSvg />
       </Button>
       <br />
-      <Button size={'very-small'} variant={'primary'}>
+      <Button onClick={() => null} size={'very-small'} variant={'primary'}>
         <DeleteSvg />
       </Button>
       <br />

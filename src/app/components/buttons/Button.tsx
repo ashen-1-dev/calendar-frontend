@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import './Button.css';
 
-const Button = ({ size, variant, children, type = '' }) => {
+const Button = ({ onClick, size, variant, children, type = '' }) => {
   return (
     <div
+      onClick={onClick}
       className={classNames(
         `btn`,
         `btn-size-${size}`,
