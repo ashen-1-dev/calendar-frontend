@@ -3,12 +3,11 @@ import Button from '../../components/buttons/Button';
 import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
-import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
+import { RadioOption } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
-import Input from 'app/components/inputs/Input';
 import TagInput from '../../components/tag-input/TagInput';
-import TagEdit from '../../components/tag/TagEdit';
-import Modal from 'app/components/modal/Modal';
+import CalendarCell from '../../components/calendar/CalendarCell';
+import { Appointment, AppointmentType } from '../../models/Appointment';
 
 export function HomePage() {
   const options: RadioOption[] = [
@@ -16,7 +15,26 @@ export function HomePage() {
     { type: 'event', label: 'Праздник' },
     { type: 'other', label: 'Другое' },
   ];
-
+  const appointments: Appointment[] = [
+    {
+      type: AppointmentType.Event,
+      name: 'Тест',
+      date: new Date(),
+      budget: 1500,
+    },
+    {
+      type: AppointmentType.Holiday,
+      name: 'Тест',
+      date: new Date(),
+      budget: 1500,
+    },
+    {
+      type: AppointmentType.Holiday,
+      name: 'Тест',
+      date: new Date(),
+      budget: 1500,
+    },
+  ];
   return (
     <div>
       <Button onClick={() => null} size={'large'} variant={'primary'}>
@@ -52,6 +70,11 @@ export function HomePage() {
         showIcon
         size={'large'}
       ></TagInput>
+      <CalendarCell
+        date={new Date('2022-01-2')}
+        selected={true}
+        appointments={appointments}
+      />
     </div>
   );
 }
