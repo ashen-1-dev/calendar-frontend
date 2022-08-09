@@ -8,6 +8,8 @@ import RadioGroup from 'app/components/radio/RadioGroup';
 import TagInput from '../../components/tag-input/TagInput';
 import CalendarCell from '../../components/calendar/CalendarCell';
 import { Appointment, AppointmentType } from '../../models/Appointment';
+import Calendar from '../../components/calendar/Calendar';
+import { getDatesUntilWeekday, getDaysInMonthUTC } from '../../helpers/dates';
 
 export function HomePage() {
   const options: RadioOption[] = [
@@ -35,6 +37,23 @@ export function HomePage() {
       budget: 1500,
     },
   ];
+  const datesOfCurrentMonth = getDaysInMonthUTC(4, 2022);
+  const datesOfPastMonth = getDatesUntilWeekday(
+    datesOfCurrentMonth[0],
+    1,
+    'back',
+  ).reverse();
+  const fillRemainingDate = (dates: Date[]) => {
+    while (dates.length !== 42) {
+      let lastDate = dates[dates.length - 1];
+      let tommorrowDate = new Date(lastDate);
+      tommorrowDate.setDate(tommorrowDate.getDate() + 1);
+      dates.push(tommorrowDate);
+    }
+    return dates;
+  };
+  const dates = fillRemainingDate(datesOfPastMonth.concat(datesOfCurrentMonth));
+
   return (
     <div>
       <Button onClick={() => null} size={'large'} variant={'primary'}>
@@ -70,11 +89,7 @@ export function HomePage() {
         showIcon
         size={'large'}
       ></TagInput>
-      <CalendarCell
-        date={new Date('2022-01-2')}
-        selected={true}
-        appointments={appointments}
-      />
+      <Calendar dates={dates} />
     </div>
   );
 }

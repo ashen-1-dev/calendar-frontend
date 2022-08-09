@@ -32,14 +32,14 @@ interface CalendarCellProp {
   date: Date;
   appointments?: Appointment[];
   selected: boolean;
+  onClick?: (...args) => any;
 }
 
 const CalendarCell = (props: CalendarCellProp) => {
-  const { appointments, date, selected } = props;
+  const { appointments, date, selected, onClick } = props;
   const formatDay = format(date, 'd');
   return (
-    // @ts-ignore
-    <Wrapper selected={selected}>
+    <Wrapper onClick={onClick} selected={selected}>
       <Date selected={selected}>{formatDay}</Date>
       <AppointmentGroup>
         {appointments &&
