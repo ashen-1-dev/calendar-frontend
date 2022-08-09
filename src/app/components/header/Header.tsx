@@ -4,8 +4,8 @@ import Button from '../buttons/Button';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import CurrentTime from './CurrentTime';
-import Modal from '../Modal/Modal';
-import TagEdit from '../tag/tag-edit';
+import Modal from '../modal/Modal';
+import TagEdit from '../tag/TagEdit';
 
 const Wrapper = styled.div`
   background-color: white;

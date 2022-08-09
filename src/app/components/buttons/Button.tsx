@@ -4,14 +4,14 @@ import './Button.css';
 
 interface ButtonProps
   extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'type'> {
-  size: 'small' | 'medium' | 'large' | 'very-small';
+  size?: 'small' | 'medium' | 'large' | 'very-small';
   variant: 'primary' | 'secondary' | 'disabled' | 'default';
   type?: 'btn-round';
   children?: ReactNode;
 }
 
 const Button = (props: ButtonProps) => {
-  const { size, variant, type = '', onClick, children } = props;
+  const { size = '', variant, type = '', onClick, children, ...rest } = props;
   return (
     <div
       onClick={onClick}
@@ -21,6 +21,7 @@ const Button = (props: ButtonProps) => {
         `btn-${variant}`,
         `${type}`,
       )}
+      {...rest}
     >
       <span className="btn-text">{children}</span>
     </div>

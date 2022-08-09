@@ -7,8 +7,8 @@ import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
 import Input from 'app/components/inputs/Input';
 import TagInput from '../../components/tag-input/TagInput';
-import TagEdit from '../../components/tag/tag-edit';
-import Modal from 'app/components/Modal/Modal';
+import TagEdit from '../../components/tag/TagEdit';
+import Modal from 'app/components/modal/Modal';
 
 export function HomePage() {
   const options: RadioOption[] = [
