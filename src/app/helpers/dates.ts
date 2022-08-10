@@ -1,7 +1,6 @@
 import { CALENDAR_COLUMN, CALENDAR_ROW } from '../constants/constants';
 
 export function getDaysInMonthUTC(month: number, year: number): Date[] {
-  month--;
   const date: Date = new Date(Date.UTC(year, month, 1));
   const days: Date[] = [];
   while (date.getUTCMonth() === month) {
@@ -23,8 +22,8 @@ export function getDatesUntilWeekday(date: Date, weekDayIndex: number): Date[] {
   return dates;
 }
 
-export function fillDates(month: number, year: number): Date[] {
-  const datesOfCurrentMonth = getDaysInMonthUTC(month, year);
+export function fillDates(monthIndex: number, year: number): Date[] {
+  const datesOfCurrentMonth = getDaysInMonthUTC(monthIndex, year);
   const datesOfPastMonth = getDatesUntilWeekday(
     datesOfCurrentMonth[0],
     1,

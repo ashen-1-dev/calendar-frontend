@@ -6,16 +6,12 @@ import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/del
 import { RadioOption } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
 import TagInput from '../../components/tag-input/TagInput';
-import CalendarCell from '../../components/calendar/CalendarCell';
 import { Appointment, AppointmentType } from '../../models/Appointment';
 import Calendar from '../../components/calendar/Calendar';
-import {
-  fillDates,
-  getDatesUntilWeekday,
-  getDaysInMonthUTC,
-} from '../../helpers/dates';
+import { useState } from 'react';
 
 export function HomePage() {
+  const [data, setData] = useState(new Date());
   const options: RadioOption[] = [
     { type: 'holiday', label: 'Событие' },
     { type: 'event', label: 'Праздник' },
@@ -41,8 +37,6 @@ export function HomePage() {
       budget: 1500,
     },
   ];
-
-  const dates = fillDates(9, 2022);
 
   return (
     <div>
@@ -79,7 +73,7 @@ export function HomePage() {
         showIcon
         size={'large'}
       ></TagInput>
-      <Calendar dates={dates} />
+      <Calendar date={data} setDate={setData} />
     </div>
   );
 }
