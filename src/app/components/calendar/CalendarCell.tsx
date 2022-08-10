@@ -28,18 +28,18 @@ const Date = styled.span<{ selected: boolean }>`
   color: ${({ selected }) => (selected ? Colors.Blue : Colors.DefaultDark)};
 `;
 
-interface CalendarCellProp {
+interface CalendarCellProp extends React.HTMLProps<HTMLDivElement> {
   date: Date;
   appointments?: Appointment[];
   selected: boolean;
-  onClick?: (...args) => any;
+  onClick: (date) => void;
 }
 
 const CalendarCell = (props: CalendarCellProp) => {
   const { appointments, date, selected, onClick } = props;
   const formatDay = format(date, 'd');
   return (
-    <Wrapper onClick={onClick} selected={selected}>
+    <Wrapper onClick={() => onClick(date)} selected={selected}>
       <Date selected={selected}>{formatDay}</Date>
       <AppointmentGroup>
         {appointments &&
