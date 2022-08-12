@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="delete" width="13" height="13" viewBox="0 0 13 13">
+    <defs>
+        <style>
+            .cls-2{fill:#fff}
+        </style>
+    </defs>
+    <g id="delete-2" transform="translate(.565)">
+        <g id="Group_20" transform="translate(1.189 2.501)">
+            <g id="Group_19">
+                <path id="Path_54" d="M70.832 98.512l-.8 9.445h-5.865l-.8-9.445-1.013.092.814 9.616a.869.869 0 0 0 .845.791h6.172a.87.87 0 0 0 .846-.8l.814-9.61z" class="cls-2" transform="translate(-62.354 -98.512)"/>
+            </g>
+        </g>
+        <g id="Group_22" transform="translate(3.222)">
+            <g id="Group_21">
+                <path id="Path_55" d="M149.875 0h-3.73a.864.864 0 0 0-.848.878v1.669h1.017V1.054h3.391v1.493h1.017V.878a.864.864 0 0 0-.847-.878z" class="cls-2" transform="translate(-145.297)"/>
+            </g>
+        </g>
+        <g id="Group_24" transform="translate(0 2.02)">
+            <g id="Group_23">
+                <path id="Path_56" d="M25.2 79.568H14.347a.527.527 0 0 0 0 1.054H25.2a.527.527 0 0 0 0-1.054z" class="cls-2" transform="translate(-13.838 -79.568)"/>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -21,6 +21,7 @@
     "@types/webpack": "5.28.0",
     "@types/webpack-env": "1.16.3",
     "chalk": "4.1.2",
+    "classnames": "2.3.1",
     "cross-env": "7.0.3",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-prettier": "4.0.0",
@@ -60,7 +61,8 @@
     "stylelint-processor-styled-components": "1.10.0",
     "ts-node": "10.4.0",
     "typescript": "4.5.4",
-    "web-vitals": "2.1.2"
+    "web-vitals": "2.1.2",
+    "yarn": "1.22.19"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -72,8 +74,8 @@
     "checkTs": "tsc --noEmit",
     "eslint": "eslint --ext js,ts,tsx",
     "lint": "yarn run eslint src",
-    "lint:fix": "yarn run eslint --fix src",
-    "lint:css": "stylelint src/**/*.css",
+    "lint:fix": "yarn run slint --fix src",
+    "lint:cs": "stylelint src/**/*.css",
     "generate": "plop --plopfile internals/generators/plopfile.ts",
     "prettify": "prettier --write",
     "extract-messages": "i18next-scanner --config=internals/extractMessages/i18next-scanner.config.js",

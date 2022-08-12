@@ -1,0 +1,60 @@
+button {
+    outline: none;
+}
+
+button[disabled] {
+    opacity: 0.6;
+    cursor: default;
+}
+
+.btn {
+    display: flex;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-size-very-small {
+    width: 1.875em;
+    height: 1.875em;
+}
+
+.btn-size-small {
+    width: 3.125em;
+    height: 3.125em;
+}
+
+.btn-size-medium {
+    width: 6.4em;
+    height: 3.125em;
+}
+
+.btn-size-large {
+    width: 12em;
+    height: 3.125em;
+}
+
+.btn-text {
+    margin: auto;
+    font-size: 1rem;
+    color: white;
+    display: block;
+}
+
+.btn-primary {
+    background-color: var(--blue);
+}
+
+.btn-secondary {
+    background-color: white;
+    border: solid 1px var(--blue);
+}
+
+.btn-secondary > .btn-text {
+    color: var(--blue);
+}
+
+.btn-round {
+    border-radius: 25px;
+    box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.05);
+}
