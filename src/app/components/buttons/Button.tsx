@@ -5,7 +5,7 @@ import './Button.css';
 interface ButtonProps
   extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
   size: 'small' | 'medium' | 'large' | 'very-small';
-  variant: 'primary' | 'secondary' | 'disabled';
+  variant: 'primary' | 'secondary';
   type?: 'btn-round';
   children?: ReactNode;
 }
