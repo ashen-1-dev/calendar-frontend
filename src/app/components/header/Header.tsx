@@ -21,10 +21,11 @@ const Logo = styled.div`
   padding-left: 1.875rem;
 `;
 
-const Header = () => {
+const Header = props => {
+  const { className } = props;
   const [modalActive, setModalActive] = useState(false);
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <Modal
         active={modalActive}
         label={'Редактрование тегов'}

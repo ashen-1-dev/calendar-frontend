@@ -1,4 +1,4 @@
-import React, { HTMLProps, useEffect } from 'react';
+import React, { HTMLProps } from 'react';
 import { ReactComponent as BackSvg } from './assets/back.svg';
 import { ReactComponent as ForwardSvg } from './assets/forward.svg';
 import CalendarBody from './CalendarBody';
@@ -11,6 +11,7 @@ import capitalize from 'lodash/capitalize';
 interface CalendarProps extends HTMLProps<HTMLDivElement> {
   date: Date;
   setDate: (date) => void;
+  className?: string;
 }
 
 const Wrapper = styled.div`
@@ -19,7 +20,7 @@ const Wrapper = styled.div`
 `;
 
 const Calendar = (props: CalendarProps) => {
-  const { date, setDate } = props;
+  const { date, setDate, className } = props;
   const formatDate = format(date, 'LLLL yyyy', { locale: ru });
   const dates = fillDates(date.getMonth(), date.getFullYear());
   const getPrevMonth = () => {
@@ -32,7 +33,6 @@ const Calendar = (props: CalendarProps) => {
     });
   };
   const getNextMonth = () => {
-    console.log(date);
     setDate(prev => {
       if (prev.getMonth() === 11) {
         console.log('next');
@@ -42,7 +42,7 @@ const Calendar = (props: CalendarProps) => {
     });
   };
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div
         style={{ alignSelf: 'center', padding: '2.5rem', userSelect: 'none' }}
       >

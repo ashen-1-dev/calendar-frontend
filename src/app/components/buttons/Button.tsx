@@ -3,28 +3,40 @@ import classNames from 'classnames';
 import './Button.css';
 
 interface ButtonProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'type'> {
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
   size?: 'small' | 'medium' | 'large' | 'very-small';
-  variant: 'primary' | 'secondary' | 'disabled' | 'default';
+  variant: 'primary' | 'secondary';
   type?: 'btn-round';
+  icon?: JSX.Element;
   children?: ReactNode;
 }
 
 const Button = (props: ButtonProps) => {
-  const { size = '', variant, type = '', onClick, children, ...rest } = props;
+  const {
+    size = 'medium',
+    variant = 'primary',
+    type = '',
+    onClick,
+    children,
+    className,
+    icon,
+    ...rest
+  } = props;
   return (
-    <div
+    <button
       onClick={onClick}
       className={classNames(
         `btn`,
         `btn-size-${size}`,
         `btn-${variant}`,
         `${type}`,
+        className,
       )}
       {...rest}
     >
+      <span>{icon}</span>
       <span className="btn-text">{children}</span>
-    </div>
+    </button>
   );
 };
 

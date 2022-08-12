@@ -14,7 +14,7 @@ interface CalendarBodyProps {
 const Wrapper = styled.div`
   display: grid;
   grid-template-columns: repeat(${CALENDAR_COLUMN}, 1fr);
-  grid-template-rows: repeat(${CALENDAR_ROW + 1}, 1fr);
+  grid-template-rows: 0.5fr repeat(${CALENDAR_ROW}, 1fr);
   grid-column-gap: 0;
   grid-row-gap: 0;
 `;
