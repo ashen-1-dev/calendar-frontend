@@ -1,3 +1,11 @@
+button {
+    outline: none;
+}
+
+button[disabled] {
+    opacity: 0.6;
+    cursor: default;
+}
 .btn {
     display: flex;
     border: none;
@@ -50,4 +58,6 @@
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.05);
 }
 
+.btn[disabled] {
 
+}

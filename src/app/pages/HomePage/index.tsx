@@ -21,7 +21,12 @@ export function HomePage() {
       <br />
       <RoundButton onClick={() => null} />
       <br />
-      <Button onClick={() => null} size={'very-small'} variant={'primary'}>
+      <Button
+        disabled
+        onClick={() => null}
+        size={'very-small'}
+        variant={'primary'}
+      >
         <EditSvg />
       </Button>
       <br />

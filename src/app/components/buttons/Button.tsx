@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import './Button.css';
 
 interface ButtonProps
-  extends Omit<React.HTMLProps<HTMLDivElement>, 'size' | 'type'> {
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
   size: 'small' | 'medium' | 'large' | 'very-small';
   variant: 'primary' | 'secondary' | 'disabled';
   type?: 'btn-round';
@@ -20,7 +20,7 @@ const Button = (props: ButtonProps) => {
     ...rest
   } = props;
   return (
-    <div
+    <button
       onClick={onClick}
       className={classNames(
         `btn`,
@@ -31,7 +31,7 @@ const Button = (props: ButtonProps) => {
       {...rest}
     >
       <span className="btn-text">{children}</span>
-    </div>
+    </button>
   );
 };
 
