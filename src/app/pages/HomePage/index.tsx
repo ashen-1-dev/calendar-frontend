@@ -5,9 +5,20 @@ import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
 import Input from 'app/components/inputs/TextInput';
-import Select from '../../components/selects/Select';
+import Select, { SelectOption } from '../../components/selects/Select';
+import { useState } from 'react';
 
 export function HomePage() {
+  const options: SelectOption[] = [
+    { name: 'sadssd', value: 'body' },
+    { name: 'sadssd123123', value: 'title' },
+  ];
+  const onChange = (selectedOption: SelectOption) => {
+    setSelectedOption(selectedOption);
+  };
+  const [selectedOption, setSelectedOption] = useState<SelectOption>(
+    options[0],
+  );
   return (
     <div>
       <Button size={'large'} variant={'primary'}>
@@ -36,7 +47,11 @@ export function HomePage() {
       <br />
       <Input placeholder={'Поиск по тегам'} size={'large'} />
       <br />
-      <Select></Select>
+      <Select
+        onChange={onChange}
+        selectedOption={selectedOption}
+        options={options}
+      />
     </div>
   );
 }
