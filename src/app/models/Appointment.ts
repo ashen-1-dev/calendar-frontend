@@ -6,10 +6,15 @@ export enum AppointmentType {
   Other = 'other',
 }
 
+export interface AppointmentState {
+  name: string;
+  value: any;
+}
+
 export interface Appointment {
   name: string;
   date: Date;
   type: AppointmentType;
   tags?: Tag[];
-  budget: number;
+  state: AppointmentState;
 }
