@@ -11,6 +11,7 @@ import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
 
 import { createReducer } from './reducers';
+import { selectedDateReducer } from './selected-date/selectedDateReducer';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -28,7 +29,9 @@ export function configureAppStore() {
   ] as StoreEnhancer[];
 
   const store = configureStore({
-    reducer: createReducer(),
+    reducer: createReducer({
+      selectedDate: selectedDateReducer,
+    }),
     middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,

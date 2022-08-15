@@ -32,7 +32,7 @@ export function HomePage() {
     <Wrapper>
       <CustomHeader />
       <CustomCalendar date={date} setDate={setDate} />
-      <CustomSidebar selectedDate={date} />
+      <CustomSidebar />
     </Wrapper>
   );
 }

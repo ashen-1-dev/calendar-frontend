@@ -12,14 +12,23 @@ interface AppointmentListProps {
   appointments: Appointment[];
 }
 
+const VerticalLine = styled.div`
+  width: inherit;
+  border: solid 2px #f8fafe;
+`;
+
 const AppointmentList = (props: AppointmentListProps) => {
   const { appointments } = props;
 
   return (
     <Wrapper>
       {appointments.map(appointment => (
-        <SidebarAppointment appointment={appointment} />
+        <React.Fragment key={appointment.name}>
+          <VerticalLine />
+          <SidebarAppointment appointment={appointment} />
+        </React.Fragment>
       ))}
+      <VerticalLine />
     </Wrapper>
   );
 };

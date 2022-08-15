@@ -16,6 +16,7 @@ interface CalendarProps extends HTMLProps<HTMLDivElement> {
 
 const Wrapper = styled.div`
   display: flex;
+  background-color: white;
   flex-direction: column;
 `;
 
@@ -26,7 +27,6 @@ const Calendar = (props: CalendarProps) => {
   const getPrevMonth = () => {
     setDate(prev => {
       if (prev.getMonth() === 0) {
-        console.log('prev');
         return new Date(prev.getFullYear() - 1, 11, 1);
       }
       return new Date(prev.getFullYear(), prev.getMonth() - 1, 1);
@@ -35,7 +35,6 @@ const Calendar = (props: CalendarProps) => {
   const getNextMonth = () => {
     setDate(prev => {
       if (prev.getMonth() === 11) {
-        console.log('next');
         return new Date(prev.getFullYear() + 1, 0, 1);
       }
       return new Date(prev.getFullYear(), prev.getMonth() + 1, 1);

@@ -6,6 +6,11 @@ import {
   CALENDAR_ROW,
   WEEK_DAYS,
 } from '../../constants/constants';
+import {
+  mockAppointments,
+  setSelectedDateAction,
+} from '../../../store/selected-date/selectedDateReducer';
+import { useDispatch } from 'react-redux';
 
 interface CalendarBodyProps {
   dates: Date[];
@@ -27,10 +32,13 @@ const Header = styled.div`
 const CalendarBody = (props: CalendarBodyProps) => {
   const { dates } = props;
   const [selectedCellId, setSelectedCellId] = useState(-1);
-  const onCellClick = useCallback(
-    date => setSelectedCellId(date.getTime()),
-    [],
-  );
+  const dispatch = useDispatch();
+  const onCellClick = useCallback(date => {
+    setSelectedCellId(date.getTime());
+    dispatch(
+      setSelectedDateAction({ date: date, appointments: mockAppointments }),
+    );
+  }, []);
   return (
     <Wrapper>
       {WEEK_DAYS.map(day => (

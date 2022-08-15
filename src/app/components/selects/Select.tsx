@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ReactComponent as DownArrowSvg } from './assets/arrow-down.svg';
 import { ReactComponent as UpArrowSvg } from './assets/arrow-up.svg';
 import styled from 'styled-components';
+import { Colors } from '../../../styles/colors';
 
 const Wrapper = styled('div')`
   display: inline-block;
@@ -14,12 +15,15 @@ const Wrapper = styled('div')`
 `;
 const SelectHeader = styled.div`
   display: flex;
+  position: relative;
+  background-color: ${Colors.LightGrey3};
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
   border: 1px solid transparent;
+  border-radius: 5px;
   width: 21.9em;
-  height: 3.125em;
+  height: 3.125rem;
   z-index: 100;
   cursor: pointer;
   > input {
@@ -38,8 +42,11 @@ const SelectHeader = styled.div`
 `;
 const DropdownList = styled('ul')`
   display: flex;
+  position: absolute;
+  background-color: white;
   margin-top: 0.313rem !important;
   gap: 0.625em;
+  z-index: 1;
   flex-direction: column;
   border-radius: 5px;
   border: solid 1px var(--ligth-grey3);

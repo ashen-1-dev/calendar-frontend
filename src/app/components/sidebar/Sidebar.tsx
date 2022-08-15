@@ -1,15 +1,20 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
 import Button from '../buttons/Button';
 import { ReactComponent as PlusSvg } from '../buttons/assets/plus.svg';
-import { Appointment, AppointmentType } from '../../models/Appointment';
 import AppointmentList from './AppointmentList';
-import { Tag } from '../../models/Tag';
+import useSelectedDate from '../../hooks/useSelectedDate';
+import RoundButton from '../buttons/RoundButton';
+import Select, { SelectOption } from '../selects/Select';
+import { Colors } from '../../../styles/colors';
+import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
+import { Appointment } from '../../models/Appointment';
 
 const Wrapper = styled.aside`
   display: flex;
+  flex-direction: column;
 `;
 const DateText = styled.span`
   font-weight: bold;
@@ -26,35 +31,82 @@ const NoAppointments = styled.div`
 
 const AppointmentContainer = styled.div`
   display: flex;
+  overflow-y: auto;
   flex-direction: column;
   align-items: center;
+  background-color: white;
+  border-radius: 10px;
+  position: relative;
+`;
+
+const ButtonContainer = styled.div`
+  margin-left: auto;
+  margin-top: auto;
+  position: sticky;
+  padding-bottom: 1.25rem;
+  padding-right: 0.688rem;
+  bottom: 0;
+`;
+
+const SelectContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 1.25rem 0;
+`;
+
+const ReverseButton = styled(Button)`
+  width: 3.125rem !important;
+  border-radius: 5px;
+  background-color: ${Colors.LightGrey3} !important;
 `;
 
 export interface SidebarProps {
   className?: string;
-  selectedDate: Date;
 }
 
 const Sidebar = (props: SidebarProps) => {
-  const { className, selectedDate } = props;
-  const formatDate = format(selectedDate, 'dd MMMM yyyy', { locale: ru });
-  // get from redux global state by date
-  const tags: Tag[] = [
-    { name: 'Важно', id: 1, description: 'dsada' },
-    { name: 'не Важно', id: 2, description: '234123' },
+  const { className } = props;
+  const { date, appointments } = useSelectedDate();
+  const sortOptions: SelectOption[] = [
+    { name: 'Сортировка по времени начала', value: 'date' },
+    { name: 'Сортировка по количеству тегов', value: 'tag' },
+    { name: 'Сортировка по названию', value: 'name' },
   ];
-  const appointments: Appointment[] = [
-    {
-      date: new Date(),
-      state: { name: 'Бюджет', value: '1500' },
-      type: AppointmentType.Holiday,
-      name: 'Днюха',
-      tags: tags,
-    },
-  ];
+
+  const [selectedSortOption, setSelectedSortOption] = useState<SelectOption>(
+    sortOptions[0],
+  );
+
+  const [sortAndOrder, setSortAndOrder] = useState({
+    sort: selectedSortOption.value,
+    asc: true,
+  });
+
+  const handleOnSortChange = (selectedOption: SelectOption) => {
+    setSelectedSortOption(selectedOption);
+    setSortAndOrder(prev => ({
+      ...prev,
+      sort: selectedOption.value,
+    }));
+  };
+
+  const handleOnReverseOrder = () => {
+    setSortAndOrder(prev => ({
+      ...prev,
+      asc: !prev.asc,
+    }));
+  };
+  const sortedAppointments = useMemo<Appointment[]>(() => {
+    return [...appointments].reverse();
+  }, [sortAndOrder, appointments]);
+
+  const formatDate = format(date, 'dd MMMM yyyy', { locale: ru });
+  const hasAppointments = appointments.length !== 0;
+  console.log(sortedAppointments);
   return (
     <Wrapper className={className}>
-      {appointments.length === 0 ? (
+      {!hasAppointments ? (
         <NoAppointments>
           <DateText style={{ marginBottom: '1.563rem' }}>
             События на {formatDate}
@@ -69,10 +121,25 @@ const Sidebar = (props: SidebarProps) => {
           </Button>
         </NoAppointments>
       ) : (
-        <AppointmentContainer>
-          <DateText>События на {formatDate}</DateText>
-          <AppointmentList appointments={appointments} />
-        </AppointmentContainer>
+        <>
+          <AppointmentContainer>
+            <DateText>События на {formatDate}</DateText>
+            <SelectContainer>
+              <ReverseButton onClick={handleOnReverseOrder} variant={'primary'}>
+                <ReverseOrderSvg />
+              </ReverseButton>
+              <Select
+                onChange={handleOnSortChange}
+                selectedOption={selectedSortOption}
+                options={sortOptions}
+              />
+            </SelectContainer>
+            <AppointmentList appointments={sortedAppointments} />
+          </AppointmentContainer>
+          <ButtonContainer>
+            <RoundButton onClick={() => null} />
+          </ButtonContainer>
+        </>
       )}
     </Wrapper>
   );

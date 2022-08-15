@@ -30,13 +30,13 @@ const Date = styled.span<{ selected: boolean }>`
 
 interface CalendarCellProp extends React.HTMLProps<HTMLDivElement> {
   date: Date;
-  appointments?: Appointment[];
   selected: boolean;
   onClick: (date) => void;
 }
 
 const CalendarCell = (props: CalendarCellProp) => {
-  const { appointments, date, selected, onClick } = props;
+  const { date, selected, onClick } = props;
+  const appointments = [];
   const formatDay = format(date, 'd');
   return (
     <Wrapper onClick={() => onClick(date)} selected={selected}>

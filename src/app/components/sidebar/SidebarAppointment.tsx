@@ -6,6 +6,7 @@ import { ReactComponent as DeleteSvg } from '../buttons/assets/delete.svg';
 import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
 import Button from '../buttons/Button';
+import useHover from '../../hooks/useHover';
 
 interface AppointmentProps {
   appointment: Appointment;
@@ -27,8 +28,12 @@ const Row = styled.div`
   gap: 0.625rem;
   flex-direction: row;
 `;
+
+const ButtonContainer = styled(Row)`
+  margin-left: auto;
+`;
 const TagContainer = styled.div`
-  padding: 0.313rem 0.938rem;
+  padding: 0.413rem 0.938rem;
   font-size: 0.875rem;
   border-radius: 14px;
   background-color: ${Colors.LightGrey3};
@@ -71,9 +76,10 @@ const Circle = styled.div<{ type: AppointmentType }>`
 
 const SidebarAppointment = (props: AppointmentProps) => {
   const { appointment } = props;
+  const [onMouseOver, onMouseOut, isHover] = useHover();
   const formatDate = format(appointment.date, 'HH:mm');
   return (
-    <Wrapper>
+    <Wrapper onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
       <Row>
         <Circle type={appointment.type} />
         <ColoredText style={{ fontWeight: 'bold' }} type={appointment.type}>
@@ -94,12 +100,16 @@ const SidebarAppointment = (props: AppointmentProps) => {
           appointment.tags.map(tag => (
             <TagContainer key={tag.id}>{tag.name}</TagContainer>
           ))}
-        <Button variant={'primary'} size={'very-small'}>
-          <EditSvg />
-        </Button>
-        <Button variant={'primary'} size={'very-small'}>
-          <DeleteSvg />
-        </Button>
+        {isHover && (
+          <ButtonContainer>
+            <Button variant={'primary'} size={'very-small'}>
+              <EditSvg />
+            </Button>
+            <Button variant={'primary'} size={'very-small'}>
+              <DeleteSvg />
+            </Button>
+          </ButtonContainer>
+        )}
       </Row>
     </Wrapper>
   );

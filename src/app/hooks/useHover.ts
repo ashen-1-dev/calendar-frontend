@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-export default function useHover(): [() => void, () => void, boolean] {
+export default function useHover(): [
+  onMouseOver: () => void,
+  onMouseOut: () => void,
+  isHover: boolean,
+] {
   const [isHover, setIsHover] = useState(false);
 
   const onMouseOver = () => setIsHover(true);
