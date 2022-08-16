@@ -7,8 +7,10 @@ import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/del
 import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
 import MyDatetimePicker from 'app/components/datepicker/MyDatetimePicker';
+import { useState } from 'react';
 
 export function HomePage() {
+  const [selectedDate, setSelectedDate] = useState<Date>();
   const options: RadioOption[] = [
     { type: 'holiday', label: 'Событие' },
     { type: 'event', label: 'Событие' },
@@ -41,7 +43,7 @@ export function HomePage() {
       <br />
       <RadioGroup options={options} />
       <br />
-      <MyDatetimePicker />
+      <MyDatetimePicker selected={selectedDate} onChange={setSelectedDate} />
     </div>
   );
 }

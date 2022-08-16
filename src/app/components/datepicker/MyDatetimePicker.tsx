@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React from 'react';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import { ru } from 'date-fns/locale';
+import mergeDateAndTime from '../../../helpers/dates/merge-date-and-time';
 
 const Wrapper = styled.div`
   display: flex;
   flex-direction: row;
   gap: 0.625em;
-
   .react-datepicker-wrapper {
     width: inherit;
   }
@@ -20,39 +20,59 @@ export interface StyledDatePickerProps {
 const StyledDatePicker = styled(DatePicker)<StyledDatePickerProps>`
   width: 14.375em;
   height: 3.125em;
+  padding-left: 1.25rem;
   border: none;
   border-radius: 5px;
+  font-weight: bold;
   background-color: ${Colors.LightGrey3};
-  color: ${Colors.LightGrey2};
-  padding-left: 1.25rem;
+  color: ${({ type }) =>
+    type === 'date' ? Colors.LightGrey2 : Colors.DefaultDark};
   :focus-within {
     outline: none;
     border: 1px solid ${Colors.Blue};
   }
   ::placeholder {
-    opacity: inherit;
+    color: ${Colors.LightGrey2};
   }
 `;
 
-const MyDatetimePicker = () => {
-  const [selectedDate, setSelectedDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(null);
+interface DatetimePickerProps {
+  selected?: Date;
+  onChange: (date: Date | undefined) => void;
+}
+
+const MyDatetimePicker = (props: DatetimePickerProps) => {
+  const { selected, onChange } = props;
+  const handleOnChangeDate = (date: Date) => {
+    if (!date) {
+      return;
+    }
+    const newDate = mergeDateAndTime(date, selected);
+    onChange(newDate);
+  };
+
+  const handleOnChangeTime = (time: Date) => {
+    if (!time) {
+      return;
+    }
+    const newDate = mergeDateAndTime(selected, time);
+    onChange(newDate);
+  };
   return (
     <Wrapper>
       <StyledDatePicker
         type={'date'}
         locale={ru}
-        selected={selectedDate}
-        // @ts-ignore
-        onChange={(date: Date) => setSelectedDate(date)}
+        selected={selected || new Date()}
+        placholderText="Введите дату"
+        onChange={date => handleOnChangeDate(date)}
         dateFormat="dd MMMM	yyyy"
       />
       <StyledDatePicker
         locale={ru}
         type={'time'}
-        selected={selectedTime}
-        // @ts-ignore
-        onChange={time => setSelectedTime(time)}
+        selected={selected}
+        onChange={time => handleOnChangeTime(time)}
         showTimeSelect
         showTimeSelectOnly
         timeIntervals={15}
