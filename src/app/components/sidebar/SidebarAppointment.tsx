@@ -12,8 +12,9 @@ interface AppointmentProps {
   appointment: Appointment;
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ hover: boolean }>`
   display: flex;
+  background-color: ${({ hover }) => (hover ? Colors.HoverGrey : 'white')};
   flex-direction: column;
   font-size: 1.125rem;
   gap: 0.625rem;
@@ -79,7 +80,7 @@ const SidebarAppointment = (props: AppointmentProps) => {
   const [onMouseOver, onMouseOut, isHover] = useHover();
   const formatDate = format(appointment.date, 'HH:mm');
   return (
-    <Wrapper onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
+    <Wrapper hover={isHover} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
       <Row>
         <Circle type={appointment.type} />
         <ColoredText style={{ fontWeight: 'bold' }} type={appointment.type}>

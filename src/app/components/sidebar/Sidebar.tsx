@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
@@ -10,7 +10,7 @@ import RoundButton from '../buttons/RoundButton';
 import Select, { SelectOption } from '../selects/Select';
 import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
-import { Appointment } from '../../models/Appointment';
+import useSortedAppointments from '../../hooks/useSortedAppointments';
 
 const Wrapper = styled.aside`
   display: flex;
@@ -56,54 +56,35 @@ const SelectContainer = styled.div`
 `;
 
 const ReverseButton = styled(Button)`
-  width: 3.125rem !important;
-  border-radius: 5px;
-  background-color: ${Colors.LightGrey3} !important;
+  && {
+    width: 3.125rem;
+    border-radius: 5px;
+    background-color: ${Colors.LightGrey3};
+  }
 `;
 
 export interface SidebarProps {
   className?: string;
 }
 
+const options: SelectOption[] = [
+  { name: 'Сортировка по времени начала', value: 'date' },
+  { name: 'Сортировка по количеству тегов', value: 'tag' },
+  { name: 'Сортировка по названию', value: 'name' },
+];
+
 const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   const { date, appointments } = useSelectedDate();
-  const sortOptions: SelectOption[] = [
-    { name: 'Сортировка по времени начала', value: 'date' },
-    { name: 'Сортировка по количеству тегов', value: 'tag' },
-    { name: 'Сортировка по названию', value: 'name' },
-  ];
-
-  const [selectedSortOption, setSelectedSortOption] = useState<SelectOption>(
-    sortOptions[0],
-  );
-
-  const [sortAndOrder, setSortAndOrder] = useState({
-    sort: selectedSortOption.value,
-    asc: true,
-  });
-
-  const handleOnSortChange = (selectedOption: SelectOption) => {
-    setSelectedSortOption(selectedOption);
-    setSortAndOrder(prev => ({
-      ...prev,
-      sort: selectedOption.value,
-    }));
-  };
-
-  const handleOnReverseOrder = () => {
-    setSortAndOrder(prev => ({
-      ...prev,
-      asc: !prev.asc,
-    }));
-  };
-  const sortedAppointments = useMemo<Appointment[]>(() => {
-    return [...appointments].reverse();
-  }, [sortAndOrder, appointments]);
+  const [
+    sortedAndOrderedAppointments,
+    handleOnSortChange,
+    handleOnReverseOrder,
+    selectedSortOption,
+  ] = useSortedAppointments(appointments, options[0]);
 
   const formatDate = format(date, 'dd MMMM yyyy', { locale: ru });
   const hasAppointments = appointments.length !== 0;
-  console.log(sortedAppointments);
   return (
     <Wrapper className={className}>
       {!hasAppointments ? (
@@ -131,10 +112,10 @@ const Sidebar = (props: SidebarProps) => {
               <Select
                 onChange={handleOnSortChange}
                 selectedOption={selectedSortOption}
-                options={sortOptions}
+                options={options}
               />
             </SelectContainer>
-            <AppointmentList appointments={sortedAppointments} />
+            <AppointmentList appointments={sortedAndOrderedAppointments} />
           </AppointmentContainer>
           <ButtonContainer>
             <RoundButton onClick={() => null} />
