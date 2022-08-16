@@ -2,18 +2,6 @@ import React, { useRef } from 'react';
 import styled from 'styled-components';
 import { Colors } from 'styles/colors';
 
-export type RadioType = 'holiday' | 'event' | 'other';
-
-export interface RadioOption {
-  label: string;
-  type: RadioType;
-}
-export interface RadioProps {
-  option: RadioOption;
-  onChange?: (radioId: string) => void;
-  selected: boolean;
-}
-
 const Wrapper = styled('div')<RadioProps>`
   display: flex;
   width: 9.375rem;
@@ -35,7 +23,7 @@ const Wrapper = styled('div')<RadioProps>`
   }};
   background-color: ${({ selected, option }) => {
     if (selected) {
-      switch (option.type) {
+      switch (option.value) {
         case 'holiday': {
           return Colors.Pink;
         }
@@ -50,6 +38,18 @@ const Wrapper = styled('div')<RadioProps>`
     return Colors.LightGrey3;
   }};
 `;
+
+export type RadioType = 'holiday' | 'event' | 'other';
+
+export interface RadioOption {
+  name: string;
+  value: RadioType;
+}
+export interface RadioProps {
+  option: RadioOption;
+  onChange?: (radioId: string) => void;
+  selected: boolean;
+}
 
 const RadioBox = styled.div<{ selected: boolean }>`
   display: flex;
@@ -73,10 +73,10 @@ const RadioCircle = styled.div`
 `;
 
 const Radio: React.FC<RadioProps> = ({ option, onChange, selected }) => {
-  const { type, label } = option;
+  const { value, name } = option;
   const inputRef = useRef<HTMLInputElement>(null);
   const handleOnClick = () => {
-    const inputId = inputRef.current?.id;
+    const inputId = inputRef.current?.value;
     if (!inputId || !onChange) {
       return null;
     }
@@ -85,14 +85,14 @@ const Radio: React.FC<RadioProps> = ({ option, onChange, selected }) => {
   return (
     <Wrapper selected={selected} onClick={handleOnClick} option={option}>
       <input
-        id={type}
+        value={value}
         onChange={onChange && (event => onChange(event.target.id))}
         checked={selected}
         type={'radio'}
         ref={inputRef}
       />
       <RadioBox selected={selected}>{selected && <RadioCircle />}</RadioBox>
-      <div>{label}</div>
+      <div>{name}</div>
     </Wrapper>
   );
 };

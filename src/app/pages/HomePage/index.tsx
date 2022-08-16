@@ -6,12 +6,17 @@ import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
 import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
+import { useState } from 'react';
 
 export function HomePage() {
+  const [selectedValue, setSelectedValue] = useState('');
+  const handleOnChange = selectedType => {
+    setSelectedValue(selectedType);
+  };
   const options: RadioOption[] = [
-    { type: 'holiday', label: 'Событие' },
-    { type: 'event', label: 'Событие' },
-    { type: 'other', label: 'Событие' },
+    { value: 'holiday', name: 'Событие' },
+    { value: 'event', name: 'Событие' },
+    { value: 'other', name: 'Событие' },
   ];
   return (
     <div>
@@ -38,7 +43,11 @@ export function HomePage() {
       </Button>
       <br />
       <br />
-      <RadioGroup options={options} />
+      <RadioGroup
+        selectedValue={selectedValue}
+        onChange={handleOnChange}
+        options={options}
+      />
     </div>
   );
 }

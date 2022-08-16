@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Radio, { RadioOption } from './Radio';
 
@@ -10,19 +10,24 @@ const Wrapper = styled('div')`
 
 interface RadioGroupProps {
   options: RadioOption[];
+  selectedValue: string;
+  onChange: (selectedType: string) => void;
 }
 
-const RadioGroup: React.FC<RadioGroupProps> = ({ options }) => {
-  const [selectedId, setSelectedId] = useState('');
+const RadioGroup: React.FC<RadioGroupProps> = ({
+  options,
+  onChange,
+  selectedValue,
+}) => {
   return (
     <Wrapper>
       {options.map(option => {
         return (
           <Radio
-            key={option.type}
+            key={option.value}
             option={option}
-            selected={option.type == selectedId}
-            onChange={() => setSelectedId(option.type)}
+            selected={selectedValue === option.value}
+            onChange={onChange}
           />
         );
       })}
