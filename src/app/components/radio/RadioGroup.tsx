@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Radio, { RadioOption } from './Radio';
 
-const Wrapper = styled('div')`
+const Wrapper = styled('form')`
   display: flex;
   flex-direction: row;
   gap: 0.625em;
@@ -10,14 +10,15 @@ const Wrapper = styled('div')`
 
 interface RadioGroupProps {
   options: RadioOption[];
-  selectedValue: string;
+  value: string;
   onChange: (selectedType: string) => void;
+  name?: string;
 }
 
 const RadioGroup: React.FC<RadioGroupProps> = ({
   options,
   onChange,
-  selectedValue,
+  value,
 }) => {
   return (
     <Wrapper>
@@ -26,7 +27,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
           <Radio
             key={option.value}
             option={option}
-            selected={selectedValue === option.value}
+            selected={value === option.value}
             onChange={onChange}
           />
         );

@@ -7,14 +7,29 @@ export enum AppointmentType {
 }
 
 export interface AppointmentState {
-  name: string;
-  value: any;
+  type: AppointmentType;
 }
 
-export interface Appointment {
+export interface HolidayState extends AppointmentState {
+  type: AppointmentType.Holiday;
+  value: number;
+}
+
+export interface EventState extends AppointmentState {
+  type: AppointmentType.Event;
+  value: string;
+}
+
+export interface OtherState extends AppointmentState {
+  type: AppointmentType.Other;
+  value: string;
+}
+
+export type AllState = HolidayState | EventState | OtherState;
+
+export interface Appointment<T extends AppointmentState = AllState> {
   name: string;
   date: Date;
-  type: AppointmentType;
+  state: T;
   tags?: Tag[];
-  state: AppointmentState;
 }

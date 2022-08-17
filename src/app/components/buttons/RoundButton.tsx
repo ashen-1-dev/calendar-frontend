@@ -13,7 +13,7 @@ const RoundButton: React.FC<{
       onClick={onClick}
       size={'small'}
       variant={'primary'}
-      type={'btn-round'}
+      form={'btn-round'}
     >
       <PlusSvg />
     </Button>

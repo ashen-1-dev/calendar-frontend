@@ -9,28 +9,35 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   position: relative;
+  input {
+    padding-left: 0.625rem;
+  }
 `;
 
-const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
-  let { placeholder, showIcon, size } = props;
+export interface TagInputProps extends Omit<InputProps, 'value' | 'onChange'> {
+  showIcon?: boolean;
+  tags: Tag[];
+  onChange: (tags: Tag[]) => void;
+}
+
+const TagInput: React.FC<TagInputProps> = props => {
+  let { placeholder, showIcon = false, size, onChange, tags, ...rest } = props;
   const [value, setValue] = useState('');
-  const [tags, setTags] = useState<Tag[]>([]);
   const allTags: Tag[] = [
     { id: 1, name: 'Не важно', description: 'Да это не жестко' },
     { id: 2, name: 'Ва же', description: 'Да это жестко' },
   ];
 
-  const removeTag = (id: number) => {
-    setTags(prevTags => prevTags.filter(tag => tag.id !== id));
-  };
-
   const handleOnChange = (value: string) => {
     setValue(value);
   };
 
+  const removeTag = (id: number) => {
+    onChange(tags.filter(tag => tag.id !== id));
+  };
+
   const addTag = (tag: Tag) => {
-    setValue('');
-    setTags(prevTags => [...prevTags, tag]);
+    onChange([...tags, tag]);
   };
 
   const searchedTags = useMemo(() => {
@@ -41,13 +48,15 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
       tag.name.toLowerCase().includes(value.toLowerCase()),
     );
     return searchedTags.filter(
-      searchedTag => !tags.map(tag => tag.name).includes(searchedTag.name),
+      searchedTag =>
+        !(tags || []).map(tag => tag.name).includes(searchedTag.name),
     );
   }, [value, allTags]);
 
   if (tags.length) {
     placeholder = '';
   }
+
   return (
     <Wrapper>
       <Input
@@ -55,9 +64,10 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
         showIcon={showIcon}
         size={size}
         value={value}
-        onChange={event => handleOnChange(event.target.value)}
+        onChange={value => handleOnChange(value)}
+        {...rest}
       >
-        <TagList onRemoval={removeTag} items={tags} />
+        <TagList onRemoval={removeTag} items={tags || []} />
       </Input>
       {!!searchedTags.length && (
         <DropDownTag items={searchedTags} onItemClick={addTag} />

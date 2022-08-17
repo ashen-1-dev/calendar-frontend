@@ -35,7 +35,13 @@ const Header = props => {
       </Modal>
       <Logo>Календарь</Logo>
       <div style={{ display: 'flex', gap: '2.5rem' }}>
-        <TagInput placeholder={'Поиск по тегам'} showIcon size={'large'} />
+        <TagInput
+          tags={[]}
+          onChange={() => {}}
+          placeholder={'Поиск по тегам'}
+          showIcon
+          size={'large'}
+        />
         <Button
           onClick={() => setModalActive(true)}
           size={'large'}

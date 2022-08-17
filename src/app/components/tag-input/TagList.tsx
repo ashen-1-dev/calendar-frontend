@@ -6,6 +6,9 @@ import TagItem from './TagItem';
 const Wrapper = styled.div`
   display: inline-flex;
   gap: 10px;
+  :first-child {
+    padding-left: 0.313rem;
+  }
 `;
 
 const TagList: React.FC<{
@@ -16,7 +19,11 @@ const TagList: React.FC<{
   return (
     <Wrapper>
       {items.map(item => (
-        <TagItem onRemoval={() => onRemoval(item.id)} item={item} />
+        <TagItem
+          key={item.id}
+          onRemoval={() => onRemoval(item.id)}
+          item={item}
+        />
       ))}
     </Wrapper>
   );

@@ -37,17 +37,17 @@ const StyledDatePicker = styled(DatePicker)<StyledDatePickerProps>`
 `;
 
 interface DatetimePickerProps {
-  selected?: Date;
+  value?: Date;
   onChange: (date: Date | undefined) => void;
 }
 
 const MyDatetimePicker = (props: DatetimePickerProps) => {
-  const { selected, onChange } = props;
+  const { value, onChange } = props;
   const handleOnChangeDate = (date: Date) => {
     if (!date) {
       return;
     }
-    const newDate = mergeDateAndTime(date, selected);
+    const newDate = mergeDateAndTime(date, value);
     onChange(newDate);
   };
 
@@ -55,7 +55,7 @@ const MyDatetimePicker = (props: DatetimePickerProps) => {
     if (!time) {
       return;
     }
-    const newDate = mergeDateAndTime(selected, time);
+    const newDate = mergeDateAndTime(value, time);
     onChange(newDate);
   };
   return (
@@ -63,7 +63,7 @@ const MyDatetimePicker = (props: DatetimePickerProps) => {
       <StyledDatePicker
         type={'date'}
         locale={ru}
-        selected={selected || new Date()}
+        selected={value || new Date()}
         placholderText="Введите дату"
         onChange={date => handleOnChangeDate(date)}
         dateFormat="dd MMMM	yyyy"
@@ -71,7 +71,7 @@ const MyDatetimePicker = (props: DatetimePickerProps) => {
       <StyledDatePicker
         locale={ru}
         type={'time'}
-        selected={selected}
+        selected={value}
         onChange={time => handleOnChangeTime(time)}
         showTimeSelect
         showTimeSelectOnly

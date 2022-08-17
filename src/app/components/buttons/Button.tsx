@@ -1,12 +1,11 @@
-import React, { ReactNode } from 'react';
+import React, { ComponentProps, ReactNode } from 'react';
 import classNames from 'classnames';
 import './Button.css';
 
-interface ButtonProps
-  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
+interface ButtonProps extends ComponentProps<'button'> {
   size?: 'small' | 'medium' | 'large' | 'very-small';
   variant: 'primary' | 'secondary';
-  type?: 'btn-round';
+  form?: 'btn-round';
   icon?: JSX.Element;
   children?: ReactNode;
 }
@@ -15,11 +14,12 @@ const Button = (props: ButtonProps) => {
   const {
     size = 'medium',
     variant = 'primary',
-    type = '',
+    form = '',
     onClick,
     children,
     className,
     icon,
+    type,
     ...rest
   } = props;
   return (
@@ -29,7 +29,7 @@ const Button = (props: ButtonProps) => {
         `btn`,
         `btn-size-${size}`,
         `btn-${variant}`,
-        `${type}`,
+        `${form}`,
         className,
       )}
       {...rest}

@@ -82,17 +82,23 @@ const SidebarAppointment = (props: AppointmentProps) => {
   return (
     <Wrapper hover={isHover} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>
       <Row>
-        <Circle type={appointment.type} />
-        <ColoredText style={{ fontWeight: 'bold' }} type={appointment.type}>
+        <Circle type={appointment.state.type} />
+        <ColoredText
+          style={{ fontWeight: 'bold' }}
+          type={appointment.state.type}
+        >
           {formatDate}
         </ColoredText>
-        <ColoredText style={{ fontWeight: 'bold' }} type={appointment.type}>
+        <ColoredText
+          style={{ fontWeight: 'bold' }}
+          type={appointment.state.type}
+        >
           {appointment.name}
         </ColoredText>
       </Row>
       <Row style={{ fontSize: '0.875rem', paddingLeft: '1.5rem' }}>
-        <ColoredText style={{ opacity: 0.7 }} type={appointment.type}>
-          {appointment.state.name}
+        <ColoredText style={{ opacity: 0.7 }} type={appointment.state.type}>
+          {appointment.state.type}
         </ColoredText>{' '}
         {appointment.state.value}
       </Row>

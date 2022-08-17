@@ -1,40 +1,42 @@
-import React, { ReactNode } from 'react';
+import React, { ComponentProps, ReactNode } from 'react';
 import './Input.css';
 import { ReactComponent as SearchSvg } from './assets/search.svg';
-import classNames from 'classnames';
 
-export interface InputProps {
-  placeholder?: string;
+export interface InputProps extends Omit<ComponentProps<'input'>, 'size'> {
   size?: 'large' | 'medium' | 'small' | 'very-small';
   label?: string;
   showIcon?: boolean;
   children?: ReactNode;
   value: string;
-  onChange: (...args) => any;
+  onChange: (value) => void;
 }
 
-const Input: React.FC<InputProps> = ({
+const Input: React.ComponentType<InputProps> = ({
   placeholder,
-  size,
+  size = 'medium',
   showIcon = false,
   children,
   value,
   onChange,
   label,
+  name,
 }) => {
   return (
-    <div style={{ position: 'relative' }}>
-      <div className={'input-label'}>{label}</div>
-      <div
-        className={classNames('input-container', `input-${size || 'medium'}`)}
-      >
+    <div className={`input-${size}`} style={{ position: 'relative' }}>
+      {label && <div className={'input-label'}>{label}</div>}
+      <div className={'input-container'}>
         {showIcon && (
           <div className={'icon-container'}>
             <SearchSvg />
           </div>
         )}
         {children}
-        <input value={value} onChange={onChange} placeholder={placeholder} />
+        <input
+          name={name}
+          value={value}
+          onChange={event => onChange(event.target.value)}
+          placeholder={placeholder}
+        />
       </div>
     </div>
   );

@@ -5,6 +5,8 @@
     border-radius: 5px;
     background-color: var(--light-grey);
     border: solid 1px transparent;
+    width: inherit;
+    height: inherit;
 }
 
 input::placeholder {
@@ -13,10 +15,10 @@ input::placeholder {
 
 input {
     padding-left: 1.25rem;
+    outline: none;
 }
 
 .input-large {
-    font-size: 1rem;
     width: 50em;
     height: 3.125em;
 }
@@ -36,15 +38,13 @@ input {
 }
 
 .input-label {
-    position: absolute;
-    bottom: 3.4rem;
+    padding-bottom: 0.625rem;
     font-size: 0.875rem;
     color: var(--default-dark);
     font-weight: 500;
 }
 
 .input-medium {
-    font-size: 0.875rem;
     width: 29.375em;
     height: 3.125em;
 }

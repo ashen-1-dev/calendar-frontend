@@ -26,7 +26,7 @@ const Wrapper = styled.div<{ type: AppointmentType }>`
 const CalendarCellAppointment = (props: { appointment: Appointment }) => {
   const { appointment } = props;
   return (
-    <Wrapper type={appointment.type}>
+    <Wrapper type={appointment.state.type}>
       <span>{appointment.name}</span>
     </Wrapper>
   );

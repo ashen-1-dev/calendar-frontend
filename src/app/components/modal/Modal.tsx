@@ -38,6 +38,8 @@ export interface ModalProps {
   children?: ReactNode;
 }
 
+export const ModalContext = React.createContext({});
+
 const Modal: React.FC<ModalProps> = props => {
   const { label, children, active, setActive } = props;
   if (!active) {
@@ -52,7 +54,11 @@ const Modal: React.FC<ModalProps> = props => {
             <CloseSvg />
           </div>
         </Header>
-        <div>{children}</div>
+        <div>
+          <ModalContext.Provider value={{ active, setActive }}>
+            {children}
+          </ModalContext.Provider>
+        </div>
       </Content>
     </Wrapper>
   );

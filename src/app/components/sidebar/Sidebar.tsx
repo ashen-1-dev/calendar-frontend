@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
@@ -11,6 +11,8 @@ import Select, { SelectOption } from '../selects/Select';
 import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
 import useSortedAppointments from '../../hooks/useSortedAppointments';
+import AppointmentAdd from './modal/AppointmentAdd';
+import Modal from '../modal/Modal';
 
 const Wrapper = styled.aside`
   display: flex;
@@ -76,6 +78,7 @@ const options: SelectOption[] = [
 const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   const { date, appointments } = useSelectedDate();
+  const [modalActive, setModalActive] = useState(false);
   const [
     sortedAndOrderedAppointments,
     handleOnSortChange,
@@ -87,13 +90,20 @@ const Sidebar = (props: SidebarProps) => {
   const hasAppointments = appointments.length !== 0;
   return (
     <Wrapper className={className}>
+      <Modal
+        active={modalActive}
+        setActive={setModalActive}
+        label={'Добавить событие'}
+      >
+        <AppointmentAdd />
+      </Modal>
       {!hasAppointments ? (
         <NoAppointments>
           <DateText style={{ marginBottom: '1.563rem' }}>
             События на {formatDate}
           </DateText>
           <Button
-            onClick={() => null}
+            onClick={() => setModalActive(true)}
             icon={<PlusSvg style={{ width: '0.875rem', height: '0.875rem' }} />}
             size={'large'}
             variant={'primary'}
@@ -118,7 +128,7 @@ const Sidebar = (props: SidebarProps) => {
             <AppointmentList appointments={sortedAndOrderedAppointments} />
           </AppointmentContainer>
           <ButtonContainer>
-            <RoundButton onClick={() => null} />
+            <RoundButton onClick={() => setModalActive(true)} />
           </ButtonContainer>
         </>
       )}
