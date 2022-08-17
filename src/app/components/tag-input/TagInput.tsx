@@ -10,26 +10,29 @@ const Wrapper = styled.div`
   flex-direction: column;
 `;
 
-const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
-  let { placeholder, showIcon, size } = props;
+export interface TagInputProps extends Omit<InputProps, 'value' | 'onChange'> {
+  showIcon?: boolean;
+  tags: Tag[];
+  onChange: (tags: Tag[]) => void;
+}
+
+const TagInput: React.FC<TagInputProps> = props => {
+  let { placeholder, showIcon = false, size, onChange, tags } = props;
   const [value, setValue] = useState('');
-  const [tags, setTags] = useState<Tag[]>([]);
   const allTags: Tag[] = [
     { id: 1, name: 'Не важно', description: 'Да это не жестко' },
     { id: 2, name: 'Ва же', description: 'Да это жестко' },
   ];
 
-  const removeTag = (id: number) => {
-    setTags(prevTags => prevTags.filter(tag => tag.id !== id));
-  };
-
   const handleOnChange = (value: string) => {
     setValue(value);
   };
+  const removeTag = (id: number) => {
+    onChange(tags.filter(tag => tag.id !== id));
+  };
 
   const addTag = (tag: Tag) => {
-    setValue('');
-    setTags(prevTags => [...prevTags, tag]);
+    onChange([...tags, tag]);
   };
 
   const searchedTags = useMemo(() => {

@@ -8,6 +8,8 @@ import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
 import RadioGroup from 'app/components/radio/RadioGroup';
 import Input from 'app/components/inputs/Input';
 import TagInput from '../../components/tag-input/TagInput';
+import { useState } from 'react';
+import { Tag } from '../../models/Tag';
 
 export function HomePage() {
   const options: RadioOption[] = [
@@ -15,6 +17,10 @@ export function HomePage() {
     { type: 'event', label: 'Праздник' },
     { type: 'other', label: 'Другое' },
   ];
+  const [tags, setTags] = useState<Tag[]>([]);
+  const handleOnChange = (tags: Tag[]) => {
+    setTags(tags);
+  };
   return (
     <div>
       <Button size={'large'} variant={'primary'}>
@@ -46,6 +52,8 @@ export function HomePage() {
       <br />
       <RadioGroup options={options} />
       <TagInput
+        tags={tags}
+        onChange={handleOnChange}
         placeholder={'Поиск по тегам'}
         showIcon
         size={'large'}

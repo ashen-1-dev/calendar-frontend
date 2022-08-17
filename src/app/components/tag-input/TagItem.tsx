@@ -14,9 +14,6 @@ const Item = styled.div`
   font-size: 0.875rem;
   background-color: ${Colors.Blue};
   white-space: nowrap;
-  :last-child {
-    margin-right: 1em;
-  }
 `;
 const ItemDescription = styled.div`
   position: absolute;
