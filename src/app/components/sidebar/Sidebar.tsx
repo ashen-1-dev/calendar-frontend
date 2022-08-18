@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { Fragment, useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
@@ -11,13 +11,16 @@ import Select, { SelectOption } from '../selects/Select';
 import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
 import useSortedAppointments from '../../hooks/useSortedAppointments';
-import AppointmentModal from './Appointment.modal';
+import AppointmentDialog from './dialogs/Appointment.dialog';
 import { Appointment } from '../../models/Appointment';
+import ConfirmDeleteDialog from './dialogs/ConfirmDelete.dialog';
 
-const Wrapper = styled.aside`
+const Container = styled.div`
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
 `;
+
 const DateText = styled.span`
   font-weight: bold;
   font-size: 1.25rem;
@@ -32,8 +35,9 @@ const NoAppointments = styled.div`
 `;
 
 const AppointmentContainer = styled.div`
+  height: 100%;
+  padding-top: 2.5rem;
   display: flex;
-  overflow-y: auto;
   flex-direction: column;
   align-items: center;
   background-color: white;
@@ -79,8 +83,23 @@ const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   const { date, appointments } = useSelectedDate();
   const [modalActive, setModalActive] = useState(false);
-  const handleOnClickEdit = (appointment: Appointment) => {
-    setModalActive(true);
+
+  const [closeModalActive, setCloseModalActive] = useState(false);
+  const [appointmentToDelete, setAppointmentToDelete] =
+    useState<Appointment | null>(null);
+  const [appointmentToEdit, setAppointmentToEdit] =
+    useState<Appointment | null>(null);
+
+  const onDeleteAppointment = (appointment: Appointment) => {
+    setAppointmentToDelete(appointment);
+    setAppointmentToEdit(null);
+    setCloseModalActive(true);
+  };
+
+  const onEditAppointment = (appointment: Appointment) => {
+    setAppointmentToEdit(appointment);
+    setAppointmentToDelete(null);
+    setCloseModalActive(true);
   };
 
   const [
@@ -93,24 +112,41 @@ const Sidebar = (props: SidebarProps) => {
   const formatDate = format(date, 'dd MMMM yyyy', { locale: ru });
   const hasAppointments = appointments.length !== 0;
   return (
-    <Wrapper className={className}>
-      <AppointmentModal active={modalActive} setActive={setModalActive} />
-      {!hasAppointments ? (
-        <NoAppointments>
-          <DateText style={{ marginBottom: '1.563rem' }}>
-            События на {formatDate}
-          </DateText>
-          <Button
-            onClick={() => setModalActive(true)}
-            icon={<PlusSvg style={{ width: '0.875rem', height: '0.875rem' }} />}
-            size={'large'}
-            variant={'primary'}
-          >
-            Добавить событие
-          </Button>
-        </NoAppointments>
-      ) : (
-        <>
+    <>
+      {appointmentToDelete && (
+        <ConfirmDeleteDialog
+          showCloseIcon={false}
+          active={closeModalActive}
+          setActive={setCloseModalActive}
+          appointment={appointmentToDelete}
+        />
+      )}
+      {appointmentToEdit && (
+        <AppointmentDialog
+          active={closeModalActive}
+          setActive={setCloseModalActive}
+          appointment={appointmentToEdit}
+        />
+      )}
+      <Container className={className}>
+        <AppointmentDialog active={modalActive} setActive={setModalActive} />
+        {!hasAppointments ? (
+          <NoAppointments>
+            <DateText style={{ marginBottom: '1.563rem' }}>
+              События на {formatDate}
+            </DateText>
+            <Button
+              onClick={() => setModalActive(true)}
+              icon={
+                <PlusSvg style={{ width: '0.875rem', height: '0.875rem' }} />
+              }
+              size={'large'}
+              variant={'primary'}
+            >
+              Добавить событие
+            </Button>
+          </NoAppointments>
+        ) : (
           <AppointmentContainer>
             <DateText>События на {formatDate}</DateText>
             <SelectContainer>
@@ -123,14 +159,18 @@ const Sidebar = (props: SidebarProps) => {
                 options={options}
               />
             </SelectContainer>
-            <AppointmentList appointments={sortedAndOrderedAppointments} />
+            <AppointmentList
+              onEdit={onEditAppointment}
+              onDelete={onDeleteAppointment}
+              appointments={sortedAndOrderedAppointments}
+            />
+            <ButtonContainer>
+              <RoundButton onClick={() => setModalActive(true)} />
+            </ButtonContainer>
           </AppointmentContainer>
-          <ButtonContainer>
-            <RoundButton onClick={() => setModalActive(true)} />
-          </ButtonContainer>
-        </>
-      )}
-    </Wrapper>
+        )}
+      </Container>
+    </>
   );
 };
 

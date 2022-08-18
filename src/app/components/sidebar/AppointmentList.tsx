@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Appointment } from '../../models/Appointment';
 import SidebarAppointment from './SidebarAppointment';
+import { Colors } from '../../../styles/colors';
 
 const Wrapper = styled.div`
   display: flex;
@@ -10,22 +11,27 @@ const Wrapper = styled.div`
 
 interface AppointmentListProps {
   appointments: Appointment[];
+  onDelete: (appointment: Appointment) => void;
+  onEdit: (appointment: Appointment) => void;
 }
 
 const VerticalLine = styled.div`
   width: inherit;
-  border: solid 2px #f8fafe;
+  border: solid 2px ${Colors.LightGrey3};
 `;
 
 const AppointmentList = (props: AppointmentListProps) => {
-  const { appointments } = props;
-
+  const { appointments, onDelete, onEdit } = props;
   return (
     <Wrapper>
       {appointments.map(appointment => (
         <React.Fragment key={appointment.name}>
           <VerticalLine />
-          <SidebarAppointment appointment={appointment} />
+          <SidebarAppointment
+            onEdit={onEdit}
+            onDelete={onDelete}
+            appointment={appointment}
+          />
         </React.Fragment>
       ))}
       <VerticalLine />

@@ -3,33 +3,32 @@ import { useState } from 'react';
 import Calendar from '../../components/calendar/Calendar';
 import Header from '../../components/header/Header';
 import styled from 'styled-components';
-import Sidebar, { SidebarProps } from '../../components/sidebar/Sidebar';
+import Sidebar from '../../components/sidebar/Sidebar';
 
-const CustomHeader = styled(Header)`
-  grid-area: header;
-`;
-
-const CustomSidebar = styled(Sidebar)<SidebarProps>`
-  grid-area: sidebar;
-`;
 const CustomCalendar = styled(Calendar)`
-  grid-area: main;
+  margin-right: 1.875rem;
+`;
+
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Row = styled.div`
+  display: flex;
+  position: relative;
+  padding: 1.875rem;
 `;
 export function HomePage() {
   const [date, setDate] = useState(new Date());
 
   return (
     <Wrapper>
-      <CustomHeader />
-      <CustomCalendar date={date} setDate={setDate} />
-      <CustomSidebar />
+      <Header />
+      <Row>
+        <CustomCalendar date={date} setDate={setDate} />
+        <Sidebar />
+      </Row>
     </Wrapper>
   );
 }
-
-const Wrapper = styled.div`
-  display: grid;
-  grid-template-areas:
-    'header header'
-    'main   sidebar';
-`;

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Input from '../inputs/Input';
 import RadioGroup from '../radio/RadioGroup';
 import { RadioOption } from '../radio/Radio';
-import { AppointmentType } from '../../models/Appointment';
+import { Appointment, AppointmentType } from '../../models/Appointment';
 import MyDatetimePicker from '../datepicker/MyDatetimePicker';
 import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
@@ -54,9 +54,13 @@ const validation = (values: { name: string; date: Date }) => {
 
 export interface CreateAppointmentProps {
   onCreate: () => void;
+  appointment?: Appointment;
 }
 
-const CreateAppointment = ({ onCreate }) => {
+const CreateAppointment = ({
+  onCreate,
+  appointment,
+}: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const handleOnClick = () => {
     onCreate();
@@ -108,7 +112,7 @@ const CreateAppointment = ({ onCreate }) => {
                     )}
                     <Input
                       name={props.input.name}
-                      value={props.input.value}
+                      value={appointment?.name || props.input.value}
                       onChange={props.input.onChange}
                     />
                   </div>
@@ -125,7 +129,7 @@ const CreateAppointment = ({ onCreate }) => {
                     )}
                     <RadioGroup
                       name={props.input.name}
-                      value={props.input.value}
+                      value={appointment?.state.type || props.input.value}
                       onChange={props.input.onChange}
                       options={radioOptions}
                     />
@@ -145,7 +149,7 @@ const CreateAppointment = ({ onCreate }) => {
                       <span>{props.meta.error}</span>
                     )}
                     <MyDatetimePicker
-                      value={props.input.value}
+                      value={appointment?.date || props.input.value}
                       onChange={props.input.onChange}
                     />
                   </div>
@@ -158,7 +162,7 @@ const CreateAppointment = ({ onCreate }) => {
                 {props => (
                   <Input
                     name={props.input.name}
-                    value={props.input.value}
+                    value={appointment?.state.value || props.input.value}
                     onChange={props.input.onChange}
                     {...input.inputProps}
                   />

@@ -9,7 +9,6 @@ const Wrapper = styled.div<Pick<CalendarCellProp, 'selected'>>`
   display: flex;
   position: relative;
   flex-direction: column;
-  height: 7.688rem;
   width: 12.313rem;
   padding: 0 0.325rem;
   background-color: ${({ selected }) =>

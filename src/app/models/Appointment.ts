@@ -33,3 +33,9 @@ export interface Appointment<T extends AppointmentState = AllState> {
   state: T;
   tags?: Tag[];
 }
+
+export const EventAttribute = {
+  [AppointmentType.Event]: 'Адрес',
+  [AppointmentType.Holiday]: 'Бюджет',
+  [AppointmentType.Other]: 'Комментарий',
+};

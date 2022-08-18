@@ -13,6 +13,7 @@ const Wrapper = styled.div`
   align-items: center;
   justify-content: space-between;
   height: 6.25rem;
+  width: 100%;
 `;
 
 const Logo = styled.div`

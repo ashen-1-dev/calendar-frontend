@@ -1,5 +1,9 @@
 import React from 'react';
-import { Appointment, AppointmentType } from '../../models/Appointment';
+import {
+  Appointment,
+  AppointmentType,
+  EventAttribute,
+} from '../../models/Appointment';
 import styled from 'styled-components';
 import { ReactComponent as EditSvg } from '../buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../buttons/assets/delete.svg';
@@ -7,10 +11,6 @@ import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
 import Button from '../buttons/Button';
 import useHover from '../../hooks/useHover';
-
-interface AppointmentProps {
-  appointment: Appointment;
-}
 
 const Wrapper = styled.div<{ hover: boolean }>`
   display: flex;
@@ -75,8 +75,14 @@ const Circle = styled.div<{ type: AppointmentType }>`
   }};
 `;
 
+interface AppointmentProps {
+  appointment: Appointment;
+  onDelete: (appointment: Appointment) => void;
+  onEdit: (appointment: Appointment) => void;
+}
+
 const SidebarAppointment = (props: AppointmentProps) => {
-  const { appointment } = props;
+  const { appointment, onDelete, onEdit } = props;
   const [onMouseOver, onMouseOut, isHover] = useHover();
 
   const formatDate = format(appointment.date, 'HH:mm');
@@ -99,8 +105,8 @@ const SidebarAppointment = (props: AppointmentProps) => {
       </Row>
       <Row style={{ fontSize: '0.875rem', paddingLeft: '1.5rem' }}>
         <ColoredText style={{ opacity: 0.7 }} type={appointment.state.type}>
-          {appointment.state.type}
-        </ColoredText>{' '}
+          {EventAttribute[appointment.state.type]}:
+        </ColoredText>
         {appointment.state.value}
       </Row>
       <Row style={{ paddingLeft: '1.5rem' }}>
@@ -110,10 +116,18 @@ const SidebarAppointment = (props: AppointmentProps) => {
           ))}
         {isHover && (
           <ButtonContainer>
-            <Button variant={'primary'} size={'very-small'}>
+            <Button
+              onClick={() => onEdit(appointment)}
+              variant={'primary'}
+              size={'very-small'}
+            >
               <EditSvg />
             </Button>
-            <Button variant={'primary'} size={'very-small'}>
+            <Button
+              onClick={() => onDelete(appointment)}
+              variant={'primary'}
+              size={'very-small'}
+            >
               <DeleteSvg />
             </Button>
           </ButtonContainer>

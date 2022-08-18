@@ -18,6 +18,7 @@ const Wrapper = styled.div`
   display: flex;
   background-color: white;
   flex-direction: column;
+  border-radius: 10px;
 `;
 
 const Calendar = (props: CalendarProps) => {
