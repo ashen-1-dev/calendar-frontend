@@ -78,6 +78,7 @@ const Circle = styled.div<{ type: AppointmentType }>`
 const SidebarAppointment = (props: AppointmentProps) => {
   const { appointment } = props;
   const [onMouseOver, onMouseOut, isHover] = useHover();
+
   const formatDate = format(appointment.date, 'HH:mm');
   return (
     <Wrapper hover={isHover} onMouseOver={onMouseOver} onMouseOut={onMouseOut}>

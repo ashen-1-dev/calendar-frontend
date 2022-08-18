@@ -11,8 +11,8 @@ import Select, { SelectOption } from '../selects/Select';
 import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
 import useSortedAppointments from '../../hooks/useSortedAppointments';
-import AppointmentAdd from './modal/AppointmentAdd';
-import Modal from '../modal/Modal';
+import AppointmentModal from './Appointment.modal';
+import { Appointment } from '../../models/Appointment';
 
 const Wrapper = styled.aside`
   display: flex;
@@ -79,6 +79,10 @@ const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   const { date, appointments } = useSelectedDate();
   const [modalActive, setModalActive] = useState(false);
+  const handleOnClickEdit = (appointment: Appointment) => {
+    setModalActive(true);
+  };
+
   const [
     sortedAndOrderedAppointments,
     handleOnSortChange,
@@ -90,13 +94,7 @@ const Sidebar = (props: SidebarProps) => {
   const hasAppointments = appointments.length !== 0;
   return (
     <Wrapper className={className}>
-      <Modal
-        active={modalActive}
-        setActive={setModalActive}
-        label={'Добавить событие'}
-      >
-        <AppointmentAdd />
-      </Modal>
+      <AppointmentModal active={modalActive} setActive={setModalActive} />
       {!hasAppointments ? (
         <NoAppointments>
           <DateText style={{ marginBottom: '1.563rem' }}>

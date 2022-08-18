@@ -4,8 +4,6 @@ import Calendar from '../../components/calendar/Calendar';
 import Header from '../../components/header/Header';
 import styled from 'styled-components';
 import Sidebar, { SidebarProps } from '../../components/sidebar/Sidebar';
-import Modal from '../../components/modal/Modal';
-import AppointmentAdd from '../../components/sidebar/modal/AppointmentAdd';
 
 const CustomHeader = styled(Header)`
   grid-area: header;

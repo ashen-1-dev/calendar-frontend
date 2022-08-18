@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import Input from '../../inputs/Input';
-import RadioGroup from '../../radio/RadioGroup';
-import { RadioOption } from '../../radio/Radio';
-import { Appointment, AppointmentType } from '../../../models/Appointment';
-import MyDatetimePicker from '../../datepicker/MyDatetimePicker';
+import Input from '../inputs/Input';
+import RadioGroup from '../radio/RadioGroup';
+import { RadioOption } from '../radio/Radio';
+import { AppointmentType } from '../../models/Appointment';
+import MyDatetimePicker from '../datepicker/MyDatetimePicker';
 import styled from 'styled-components';
-import { Colors } from '../../../../styles/colors';
-import TagInput from '../../tag-input/TagInput';
-import Button from '../../buttons/Button';
+import { Colors } from '../../../styles/colors';
+import TagInput from '../tag-input/TagInput';
+import Button from '../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 
@@ -41,15 +41,26 @@ const radioOptions: RadioOption[] = [
   { value: 'other', name: 'Другое' },
 ];
 
-const AppointmentAdd = () => {
-  const [appointment, setAppointment] = useState<Appointment>({
-    date: new Date(),
-    name: '',
-    tags: [],
-    state: { type: AppointmentType.Event, value: '' },
-  });
+const validation = (values: { name: string; date: Date }) => {
+  const errors: { name?: string; date?: string } = {};
+  if (!values.name) {
+    errors.name = 'Обязательное поле';
+  }
+  if (!values.date) {
+    errors.date = 'Обязательное поле';
+  }
+  return errors;
+};
 
+export interface CreateAppointmentProps {
+  onCreate: () => void;
+}
+
+const CreateAppointment = ({ onCreate }) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
+  const handleOnClick = () => {
+    onCreate();
+  };
 
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
@@ -81,6 +92,7 @@ const AppointmentAdd = () => {
 
   return (
     <Form
+      validate={validation}
       onSubmit={onSubmit}
       render={({ handleSubmit }) => (
         <form onSubmit={handleSubmit}>
@@ -90,11 +102,16 @@ const AppointmentAdd = () => {
               <Label>Название</Label>
               <Field name={'name'}>
                 {props => (
-                  <Input
-                    name={props.input.name}
-                    value={props.input.value}
-                    onChange={props.input.onChange}
-                  />
+                  <div>
+                    {props.meta.error && props.meta.touched && (
+                      <span>{props.meta.error}</span>
+                    )}
+                    <Input
+                      name={props.input.name}
+                      value={props.input.value}
+                      onChange={props.input.onChange}
+                    />
+                  </div>
                 )}
               </Field>
             </Row>
@@ -102,12 +119,17 @@ const AppointmentAdd = () => {
               <Label>Тип события</Label>
               <Field name={'state.type'}>
                 {props => (
-                  <RadioGroup
-                    name={props.input.name}
-                    value={props.input.value}
-                    onChange={props.input.onChange}
-                    options={radioOptions}
-                  />
+                  <div>
+                    {props.meta.error && props.meta.touched && (
+                      <span>{props.meta.error}</span>
+                    )}
+                    <RadioGroup
+                      name={props.input.name}
+                      value={props.input.value}
+                      onChange={props.input.onChange}
+                      options={radioOptions}
+                    />
+                  </div>
                 )}
               </Field>
               <OnChange name="state.type">
@@ -118,10 +140,15 @@ const AppointmentAdd = () => {
               <Label>Дата и время</Label>
               <Field name={'date'}>
                 {props => (
-                  <MyDatetimePicker
-                    value={props.input.value}
-                    onChange={props.input.onChange}
-                  />
+                  <div>
+                    {props.meta.error && props.meta.touched && (
+                      <span>{props.meta.error}</span>
+                    )}
+                    <MyDatetimePicker
+                      value={props.input.value}
+                      onChange={props.input.onChange}
+                    />
+                  </div>
                 )}
               </Field>
             </Row>
@@ -153,7 +180,12 @@ const AppointmentAdd = () => {
               </Field>
             </Row>
             <ButtonContainer>
-              <Button variant={'primary'} size={'large'}>
+              <Button
+                type={'submit'}
+                onClick={handleOnClick}
+                variant={'primary'}
+                size={'large'}
+              >
                 Добавить событие
               </Button>
             </ButtonContainer>
@@ -164,4 +196,4 @@ const AppointmentAdd = () => {
   );
 };
 
-export default AppointmentAdd;
+export default CreateAppointment;

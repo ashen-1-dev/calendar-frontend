@@ -38,6 +38,7 @@ const TagInput: React.FC<TagInputProps> = props => {
 
   const addTag = (tag: Tag) => {
     onChange([...tags, tag]);
+    setValue('');
   };
 
   const searchedTags = useMemo(() => {
