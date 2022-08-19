@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { ReactComponent as DownArrowSvg } from './assets/arrow-down.svg';
 import { ReactComponent as UpArrowSvg } from './assets/arrow-up.svg';
 import { Wrapper, SelectHeader, ListItem, DropdownList } from './styled';
+import { useToggle } from '../../hooks/useToggle';
 
 export interface SelectOption {
   name: string;
@@ -15,15 +16,10 @@ interface SelectProps {
 }
 
 const Select = ({ onChange, options, selectedOption }: SelectProps) => {
-  const [isOpen, setIsOpen] = useState(false);
-
+  const [isOpen, toggle] = useToggle(false);
   const handleSelectItem = option => {
     onChange(option);
     toggle();
-  };
-
-  const toggle = () => {
-    setIsOpen(prev => !prev);
   };
 
   const handleOnClick = () => {
