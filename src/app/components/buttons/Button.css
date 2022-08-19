@@ -1,59 +1,60 @@
+button {
+    outline: none;
+}
 
+button[disabled] {
+    opacity: 0.6;
+    cursor: default;
+}
 
 .btn {
     display: flex;
     border: none;
     border-radius: 5px;
+    cursor: pointer;
 }
 
 .btn-size-very-small {
-    width: 30px;
-    height: 30px;
+    width: 1.875em;
+    height: 1.875em;
 }
 
 .btn-size-small {
-    width: 50px;
-    height: 50px;
+    width: 3.125em;
+    height: 3.125em;
 }
 
 .btn-size-medium {
-    width: 103px;
-    height: 50px;
-}
-
-.btn-size-medium. {
-    width: 103px;
-    height: 50px;
+    width: 6.4em;
+    height: 3.125em;
 }
 
 .btn-size-large {
-    width: 192px;
-    height: 50px;
+    width: 12em;
+    height: 3.125em;
 }
 
 .btn-text {
     margin: auto;
-    font-size: 16px;
+    font-size: 1rem;
     color: white;
     display: block;
 }
 
 .btn-primary {
-    background-color: #489df0;
+    background-color: var(--blue);
 }
 
 .btn-secondary {
     background-color: white;
-    border: solid 1px #489df0;
+    border: solid 1px var(--blue);
 }
 
 .btn-secondary > .btn-text {
-    color: #489df0;
+    color: var(--blue);
 }
 
 .btn-round {
     border-radius: 25px;
     box-shadow: 0 4px 6px 0 rgba(0, 0, 0, 0.05);
 }
-
-

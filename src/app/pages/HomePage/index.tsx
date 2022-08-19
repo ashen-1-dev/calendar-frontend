@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Button from '../../components/buttons/Button';
-import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
-import Input from 'app/components/inputs/TextInput';
 import Select, { SelectOption } from '../../components/selects/Select';
 import { useState } from 'react';
+import Input from '../../components/inputs/Input';
 
 export function HomePage() {
   const options: SelectOption[] = [
@@ -33,7 +32,6 @@ export function HomePage() {
         Отмена
       </Button>
       <br />
-      <RoundButton />
       <br />
       <Button size={'very-small'} variant={'primary'}>
         <EditSvg />
@@ -42,10 +40,6 @@ export function HomePage() {
       <Button size={'very-small'} variant={'primary'}>
         <DeleteSvg />
       </Button>
-      <br />
-      <Input placeholder={'Поиск по тегам'} />
-      <br />
-      <Input placeholder={'Поиск по тегам'} size={'large'} />
       <br />
       <Select
         onChange={onChange}
