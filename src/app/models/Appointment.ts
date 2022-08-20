@@ -28,6 +28,7 @@ export interface OtherState extends AppointmentState {
 export type AllState = HolidayState | EventState | OtherState;
 
 export interface Appointment<T extends AppointmentState = AllState> {
+  id: number;
   name: string;
   date: Date;
   state: T;
