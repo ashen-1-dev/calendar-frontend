@@ -2,8 +2,8 @@ import { Appointment } from '../../models/Appointment';
 import { APPOINTMENTS } from './keys';
 import { IAppointmentService } from '../appointment.interface';
 
-export class AppointmentService implements IAppointmentService {
-  public getAppointments(): Appointment[] {
+export class AppointmentService {
+  public static getAppointments(): Appointment[] {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     if (!rawAppointments) {
       return [];
@@ -11,16 +11,16 @@ export class AppointmentService implements IAppointmentService {
     return JSON.parse(rawAppointments);
   }
 
-  public setAppointment(appointment: Appointment): void {
-    const allRawAppointments = localStorage.getItem(APPOINTMENTS);
-    const appointments: Appointment[] = JSON.parse(allRawAppointments || '');
+  public static setAppointment(appointment: Appointment): void {
+    const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
+    const appointments: Appointment[] = JSON.parse(allRawAppointments);
     return localStorage.setItem(
       APPOINTMENTS,
       JSON.stringify([...appointments, appointment]),
     );
   }
 
-  public updateAppointment(
+  public static updateAppointment(
     id: number,
     appointment: Appointment,
   ): Appointment | null {
@@ -36,7 +36,7 @@ export class AppointmentService implements IAppointmentService {
     return appointment;
   }
 
-  public removeAppointment(id: number): void {
+  public static removeAppointment(id: number): void {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     const appointments: Appointment[] =
       rawAppointments && JSON.parse(rawAppointments);

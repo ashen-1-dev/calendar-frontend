@@ -4,6 +4,8 @@ import Calendar from '../../components/calendar/Calendar';
 import Header from '../../components/header/Header';
 import styled from 'styled-components';
 import Sidebar from '../../components/sidebar/Sidebar';
+import { useDispatch } from 'react-redux';
+import { GET_APPOINTMENTS } from '../../../store/appointments/actions';
 
 const CustomCalendar = styled(Calendar)`
   margin-right: 1.875rem;
@@ -21,10 +23,13 @@ const Row = styled.div`
 `;
 export function HomePage() {
   const [date, setDate] = useState(new Date());
-
+  const dispatch = useDispatch();
   return (
     <Wrapper>
       <Header />
+      <button onClick={() => dispatch({ type: GET_APPOINTMENTS })}>
+        dsadsda
+      </button>
       <Row>
         <CustomCalendar date={date} setDate={setDate} />
         <Sidebar />

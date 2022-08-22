@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Radio, { RadioOption } from './Radio';
 
-const Wrapper = styled('form')`
+const Wrapper = styled('div')`
   display: flex;
   flex-direction: row;
   gap: 0.625em;

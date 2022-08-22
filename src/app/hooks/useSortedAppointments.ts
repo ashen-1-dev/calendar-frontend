@@ -42,9 +42,7 @@ export default function useSortedAppointments(
     let result: Appointment[] = [];
     switch (sortAndOrder.sort) {
       case 'date': {
-        result = appointments.sort(
-          (a, b) => a.date.getTime() - b.date.getTime(),
-        );
+        result = appointments.sort((a, b) => a.date - b.date);
         break;
       }
       case 'tag': {

@@ -35,9 +35,6 @@ const Header = styled.div`
   border-right: 0;
 `;
 
-const CalendarCellWrapper = styled.div`
-  border: solid 1px ${Colors.LightGrey3};
-`;
 const CalendarBody = (props: CalendarBodyProps) => {
   const { dates } = props;
   const [selectedCellId, setSelectedCellId] = useState(-1);
@@ -45,7 +42,10 @@ const CalendarBody = (props: CalendarBodyProps) => {
   const onCellClick = useCallback(date => {
     setSelectedCellId(date.getTime());
     dispatch(
-      setSelectedDateAction({ date: date, appointments: mockAppointments }),
+      setSelectedDateAction({
+        date: date.getTime(),
+        appointments: mockAppointments,
+      }),
     );
   }, []);
   return (
@@ -58,14 +58,12 @@ const CalendarBody = (props: CalendarBodyProps) => {
       {dates.map(date => {
         const isCellSelected = selectedCellId === date.getTime();
         return (
-          <CalendarCellWrapper>
-            <CalendarCell
-              key={date.getTime()}
-              onClick={onCellClick}
-              selected={isCellSelected}
-              date={date}
-            />
-          </CalendarCellWrapper>
+          <CalendarCell
+            key={date.getTime()}
+            onClick={onCellClick}
+            selected={isCellSelected}
+            date={date}
+          />
         );
       })}
     </Wrapper>

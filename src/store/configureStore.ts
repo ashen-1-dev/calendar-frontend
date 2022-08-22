@@ -12,6 +12,8 @@ import createSagaMiddleware from 'redux-saga';
 
 import { createReducer } from './reducers';
 import { selectedDateReducer } from './selected-date/selectedDateReducer';
+import rootSaga from './sagas/root-saga';
+import { appointmentReducer } from './appointments/appointment.reducer';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -31,11 +33,12 @@ export function configureAppStore() {
   const store = configureStore({
     reducer: createReducer({
       selectedDate: selectedDateReducer,
+      appointments: appointmentReducer,
     }),
     middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',
     enhancers,
   });
-
+  sagaMiddleware.run(rootSaga);
   return store;
 }

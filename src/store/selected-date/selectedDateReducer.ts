@@ -18,35 +18,35 @@ export const mockAppointments: Appointment<
 >[] = [
   {
     id: 1,
-    date: new Date('2022-01-01 19:00'),
+    date: new Date('2022-01-01 19:00').getTime(),
     name: 'Fame1',
     state: { type: AppointmentType.Event, value: 'ул. Пушкина д.130' },
     tags: mockTags.slice(1),
   },
   {
     id: 2,
-    date: new Date('2021-01-01 16:00'),
+    date: new Date('2021-01-01 16:00').getTime(),
     name: 'Bame1',
     state: { type: AppointmentType.Holiday, value: 1500 },
     tags: mockTags.slice(2),
   },
   {
     id: 3,
-    date: new Date('2022-01-01 15:00'),
+    date: new Date('2022-01-01 15:00').getTime(),
     name: 'Aame1',
     state: { type: AppointmentType.Other, value: 'Не забыть взять деньги' },
     tags: mockTags.slice(1),
   },
   {
     id: 4,
-    date: new Date('2023-01-01 13:00'),
+    date: new Date('2023-01-01 13:00').getTime(),
     name: 'Lame1',
     state: { type: AppointmentType.Event, value: 'ул. Ленина 103' },
     tags: mockTags,
   },
 ];
 const initialState: SelectedDate = {
-  date: new Date(),
+  date: new Date().getTime(),
   appointments: mockAppointments,
 };
 

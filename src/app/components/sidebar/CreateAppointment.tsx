@@ -10,6 +10,8 @@ import TagInput from '../tag-input/TagInput';
 import Button from '../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
+import { useDispatch } from 'react-redux';
+import { CREATE_APPOINTMENT } from '../../../store/appointments/actions';
 
 const Label = styled.div`
   margin-bottom: 0.625rem;
@@ -62,9 +64,7 @@ const CreateAppointment = ({
   appointment,
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
-  const handleOnClick = () => {
-    onCreate();
-  };
+  const dispatch = useDispatch();
 
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
@@ -92,7 +92,11 @@ const CreateAppointment = ({
     }
   };
 
-  const onSubmit = data => console.log(data);
+  const onSubmit = data => {
+    onCreate();
+    const appointment: Appointment = data;
+    dispatch({ type: CREATE_APPOINTMENT, payload: appointment });
+  };
 
   return (
     <Form
@@ -112,7 +116,7 @@ const CreateAppointment = ({
                     )}
                     <Input
                       name={props.input.name}
-                      value={appointment?.name || props.input.value}
+                      value={props.input.value}
                       onChange={props.input.onChange}
                     />
                   </div>
@@ -129,7 +133,7 @@ const CreateAppointment = ({
                     )}
                     <RadioGroup
                       name={props.input.name}
-                      value={appointment?.state.type || props.input.value}
+                      value={props.input.value}
                       onChange={props.input.onChange}
                       options={radioOptions}
                     />
@@ -149,7 +153,7 @@ const CreateAppointment = ({
                       <span>{props.meta.error}</span>
                     )}
                     <MyDatetimePicker
-                      value={appointment?.date || props.input.value}
+                      value={props.input.value}
                       onChange={props.input.onChange}
                     />
                   </div>
@@ -162,7 +166,7 @@ const CreateAppointment = ({
                 {props => (
                   <Input
                     name={props.input.name}
-                    value={appointment?.state.value || props.input.value}
+                    value={props.input.value}
                     onChange={props.input.onChange}
                     {...input.inputProps}
                   />
@@ -184,12 +188,7 @@ const CreateAppointment = ({
               </Field>
             </Row>
             <ButtonContainer>
-              <Button
-                type={'submit'}
-                onClick={handleOnClick}
-                variant={'primary'}
-                size={'large'}
-              >
+              <Button type={'submit'} variant={'primary'} size={'large'}>
                 Добавить событие
               </Button>
             </ButtonContainer>

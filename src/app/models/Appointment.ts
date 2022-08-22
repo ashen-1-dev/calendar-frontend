@@ -30,7 +30,7 @@ export type AllState = HolidayState | EventState | OtherState;
 export interface Appointment<T extends AppointmentState = AllState> {
   id: number;
   name: string;
-  date: Date;
+  date: number;
   state: T;
   tags?: Tag[];
 }

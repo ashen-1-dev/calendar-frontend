@@ -19,7 +19,6 @@ const Button = (props: ButtonProps) => {
     children,
     className,
     icon,
-    type,
     ...rest
   } = props;
   return (

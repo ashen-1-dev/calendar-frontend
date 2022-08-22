@@ -1,6 +1,6 @@
 import { Appointment } from '../../app/models/Appointment';
 
 export interface SelectedDate {
-  date: Date;
+  date: number;
   appointments: Appointment[];
 }
