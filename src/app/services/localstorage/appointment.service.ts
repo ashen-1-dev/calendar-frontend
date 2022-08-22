@@ -1,14 +1,29 @@
 import { Appointment } from '../../models/Appointment';
 import { APPOINTMENTS } from './keys';
 import { IAppointmentService } from '../appointment.interface';
+import { AppointmentsQuery } from '../appointments-query';
 
 export class AppointmentService {
-  public static getAppointments(): Appointment[] {
+  public static getAppointments(
+    appointmentsQuery: AppointmentsQuery,
+  ): Appointment[] {
+    const { startDate, endDate } = appointmentsQuery;
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     if (!rawAppointments) {
       return [];
     }
-    return JSON.parse(rawAppointments);
+    const appointments: Appointment[] = JSON.parse(rawAppointments);
+    if (!startDate || !endDate) {
+      return appointments;
+    }
+    const result: Appointment[] = appointments.filter(appointment => {
+      console.log(
+        appointment,
+        appointment.date >= startDate && appointment.date <= endDate,
+      );
+      return appointment.date >= startDate && appointment.date <= endDate;
+    });
+    return result;
   }
 
   public static setAppointment(appointment: Appointment): void {

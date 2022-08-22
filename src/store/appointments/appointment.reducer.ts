@@ -10,31 +10,19 @@ const initialState: { appointments: Appointment[]; error: any } = {
   error: {},
 };
 
-export interface AppointmentAction {
-  type: string;
-  payload: {
-    appointments?: Appointment[];
-    appointment?: Appointment;
-    error: any;
-  };
-}
-
 export const appointmentReducer = (state = initialState, action) => {
   switch (action.type) {
     case CREATE_APPOINTMENT_SUCCESS: {
-      state = {
+      return {
         ...state,
         appointments: [...state.appointments, action.payload.appointment],
       };
-      break;
     }
     case CREATE_APPOINTMENT_FAILURE: {
-      state = { ...state, error: action.payload.error };
-      break;
+      return { ...state, error: action.payload.error };
     }
     case GET_APPOINTMENTS_SUCCESS: {
-      state = { ...state, appointments: action.payload.appointments };
-      break;
+      return { ...state, appointments: action.payload.appointments };
     }
     default:
       return state;

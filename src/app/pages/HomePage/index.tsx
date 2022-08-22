@@ -27,7 +27,17 @@ export function HomePage() {
   return (
     <Wrapper>
       <Header />
-      <button onClick={() => dispatch({ type: GET_APPOINTMENTS })}>
+      <button
+        onClick={() =>
+          dispatch({
+            type: GET_APPOINTMENTS,
+            payload: {
+              startDate: new Date('2021-01-01').getTime(),
+              endDate: new Date('2023-01-01').getTime(),
+            },
+          })
+        }
+      >
         dsadsda
       </button>
       <Row>

@@ -95,6 +95,7 @@ const CreateAppointment = ({
   const onSubmit = data => {
     onCreate();
     const appointment: Appointment = data;
+    appointment.date = data.date.getTime();
     dispatch({ type: CREATE_APPOINTMENT, payload: appointment });
   };
 
