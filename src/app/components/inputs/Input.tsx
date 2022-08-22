@@ -20,6 +20,7 @@ const Input: React.ComponentType<InputProps> = ({
   onChange,
   label,
   name,
+  ...rest
 }) => {
   return (
     <div className={`input-${size}`} style={{ position: 'relative' }}>
@@ -36,6 +37,7 @@ const Input: React.ComponentType<InputProps> = ({
           value={value}
           onChange={event => onChange(event.target.value)}
           placeholder={placeholder}
+          {...rest}
         />
       </div>
     </div>
