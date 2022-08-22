@@ -2,12 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Radio, { RadioOption } from './Radio';
 
-const Wrapper = styled('div')`
-  display: flex;
-  flex-direction: row;
-  gap: 0.625em;
-`;
-
 interface RadioGroupProps {
   options: RadioOption[];
   selectedValue: string;
@@ -34,5 +28,11 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
     </Wrapper>
   );
 };
+
+const Wrapper = styled('div')`
+  display: flex;
+  flex-direction: row;
+  gap: 0.625em;
+`;
 
 export default RadioGroup;

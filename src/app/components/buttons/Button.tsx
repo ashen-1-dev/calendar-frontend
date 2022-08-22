@@ -1,33 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React, { ReactNode } from 'react';
 import classNames from 'classnames';
 import './Button.css';
 
-const Button = ({ size, variant, children, type = '' }) => {
+interface ButtonProps
+  extends Omit<React.HTMLProps<HTMLButtonElement>, 'size' | 'type'> {
+  size: 'small' | 'medium' | 'large' | 'very-small';
+  variant: 'primary' | 'secondary';
+  type?: 'btn-round';
+  children?: ReactNode;
+}
+
+const Button = (props: ButtonProps) => {
+  const {
+    size = 'medium',
+    variant = 'primary',
+    type = '',
+    onClick,
+    children,
+    ...rest
+  } = props;
   return (
-    <div
+    <button
+      onClick={onClick}
       className={classNames(
         `btn`,
         `btn-size-${size}`,
         `btn-${variant}`,
         `${type}`,
       )}
+      {...rest}
     >
       <span className="btn-text">{children}</span>
-    </div>
+    </button>
   );
-};
-
-Button.defaultProps = {
-  size: 'medium',
-  variant: 'default',
-  children: '',
-};
-
-Button.propTypes = {
-  size: PropTypes.oneOf(['small', 'medium', 'large', 'very-small']),
-  variant: PropTypes.oneOf(['primary', 'secondary', 'disabled', 'default']),
-  type: PropTypes.oneOf(['btn-round']),
 };
 
 export default Button;

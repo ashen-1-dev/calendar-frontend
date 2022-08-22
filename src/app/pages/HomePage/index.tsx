@@ -32,7 +32,6 @@ export function HomePage() {
         Отмена
       </Button>
       <br />
-      <RoundButton />
       <br />
       <Button size={'very-small'} variant={'primary'}>
         <EditSvg />
