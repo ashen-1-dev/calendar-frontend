@@ -40,7 +40,13 @@ export class AppointmentService {
     appointment: Appointment,
   ): Appointment | null {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
-    const appointments: Appointment[] = JSON.parse(rawAppointments || '[]');
+    if (!rawAppointments) {
+      return null;
+    }
+    const appointments = JSON.parse(rawAppointments);
+    console.log('raw apps', rawAppointments);
+    console.log('apps eto', appointments);
+    //TODO: Ошибка. Пропадает свойство id, чек логи
     const appointmentToUpdateIndex = appointments.findIndex(x => x.id === id);
     if (appointmentToUpdateIndex === -1) {
       return null;

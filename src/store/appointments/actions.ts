@@ -31,3 +31,17 @@ export const getAppointmentsSuccess = createAction(
     payload: appointments,
   }),
 );
+
+export const updateAppointment = createAction(
+  'UPDATE_APPOINTMENT',
+  (id: string, appointment: Appointment) => ({
+    payload: { appointment: appointment, id: id },
+  }),
+);
+
+export const updateAppointmentSuccess = createAction(
+  'UPDATE_APPOINTMENT_SUCCESS',
+  (appointment: Appointment) => ({
+    payload: appointment,
+  }),
+);

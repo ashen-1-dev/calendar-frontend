@@ -11,7 +11,10 @@ import Button from '../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import { useDispatch } from 'react-redux';
-import { createAppointment } from '../../../store/appointments/actions';
+import {
+  createAppointment,
+  updateAppointment,
+} from '../../../store/appointments/actions';
 
 const Label = styled.div`
   margin-bottom: 0.625rem;
@@ -43,25 +46,33 @@ const radioOptions: RadioOption[] = [
   { value: 'other', name: 'Другое' },
 ];
 
-const validation = (values: { name: string; date: Date }) => {
-  const errors: { name?: string; date?: string } = {};
+const validation = (values: Appointment) => {
+  const errors: {
+    name?: string;
+    date?: string;
+    state?: { value?: string; type?: string };
+  } = {};
   if (!values.name) {
     errors.name = 'Обязательное поле';
   }
   if (!values.date) {
     errors.date = 'Обязательное поле';
   }
+  if (!values.state?.type) {
+    errors.state = {};
+    errors.state.type = 'Обязательное поле';
+  }
   return errors;
 };
 
 export interface CreateAppointmentProps {
   onCreate: () => void;
-  appointment?: Appointment;
+  appointmentToEdit?: Appointment;
 }
 
 const CreateAppointment = ({
   onCreate,
-  appointment,
+  appointmentToEdit,
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useDispatch();
@@ -96,20 +107,22 @@ const CreateAppointment = ({
     onCreate();
     const appointment: Appointment = data;
     appointment.date = data.date.getTime();
-    dispatch(createAppointment(appointment));
+    !appointmentToEdit
+      ? dispatch(createAppointment(appointment))
+      : dispatch(updateAppointment(appointmentToEdit.id, appointment));
   };
 
   return (
     <Form
       validate={validation}
       onSubmit={onSubmit}
-      render={({ handleSubmit }) => (
+      render={({ handleSubmit, valid }) => (
         <form onSubmit={handleSubmit}>
           <VerticalLine />
           <Wrapper>
             <Row>
               <Label>Название</Label>
-              <Field initialValue={appointment?.name} name={'name'}>
+              <Field initialValue={appointmentToEdit?.name} name={'name'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -126,7 +139,10 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Тип события</Label>
-              <Field initialValue={appointment?.state.type} name={'state.type'}>
+              <Field
+                initialValue={appointmentToEdit?.state.type}
+                name={'state.type'}
+              >
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -148,7 +164,9 @@ const CreateAppointment = ({
             <Row>
               <Label>Дата и время</Label>
               <Field
-                initialValue={appointment && new Date(appointment?.date)}
+                initialValue={
+                  appointmentToEdit && new Date(appointmentToEdit?.date)
+                }
                 name={'date'}
               >
                 {props => (
@@ -167,7 +185,9 @@ const CreateAppointment = ({
             <Row>
               <Label>{input.label}</Label>
               <Field
-                initialValue={appointment && appointment.state.value}
+                initialValue={
+                  appointmentToEdit && appointmentToEdit.state.value
+                }
                 name={'state.value'}
               >
                 {props => (
@@ -195,7 +215,12 @@ const CreateAppointment = ({
               </Field>
             </Row>
             <ButtonContainer>
-              <Button type={'submit'} variant={'primary'} size={'large'}>
+              <Button
+                disabled={!valid}
+                type={'submit'}
+                variant={'primary'}
+                size={'large'}
+              >
                 Добавить событие
               </Button>
             </ButtonContainer>

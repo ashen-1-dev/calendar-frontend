@@ -20,7 +20,7 @@ const AppointmentDialog = ({
   const labelName = !appointment ? 'Добавить событие' : 'Редактировать событие';
   return (
     <Modal active={active} label={labelName} setActive={setActive}>
-      <CreateAppointment appointment={appointment} onCreate={onCreate} />
+      <CreateAppointment appointmentToEdit={appointment} onCreate={onCreate} />
     </Modal>
   );
 };
