@@ -7,7 +7,7 @@ export interface InputProps extends Omit<ComponentProps<'input'>, 'size'> {
   label?: string;
   showIcon?: boolean;
   children?: ReactNode;
-  value: string;
+  value: number | string;
   onChange: (value) => void;
 }
 

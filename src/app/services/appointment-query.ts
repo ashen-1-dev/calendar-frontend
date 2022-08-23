@@ -1,4 +1,4 @@
-export interface AppointmentsQuery {
+export interface AppointmentQuery {
   startDate?: number;
   endDate?: number;
 }

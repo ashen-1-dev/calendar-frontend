@@ -2,8 +2,6 @@ import React from 'react';
 import CreateAppointment from '../CreateAppointment';
 import Modal from '../../modal/Modal';
 import { Appointment } from '../../../models/Appointment';
-import { useDispatch } from 'react-redux';
-import { CREATE_APPOINTMENT } from '../../../../store/appointments/actions';
 
 export interface AppointmentModalProps {
   active: boolean;

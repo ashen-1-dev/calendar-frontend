@@ -1,9 +1,9 @@
 import { Tag } from '../../models/Tag';
-import { APPOINTMENTS, TAGS } from './keys';
+import { TAGS } from './keys';
 import { ITagService } from '../tag.interface';
 import { Appointment } from '../../models/Appointment';
 
-export class TagService implements ITagService {
+export class TagService {
   public getTags(): Tag[] {
     const rawTags = localStorage.getItem(TAGS);
     if (!rawTags) {
@@ -12,14 +12,14 @@ export class TagService implements ITagService {
     return JSON.parse(rawTags);
   }
 
-  public removeTag(id: number): void {
+  public removeTag(id: string): void {
     const rawTags = localStorage.getItem(TAGS);
     const tags: Appointment[] = rawTags && JSON.parse(rawTags);
     if (!tags) {
       return;
     }
     return localStorage.setItem(
-      APPOINTMENTS,
+      TAGS,
       JSON.stringify(tags.filter(x => x.id !== id)),
     );
   }

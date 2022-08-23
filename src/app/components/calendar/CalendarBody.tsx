@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import CalendarCell from './CalendarCell';
 import {
@@ -6,12 +6,12 @@ import {
   CALENDAR_ROW,
   WEEK_DAYS,
 } from '../../constants/constants';
-import {
-  mockAppointments,
-  setSelectedDateAction,
-} from '../../../store/selected-date/selectedDateReducer';
-import { useDispatch } from 'react-redux';
 import { Colors } from '../../../styles/colors';
+import { getAppointments } from '../../../store/appointments/actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { Appointment } from '../../models/Appointment';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { filterAppointmentsByDay } from './helpers/filter-appointments';
 
 interface CalendarBodyProps {
   dates: Date[];
@@ -37,17 +37,20 @@ const Header = styled.div`
 
 const CalendarBody = (props: CalendarBodyProps) => {
   const { dates } = props;
-  const [selectedCellId, setSelectedCellId] = useState(-1);
-  const dispatch = useDispatch();
-  const onCellClick = useCallback(date => {
-    setSelectedCellId(date.getTime());
+  const dispatch = useAppDispatch();
+  const appointments: Appointment[] = useAppSelector(
+    state => state.appointments.appointments,
+  );
+
+  useEffect(() => {
     dispatch(
-      setSelectedDateAction({
-        date: date.getTime(),
-        appointments: mockAppointments,
+      getAppointments({
+        startDate: dates[0].getTime(),
+        endDate: dates[dates.length - 1].getTime(),
       }),
     );
-  }, []);
+  }, [dates]);
+
   return (
     <Wrapper>
       {WEEK_DAYS.map(day => (
@@ -56,15 +59,11 @@ const CalendarBody = (props: CalendarBodyProps) => {
         </Header>
       ))}
       {dates.map(date => {
-        const isCellSelected = selectedCellId === date.getTime();
-        return (
-          <CalendarCell
-            key={date.getTime()}
-            onClick={onCellClick}
-            selected={isCellSelected}
-            date={date}
-          />
-        );
+        const element = {
+          date: date,
+          appointments: filterAppointmentsByDay(date, appointments),
+        };
+        return <CalendarCell key={date.getTime()} element={element} />;
       })}
     </Wrapper>
   );

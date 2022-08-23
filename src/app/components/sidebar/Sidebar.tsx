@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
@@ -18,7 +18,7 @@ import ConfirmDeleteDialog from './dialogs/ConfirmDelete.dialog';
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
+  background-color: white;
 `;
 
 const DateText = styled.span`
@@ -36,12 +36,11 @@ const NoAppointments = styled.div`
 
 const AppointmentContainer = styled.div`
   height: 100%;
+  border-radius: 10px;
   padding-top: 2.5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: white;
-  border-radius: 10px;
   position: relative;
 `;
 
@@ -109,7 +108,7 @@ const Sidebar = (props: SidebarProps) => {
     selectedSortOption,
   ] = useSortedAppointments(appointments, options[0]);
 
-  const formatDate = format(date, 'dd MMMM yyyy', { locale: ru });
+  const formatDate = format(new Date(date), 'dd MMMM yyyy', { locale: ru });
   const hasAppointments = appointments.length !== 0;
   return (
     <>

@@ -11,7 +11,7 @@ import Button from '../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import { useDispatch } from 'react-redux';
-import { CREATE_APPOINTMENT } from '../../../store/appointments/actions';
+import { createAppointment } from '../../../store/appointments/actions';
 
 const Label = styled.div`
   margin-bottom: 0.625rem;
@@ -96,7 +96,7 @@ const CreateAppointment = ({
     onCreate();
     const appointment: Appointment = data;
     appointment.date = data.date.getTime();
-    dispatch({ type: CREATE_APPOINTMENT, payload: appointment });
+    dispatch(createAppointment(appointment));
   };
 
   return (
@@ -109,7 +109,7 @@ const CreateAppointment = ({
           <Wrapper>
             <Row>
               <Label>Название</Label>
-              <Field name={'name'}>
+              <Field initialValue={appointment?.name} name={'name'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -126,7 +126,7 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Тип события</Label>
-              <Field name={'state.type'}>
+              <Field initialValue={appointment?.state.type} name={'state.type'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -147,7 +147,10 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Дата и время</Label>
-              <Field name={'date'}>
+              <Field
+                initialValue={appointment && new Date(appointment?.date)}
+                name={'date'}
+              >
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -163,7 +166,10 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>{input.label}</Label>
-              <Field name={'state.value'}>
+              <Field
+                initialValue={appointment && appointment.state.value}
+                name={'state.value'}
+              >
                 {props => (
                   <Input
                     name={props.input.name}

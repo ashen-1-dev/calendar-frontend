@@ -1,11 +1,12 @@
 import { Appointment } from '../../models/Appointment';
 import { APPOINTMENTS } from './keys';
 import { IAppointmentService } from '../appointment.interface';
-import { AppointmentsQuery } from '../appointments-query';
+import { AppointmentQuery } from '../appointment-query';
+import { generateId } from '../../helpers/uuid-generator';
 
 export class AppointmentService {
   public static getAppointments(
-    appointmentsQuery: AppointmentsQuery,
+    appointmentsQuery: AppointmentQuery,
   ): Appointment[] {
     const { startDate, endDate } = appointmentsQuery;
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
@@ -16,18 +17,17 @@ export class AppointmentService {
     if (!startDate || !endDate) {
       return appointments;
     }
-    const result: Appointment[] = appointments.filter(appointment => {
-      console.log(
-        appointment,
-        appointment.date >= startDate && appointment.date <= endDate,
-      );
-      return appointment.date >= startDate && appointment.date <= endDate;
-    });
+    const result: Appointment[] = appointments
+      .filter(Boolean)
+      .filter(appointment => {
+        return appointment.date >= startDate && appointment.date <= endDate;
+      });
     return result;
   }
 
   public static setAppointment(appointment: Appointment): void {
     const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
+    appointment.id = generateId();
     const appointments: Appointment[] = JSON.parse(allRawAppointments);
     return localStorage.setItem(
       APPOINTMENTS,
@@ -36,11 +36,11 @@ export class AppointmentService {
   }
 
   public static updateAppointment(
-    id: number,
+    id: string,
     appointment: Appointment,
   ): Appointment | null {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
-    const appointments: Appointment[] = JSON.parse(rawAppointments || '');
+    const appointments: Appointment[] = JSON.parse(rawAppointments || '[]');
     const appointmentToUpdateIndex = appointments.findIndex(x => x.id === id);
     if (appointmentToUpdateIndex === -1) {
       return null;
@@ -51,7 +51,7 @@ export class AppointmentService {
     return appointment;
   }
 
-  public static removeAppointment(id: number): void {
+  public static removeAppointment(id: string): void {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     const appointments: Appointment[] =
       rawAppointments && JSON.parse(rawAppointments);

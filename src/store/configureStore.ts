@@ -32,6 +32,7 @@ export function configureAppStore() {
 
   const store = configureStore({
     reducer: createReducer({
+      //@ts-ignore
       selectedDate: selectedDateReducer,
       appointments: appointmentReducer,
     }),

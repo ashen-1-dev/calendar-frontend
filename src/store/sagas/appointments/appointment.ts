@@ -1,12 +1,11 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { AppointmentService } from '../../../app/services/localstorage/appointment.service';
 import {
-  CREATE_APPOINTMENT,
   CREATE_APPOINTMENT_FAILURE,
-  CREATE_APPOINTMENT_SUCCESS,
   createAppointment,
-  GET_APPOINTMENTS,
-  GET_APPOINTMENTS_SUCCESS,
+  createAppointmentSuccess,
+  getAppointments as getAppointmentsReducer,
+  getAppointmentsSuccess,
 } from '../../appointments/actions';
 import { Appointment } from '../../../app/models/Appointment';
 
@@ -14,7 +13,7 @@ function* createAppointmentWorker(action) {
   try {
     const appointment = action.payload;
     yield call(AppointmentService.setAppointment, appointment);
-    yield put(createAppointment(appointment));
+    yield put(createAppointmentSuccess(appointment));
   } catch (e) {
     console.log(e);
     yield put({ type: CREATE_APPOINTMENT_FAILURE, payload: e });
@@ -27,16 +26,14 @@ function* getAppointments(action) {
       AppointmentService.getAppointments,
       action.payload,
     );
-    yield put({ type: GET_APPOINTMENTS_SUCCESS, payload: appointments });
-  } catch (e) {
-    console.log('something went wrong', e);
-  }
+    yield put(getAppointmentsSuccess(appointments));
+  } catch (e) {}
 }
 
 export function* createAppointmentWatcher() {
-  yield takeEvery(CREATE_APPOINTMENT, createAppointmentWorker);
+  yield takeEvery(createAppointment, createAppointmentWorker);
 }
 
 export function* getAppointmentsWatcher() {
-  yield takeEvery(GET_APPOINTMENTS, getAppointments);
+  yield takeEvery(getAppointmentsReducer, getAppointments);
 }

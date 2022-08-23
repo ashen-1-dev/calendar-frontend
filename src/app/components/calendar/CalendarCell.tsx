@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Appointment } from '../../models/Appointment';
 import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
 import CalendarCellAppointment from './CalendarCellAppointment';
+import useSelectedDate from '../../hooks/useSelectedDate';
+import { setSelectedDate } from '../../../store/selected-date/selectedDateReducer';
+import { filterAppointmentsByDay } from './helpers/filter-appointments';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { CalendarElement } from './calendar-element.interface';
 
 const Wrapper = styled.div<Pick<CalendarCellProp, 'selected'>>`
   display: flex;
@@ -29,27 +33,44 @@ const Date = styled.span<{ selected: boolean }>`
 `;
 
 interface CalendarCellProp extends React.HTMLProps<HTMLDivElement> {
-  date: Date;
-  selected: boolean;
-  onClick: (date) => void;
+  element: CalendarElement;
 }
 
 const CalendarCell = (props: CalendarCellProp) => {
-  const { date, selected, onClick } = props;
-  const appointments = [];
+  const { element } = props;
+  const dispatch = useAppDispatch();
+  const { date: selectedDate } = useSelectedDate();
+
+  const { date, appointments } = element;
+  const selected = date.getTime() === selectedDate;
   const formatDay = format(date, 'd');
+
+  const handleOnClick = () => {
+    dispatch(
+      setSelectedDate({
+        date: date.getTime(),
+        appointments: filterAppointmentsByDay(date, appointments),
+      }),
+    );
+  };
+
   return (
-    <Wrapper onClick={() => onClick(date)} selected={selected}>
+    <Wrapper onClick={handleOnClick} selected={selected}>
       <Date selected={selected}>{formatDay}</Date>
       <AppointmentGroup>
         {appointments &&
-          appointments.map((appointment, i) => {
+          appointments.slice(0, 3).map((appointment, i) => {
             if (i >= 2) {
               return (
                 <span style={{ position: 'absolute', bottom: 0 }}>...</span>
               );
             }
-            return <CalendarCellAppointment appointment={appointment} />;
+            return (
+              <CalendarCellAppointment
+                key={appointment.id}
+                appointment={appointment}
+              />
+            );
           })}
       </AppointmentGroup>
     </Wrapper>

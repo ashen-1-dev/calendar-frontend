@@ -6,4 +6,6 @@
 */
 export interface RootState {
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
+  selectedDate;
+  appointments;
 }

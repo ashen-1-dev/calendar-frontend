@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
 import { SelectedDate } from '../../store/selected-date/selected-date.interface';
+import { useAppSelector } from './useAppSelector';
 
 export default function useSelectedDate(): SelectedDate {
-  //@ts-ignore
-  return useSelector(state => state.selectedDate);
+  return useAppSelector(state => state.selectedDate);
 }
