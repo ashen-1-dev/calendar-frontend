@@ -4,10 +4,8 @@ import { IAppointmentService } from '../appointment.interface';
 import { AppointmentQuery } from '../appointment-query';
 import { generateId } from '../../helpers/uuid-generator';
 
-export class AppointmentService {
-  public static getAppointments(
-    appointmentsQuery: AppointmentQuery,
-  ): Appointment[] {
+export class AppointmentServiceIml implements IAppointmentService {
+  public getAppointments(appointmentsQuery: AppointmentQuery): Appointment[] {
     const { startDate, endDate } = appointmentsQuery;
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     if (!rawAppointments) {
@@ -25,9 +23,9 @@ export class AppointmentService {
     return result;
   }
 
-  public static setAppointment(appointment: Appointment): void {
+  public setAppointment(appointment: Appointment): void {
     const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
-    appointment.id = generateId();
+    appointment.uuid = generateId();
     const appointments: Appointment[] = JSON.parse(allRawAppointments);
     return localStorage.setItem(
       APPOINTMENTS,
@@ -35,8 +33,8 @@ export class AppointmentService {
     );
   }
 
-  public static updateAppointment(
-    id: string,
+  public updateAppointment(
+    uuid: string,
     appointment: Appointment,
   ): Appointment | null {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
@@ -44,10 +42,10 @@ export class AppointmentService {
       return null;
     }
     const appointments = JSON.parse(rawAppointments);
-    console.log('raw apps', rawAppointments);
-    console.log('apps eto', appointments);
-    //TODO: Ошибка. Пропадает свойство id, чек логи
-    const appointmentToUpdateIndex = appointments.findIndex(x => x.id === id);
+    //TODO: не работает apps становится undefined
+    const appointmentToUpdateIndex = appointments.findIndex(
+      x => x.uuid === uuid,
+    );
     if (appointmentToUpdateIndex === -1) {
       return null;
     }
@@ -57,16 +55,19 @@ export class AppointmentService {
     return appointment;
   }
 
-  public static removeAppointment(id: string): void {
+  public removeAppointment(uuid: string): void {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     const appointments: Appointment[] =
-      rawAppointments && JSON.parse(rawAppointments);
+      rawAppointments && JSON.parse(rawAppointments).filter(Boolean);
+    console.log('app', appointments);
     if (!appointments) {
       return;
     }
     return localStorage.setItem(
       APPOINTMENTS,
-      JSON.stringify(appointments.filter(x => x.id !== id)),
+      JSON.stringify(appointments.filter(x => x.uuid !== uuid)),
     );
   }
 }
+
+export const AppointmentService = new AppointmentServiceIml();

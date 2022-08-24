@@ -34,8 +34,8 @@ export const getAppointmentsSuccess = createAction(
 
 export const updateAppointment = createAction(
   'UPDATE_APPOINTMENT',
-  (id: string, appointment: Appointment) => ({
-    payload: { appointment: appointment, id: id },
+  (uuid: string, appointment: Appointment) => ({
+    payload: { appointment: appointment, uuid: uuid },
   }),
 );
 
@@ -43,5 +43,19 @@ export const updateAppointmentSuccess = createAction(
   'UPDATE_APPOINTMENT_SUCCESS',
   (appointment: Appointment) => ({
     payload: appointment,
+  }),
+);
+
+export const removeAppointment = createAction(
+  'REMOVE_APPOINTMENT',
+  (uuid: string) => ({
+    payload: uuid,
+  }),
+);
+
+export const removeAppointmentSuccess = createAction(
+  'REMOVE_APPOINTMENT_SUCCESS',
+  (uuid: string) => ({
+    payload: uuid,
   }),
 );

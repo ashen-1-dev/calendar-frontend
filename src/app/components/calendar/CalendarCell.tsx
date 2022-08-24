@@ -4,10 +4,10 @@ import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
 import CalendarCellAppointment from './CalendarCellAppointment';
 import useSelectedDate from '../../hooks/useSelectedDate';
-import { setSelectedDate } from '../../../store/selected-date/selectedDateReducer';
 import { filterAppointmentsByDay } from './helpers/filter-appointments';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { CalendarElement } from './calendar-element.interface';
+import { setSelectedDate } from '../../../store/selected-date/actions';
 
 const Wrapper = styled.div<Pick<CalendarCellProp, 'selected'>>`
   display: flex;
@@ -67,7 +67,7 @@ const CalendarCell = (props: CalendarCellProp) => {
             }
             return (
               <CalendarCellAppointment
-                key={appointment.id}
+                key={appointment.uuid}
                 appointment={appointment}
               />
             );

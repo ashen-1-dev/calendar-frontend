@@ -1,6 +1,5 @@
 import { Tag } from '../../models/Tag';
 import { TAGS } from './keys';
-import { ITagService } from '../tag.interface';
 import { Appointment } from '../../models/Appointment';
 
 export class TagService {
@@ -20,7 +19,7 @@ export class TagService {
     }
     return localStorage.setItem(
       TAGS,
-      JSON.stringify(tags.filter(x => x.id !== id)),
+      JSON.stringify(tags.filter(x => x.uuid !== id)),
     );
   }
 

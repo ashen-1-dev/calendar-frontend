@@ -8,6 +8,8 @@ import {
   getAppointmentsSuccess,
   updateAppointmentSuccess,
   updateAppointment as updateAppointmentAction,
+  removeAppointment as removeAppointmentAction,
+  removeAppointmentSuccess,
 } from '../../appointments/actions';
 import { Appointment } from '../../../app/models/Appointment';
 
@@ -36,10 +38,19 @@ function* updateAppointment(action) {
   try {
     const updatedAppointment = yield call(
       AppointmentService.updateAppointment,
-      action.payload.id,
-      action.payload.appointment,
+      action.payload.uuid,
+      action.payload.appointments,
     );
     yield put(updateAppointmentSuccess(updatedAppointment));
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+function* removeAppointment(action) {
+  try {
+    yield call(AppointmentService.removeAppointment, action.payload);
+    yield put(removeAppointmentSuccess(action.payload));
   } catch (e) {
     console.log(e);
   }
@@ -55,4 +66,8 @@ export function* getAppointmentsWatcher() {
 
 export function* updateAppointmentWatcher() {
   yield takeEvery(updateAppointmentAction, updateAppointment);
+}
+
+export function* removeAppointmentWatcher() {
+  yield takeEvery(removeAppointmentAction, removeAppointment);
 }

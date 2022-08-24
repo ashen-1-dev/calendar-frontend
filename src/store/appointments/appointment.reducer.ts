@@ -2,6 +2,7 @@ import { Appointment } from '../../app/models/Appointment';
 import {
   createAppointmentSuccess,
   getAppointmentsSuccess,
+  removeAppointmentSuccess,
   updateAppointmentSuccess,
 } from './actions';
 import { createReducer } from '@reduxjs/toolkit';
@@ -21,27 +22,13 @@ export const appointmentReducer = createReducer(initialState, builder => {
     })
     .addCase(updateAppointmentSuccess, (state, action) => {
       const appointments = state.appointments;
-      const index = appointments.findIndex(x => x.id === action.payload.id);
+      const index = appointments.findIndex(x => x.uuid === action.payload.uuid);
       appointments[index] = action.payload;
       state.appointments = [...appointments];
+    })
+    .addCase(removeAppointmentSuccess, (state, action) => {
+      state.appointments = [
+        ...state.appointments.filter(x => x.uuid !== action.payload),
+      ];
     });
 });
-
-// export const appointmentReducer = createReducer(initialState, builder => {
-//   builder
-//     .addCase(createAppointmentSuccess, (state, action) => {
-//       return {
-//         ...state,
-//         appointments: [...state.appointments, action.payload],
-//       };
-//     })
-//     .addCase(getAppointmentsSuccess, (state, action) => {
-//       return { ...state, appointments: [...action.payload] };
-//     })
-//     .addCase(updateAppointmentSuccess, (state, action) => {
-//       const appointments = state.appointments;
-//       const index = appointments.findIndex(x => x.id === action.payload.id)
-//       appointments[index] = action.payload
-//       return {...state, appointments: [...appointments ]}
-//     })
-// });

@@ -76,7 +76,6 @@ const CreateAppointment = ({
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useDispatch();
-
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
       case AppointmentType.Holiday: {
@@ -109,20 +108,25 @@ const CreateAppointment = ({
     appointment.date = data.date.getTime();
     !appointmentToEdit
       ? dispatch(createAppointment(appointment))
-      : dispatch(updateAppointment(appointmentToEdit.id, appointment));
+      : dispatch(updateAppointment(appointmentToEdit.uuid, appointment));
   };
 
   return (
     <Form
       validate={validation}
       onSubmit={onSubmit}
+      initialValues={
+        !appointmentToEdit
+          ? undefined
+          : { ...appointmentToEdit, date: new Date(appointmentToEdit!.date) }
+      }
       render={({ handleSubmit, valid }) => (
         <form onSubmit={handleSubmit}>
           <VerticalLine />
           <Wrapper>
             <Row>
               <Label>Название</Label>
-              <Field initialValue={appointmentToEdit?.name} name={'name'}>
+              <Field name={'name'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -139,10 +143,7 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Тип события</Label>
-              <Field
-                initialValue={appointmentToEdit?.state.type}
-                name={'state.type'}
-              >
+              <Field name={'state.type'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -163,12 +164,7 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Дата и время</Label>
-              <Field
-                initialValue={
-                  appointmentToEdit && new Date(appointmentToEdit?.date)
-                }
-                name={'date'}
-              >
+              <Field name={'date'}>
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (
@@ -184,12 +180,7 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>{input.label}</Label>
-              <Field
-                initialValue={
-                  appointmentToEdit && appointmentToEdit.state.value
-                }
-                name={'state.value'}
-              >
+              <Field name={'state.value'}>
                 {props => (
                   <Input
                     name={props.input.name}
