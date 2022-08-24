@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { Tag } from '../../models/Tag';
 import TagList from './TagList';
 import DropDownTag from './DropDownTag';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const Wrapper = styled.div`
   display: flex;
@@ -22,11 +23,8 @@ export interface TagInputProps extends Omit<InputProps, 'value' | 'onChange'> {
 
 const TagInput: React.FC<TagInputProps> = props => {
   let { placeholder, showIcon = false, size, onChange, tags, ...rest } = props;
+  const allTags = useAppSelector(state => state.tags.tags);
   const [value, setValue] = useState('');
-  const allTags: Tag[] = [
-    { uuid: '1', name: 'Не важно', description: 'Да это не жестко' },
-    { uuid: '2', name: 'Ва же', description: 'Да это жестко' },
-  ];
 
   const handleOnChange = (value: string) => {
     setValue(value);

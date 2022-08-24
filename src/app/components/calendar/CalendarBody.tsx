@@ -12,6 +12,8 @@ import { useAppSelector } from '../../hooks/useAppSelector';
 import { Appointment } from '../../models/Appointment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { filterAppointmentsByDay } from './helpers/filter-appointments';
+import { AppointmentFilter } from '../../models/appointment-filter';
+import { filterAppointments } from '../../helpers/filter-appointments';
 
 interface CalendarBodyProps {
   dates: Date[];
@@ -38,10 +40,14 @@ const Header = styled.div`
 const CalendarBody = (props: CalendarBodyProps) => {
   const { dates } = props;
   const dispatch = useAppDispatch();
-  const appointments: Appointment[] = useAppSelector(
-    state => state.appointments.appointments,
-  );
-
+  const {
+    appointments,
+    filter,
+  }: { appointments: Appointment[]; filter: AppointmentFilter } =
+    useAppSelector(state => ({
+      appointments: state.appointments.appointments,
+      filter: state.filter.filter,
+    }));
   useEffect(() => {
     dispatch(
       getAppointments({
@@ -50,7 +56,7 @@ const CalendarBody = (props: CalendarBodyProps) => {
       }),
     );
   }, [dates]);
-
+  const filteredAppointments = filterAppointments(appointments, filter);
   return (
     <Wrapper>
       {WEEK_DAYS.map(day => (
@@ -61,7 +67,7 @@ const CalendarBody = (props: CalendarBodyProps) => {
       {dates.map(date => {
         const element = {
           date: date,
-          appointments: filterAppointmentsByDay(date, appointments),
+          appointments: filterAppointmentsByDay(date, filteredAppointments),
         };
         return <CalendarCell key={date.getTime()} element={element} />;
       })}

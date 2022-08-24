@@ -15,6 +15,7 @@ import {
   createAppointment,
   updateAppointment,
 } from '../../../store/appointments/actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const Label = styled.div`
   margin-bottom: 0.625rem;
@@ -76,6 +77,8 @@ const CreateAppointment = ({
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useDispatch();
+  const { date } = useAppSelector(state => state.selectedDate);
+  console.log('date', date);
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
       case AppointmentType.Holiday: {
@@ -164,7 +167,10 @@ const CreateAppointment = ({
             </Row>
             <Row>
               <Label>Дата и время</Label>
-              <Field name={'date'}>
+              <Field
+                defaultValue={!appointmentToEdit ? new Date(date) : undefined}
+                name={'date'}
+              >
                 {props => (
                   <div>
                     {props.meta.error && props.meta.touched && (

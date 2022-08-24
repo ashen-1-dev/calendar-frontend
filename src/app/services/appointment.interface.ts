@@ -2,7 +2,7 @@ import { Appointment } from '../models/Appointment';
 import { AppointmentQuery } from './appointment-query';
 
 export interface IAppointmentService {
-  setAppointment: (appointment: Appointment) => void;
+  addAppointment: (appointment: Appointment) => void;
   getAppointments: (query: AppointmentQuery) => Appointment[];
   updateAppointment: (
     uuid: string,

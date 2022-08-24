@@ -14,6 +14,8 @@ import { createReducer } from './reducers';
 import { selectedDateReducer } from './selected-date/selectedDateReducer';
 import rootSaga from './sagas/root-saga';
 import { appointmentReducer } from './appointments/appointment.reducer';
+import { tagReducer } from './tags/tag.reducer';
+import { filterReducer } from './filter/filter.reducer';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -35,6 +37,8 @@ export function configureAppStore() {
       //@ts-ignore
       selectedDate: selectedDateReducer,
       appointments: appointmentReducer,
+      tags: tagReducer,
+      filter: filterReducer,
     }),
     middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',

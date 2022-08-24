@@ -4,6 +4,8 @@ import { ReactComponent as DeleteSvg } from '../buttons/assets/delete.svg';
 import { Tag } from '../../models/Tag';
 import { TableHeader, TableItem, TableRow } from './styled-table';
 import { Wrapper } from './styled-table';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { removeTag } from '../../../store/tags/actions';
 
 export interface TableRowProps {
   selected?: boolean;
@@ -15,7 +17,11 @@ export interface TagTableProps {
 
 const TagTable: React.FC<TagTableProps> = props => {
   const { tags } = props;
+  const dispatch = useAppDispatch();
   const [selectedTagId, setSelectedTagId] = useState<string>();
+  const handleOnClick = (tag: Tag) => {
+    dispatch(removeTag(tag.uuid));
+  };
   return (
     <Wrapper>
       <TableRow>
@@ -27,6 +33,7 @@ const TagTable: React.FC<TagTableProps> = props => {
           const isRowSelected = selectedTagId === tag.uuid;
           return (
             <TableRow
+              key={tag.uuid}
               selected={isRowSelected}
               onClick={() => setSelectedTagId(tag.uuid)}
             >
@@ -40,7 +47,7 @@ const TagTable: React.FC<TagTableProps> = props => {
 
                 {isRowSelected && (
                   <Button
-                    onClick={() => null}
+                    onClick={() => handleOnClick(tag)}
                     variant={'primary'}
                     size={'very-small'}
                   >

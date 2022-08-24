@@ -50,7 +50,7 @@ input {
 }
 
 .icon-container {
-    margin-left: 1.25em;
+    padding: 0 1.25rem;
 }
 
 .input-container:focus-within {

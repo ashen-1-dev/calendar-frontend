@@ -1,8 +1,10 @@
 import { Tag } from '../../models/Tag';
 import { TAGS } from './keys';
 import { Appointment } from '../../models/Appointment';
+import { ITagService } from '../tag.interface';
+import { generateId } from '../../helpers/uuid-generator';
 
-export class TagService {
+export class TagServiceImpl implements ITagService {
   public getTags(): Tag[] {
     const rawTags = localStorage.getItem(TAGS);
     if (!rawTags) {
@@ -24,8 +26,11 @@ export class TagService {
   }
 
   public addTag(tag: Tag): void {
-    const allRawTags = localStorage.getItem(TAGS);
-    const tags: Tag[] = JSON.parse(allRawTags || '');
+    const allRawTags = localStorage.getItem(TAGS) || '[]';
+    tag.uuid = generateId();
+    const tags: Tag[] = JSON.parse(allRawTags);
     return localStorage.setItem(TAGS, JSON.stringify([...tags, tag]));
   }
 }
+
+export const TagService = new TagServiceImpl();

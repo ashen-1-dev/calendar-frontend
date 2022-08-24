@@ -16,7 +16,7 @@ import { Appointment } from '../../../app/models/Appointment';
 function* createAppointmentWorker(action) {
   try {
     const appointment = action.payload;
-    yield call(AppointmentService.setAppointment, appointment);
+    yield call(AppointmentService.addAppointment, appointment);
     yield put(createAppointmentSuccess(appointment));
   } catch (e) {
     console.log(e);

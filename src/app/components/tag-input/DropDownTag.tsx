@@ -21,6 +21,8 @@ const DropDownTagItem = styled.div`
   padding-left: 1.25rem;
   height: 2.938em;
   cursor: pointer;
+  background-color: white;
+  z-index: 1;
 `;
 
 const DropDownTag: React.FC<{

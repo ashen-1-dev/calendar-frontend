@@ -7,13 +7,14 @@ import { ReactComponent as PlusSvg } from '../buttons/assets/plus.svg';
 import AppointmentList from './AppointmentList';
 import useSelectedDate from '../../hooks/useSelectedDate';
 import RoundButton from '../buttons/RoundButton';
-import Select, { SelectOption } from '../selects/Select';
+import Select from '../selects/Select';
 import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
 import useSortedAppointments from '../../hooks/useSortedAppointments';
 import AppointmentDialog from './dialogs/Appointment.dialog';
 import { Appointment } from '../../models/Appointment';
 import ConfirmDeleteDialog from './dialogs/ConfirmDelete.dialog';
+import { appointmentSortOptions } from './sort-options';
 
 const Container = styled.div`
   display: flex;
@@ -72,12 +73,6 @@ export interface SidebarProps {
   className?: string;
 }
 
-const options: SelectOption[] = [
-  { name: 'Сортировка по времени начала', value: 'date' },
-  { name: 'Сортировка по количеству тегов', value: 'tag' },
-  { name: 'Сортировка по названию', value: 'name' },
-];
-
 const Sidebar = (props: SidebarProps) => {
   const { className } = props;
   const { date, appointments } = useSelectedDate();
@@ -106,7 +101,7 @@ const Sidebar = (props: SidebarProps) => {
     handleOnSortChange,
     handleOnReverseOrder,
     selectedSortOption,
-  ] = useSortedAppointments(appointments, options[0]);
+  ] = useSortedAppointments(appointments, appointmentSortOptions[0]);
 
   const formatDate = format(new Date(date), 'dd MMMM yyyy', { locale: ru });
   const hasAppointments = appointments.length !== 0;
@@ -155,7 +150,7 @@ const Sidebar = (props: SidebarProps) => {
               <Select
                 onChange={handleOnSortChange}
                 selectedOption={selectedSortOption}
-                options={options}
+                options={appointmentSortOptions}
               />
             </SelectContainer>
             <AppointmentList

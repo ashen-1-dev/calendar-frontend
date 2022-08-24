@@ -6,6 +6,9 @@ import { Colors } from '../../../styles/colors';
 import CurrentTime from './CurrentTime';
 import Modal from '../modal/Modal';
 import TagEditForm from '../tag/TagEditForm';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { Tag } from '../../models/Tag';
+import { addFilter } from '../../../store/filter/actions';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -24,6 +27,12 @@ const Logo = styled.div`
 
 const Header = props => {
   const { className } = props;
+  const dispatch = useAppDispatch();
+  const [tags, setTags] = useState<Tag[]>([]);
+  const handleOnChange = (tags: Tag[]) => {
+    setTags(tags);
+    dispatch(addFilter({ tags: tags }));
+  };
   const [modalActive, setModalActive] = useState(false);
   return (
     <Wrapper className={className}>
@@ -37,8 +46,8 @@ const Header = props => {
       <Logo>Календарь</Logo>
       <div style={{ display: 'flex', gap: '2.5rem' }}>
         <TagInput
-          tags={[]}
-          onChange={() => {}}
+          tags={tags}
+          onChange={tags => handleOnChange(tags)}
           placeholder={'Поиск по тегам'}
           showIcon
           size={'large'}

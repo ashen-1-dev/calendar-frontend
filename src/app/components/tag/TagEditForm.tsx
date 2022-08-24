@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Input from '../inputs/Input';
 import Button from '../buttons/Button';
 import { Tag } from '../../models/Tag';
@@ -6,6 +6,9 @@ import TagTable from './TagTable';
 import { StyledForm, Wrapper } from './styled-form';
 import { VerticalLine } from './styled-form';
 import { Field, Form } from 'react-final-form';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { createTag, getTags } from '../../../store/tags/actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
 
 const validation = (values: Omit<Tag, 'uuid'>) => {
   const errors: {
@@ -22,8 +25,15 @@ const validation = (values: Omit<Tag, 'uuid'>) => {
 };
 
 const TagEditForm = () => {
-  const onSubmit = (tag: Omit<Tag, 'uuid'>) => {
-    console.log(tag);
+  const dispatch = useAppDispatch();
+  const tags: Tag[] = useAppSelector(state => state.tags.tags);
+
+  useEffect(() => {
+    dispatch(getTags());
+  }, []);
+  const onSubmit = (tag: Omit<Tag, 'uuid'>, form) => {
+    dispatch(createTag(tag));
+    form.reset();
   };
   return (
     <>
@@ -59,7 +69,6 @@ const TagEditForm = () => {
                 disabled={!valid}
                 size={'medium'}
                 style={{ width: '8.813rem' }}
-                onClick={() => null}
                 variant={'primary'}
               >
                 Добавить тег
@@ -67,7 +76,7 @@ const TagEditForm = () => {
             </StyledForm>
           )}
         />
-        <TagTable />
+        <TagTable tags={tags} />
       </Wrapper>
     </>
   );

@@ -4,7 +4,7 @@ import { IAppointmentService } from '../appointment.interface';
 import { AppointmentQuery } from '../appointment-query';
 import { generateId } from '../../helpers/uuid-generator';
 
-export class AppointmentServiceIml implements IAppointmentService {
+export class AppointmentServiceImpl implements IAppointmentService {
   public getAppointments(appointmentsQuery: AppointmentQuery): Appointment[] {
     const { startDate, endDate } = appointmentsQuery;
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
@@ -20,10 +20,11 @@ export class AppointmentServiceIml implements IAppointmentService {
       .filter(appointment => {
         return appointment.date >= startDate && appointment.date <= endDate;
       });
+
     return result;
   }
 
-  public setAppointment(appointment: Appointment): void {
+  public addAppointment(appointment: Appointment): void {
     const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
     appointment.uuid = generateId();
     const appointments: Appointment[] = JSON.parse(allRawAppointments);
@@ -70,4 +71,4 @@ export class AppointmentServiceIml implements IAppointmentService {
   }
 }
 
-export const AppointmentService = new AppointmentServiceIml();
+export const AppointmentService = new AppointmentServiceImpl();
