@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { Colors } from '../../../styles/colors';
 import CurrentTime from './CurrentTime';
 import Modal from '../modal/Modal';
-import TagEdit from '../tag/TagEdit';
+import TagEditForm from '../tag/TagEditForm';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -32,7 +32,7 @@ const Header = props => {
         label={'Редактрование тегов'}
         setActive={setModalActive}
       >
-        <TagEdit />
+        <TagEditForm />
       </Modal>
       <Logo>Календарь</Logo>
       <div style={{ display: 'flex', gap: '2.5rem' }}>

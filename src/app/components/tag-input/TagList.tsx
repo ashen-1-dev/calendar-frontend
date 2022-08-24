@@ -13,15 +13,15 @@ const Wrapper = styled.div`
 
 const TagList: React.FC<{
   items: Tag[];
-  onRemoval: (itemId: number) => void;
+  onRemoval: (itemId: string) => void;
 }> = props => {
   const { items, onRemoval } = props;
   return (
     <Wrapper>
       {items.map(item => (
         <TagItem
-          key={item.id}
-          onRemoval={() => onRemoval(item.id)}
+          key={item.uuid}
+          onRemoval={() => onRemoval(item.uuid)}
           item={item}
         />
       ))}
