@@ -16,12 +16,12 @@ const TagInput: React.FC<Omit<InputProps, 'value' | 'onChange'>> = props => {
   const [value, setValue] = useState('');
   const [tags, setTags] = useState<Tag[]>([]);
   const allTags: Tag[] = [
-    { id: 1, name: 'Не важно', description: 'Да это не жестко' },
-    { id: 2, name: 'Ва же', description: 'Да это жестко' },
+    { uuid: '1', name: 'Не важно', description: 'Да это не жестко' },
+    { uuid: '2', name: 'Ва же', description: 'Да это жестко' },
   ];
 
-  const removeTag = (id: number) => {
-    setTags(prevTags => prevTags.filter(tag => tag.id !== id));
+  const removeTag = (id: string) => {
+    setTags(prevTags => prevTags.filter(tag => tag.uuid !== id));
   };
 
   const handleOnChange = (value: string) => {
