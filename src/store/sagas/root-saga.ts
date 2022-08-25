@@ -10,6 +10,7 @@ import {
   getTagsWatcher,
   removeTagWatcher,
 } from './tags/tag.saga';
+import { changeServiceWatcher } from './used-service/used-service.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -20,5 +21,6 @@ export default function* rootSaga() {
     createTagWatcher(),
     getTagsWatcher(),
     removeTagWatcher(),
+    changeServiceWatcher(),
   ]);
 }

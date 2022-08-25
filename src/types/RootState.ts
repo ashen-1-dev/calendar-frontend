@@ -11,4 +11,5 @@ export interface RootState {
   appointmentState;
   tagState;
   filterState;
+  usedServiceState;
 }

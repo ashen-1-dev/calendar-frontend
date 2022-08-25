@@ -9,6 +9,8 @@ import TagEditForm from '../tag/TagEditForm';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Tag } from '../../models/Tag';
 import { addFilter } from '../../../store/filter/actions';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { changeCurrentService } from '../../../store/used-service/actions';
 
 const Wrapper = styled.div`
   background-color: white;
@@ -28,7 +30,13 @@ const Logo = styled.div`
 const Header = props => {
   const { className } = props;
   const dispatch = useAppDispatch();
+  const currentService = useAppSelector(
+    state => state.usedServiceState.service,
+  );
   const [tags, setTags] = useState<Tag[]>([]);
+  const handleOnClick = () => {
+    dispatch(changeCurrentService());
+  };
   const handleOnChange = (tags: Tag[]) => {
     setTags(tags);
     dispatch(addFilter({ tags: tags }));
@@ -59,6 +67,14 @@ const Header = props => {
         >
           Редактировать теги
         </Button>
+        <Button
+          size={'large'}
+          variant={'primary'}
+          onClick={() => handleOnClick()}
+        >
+          Сменить сервис
+        </Button>
+        <span>Текущий сервис: {currentService}</span>
       </div>
       <CurrentTime />
     </Wrapper>

@@ -4,7 +4,8 @@ import axios from 'axios';
 
 class TagServiceIml implements ITagService {
   constructor() {
-    axios.defaults.baseURL = process.env.SERVER_BASE_URL;
+    axios.defaults.baseURL =
+      process.env.SERVER_BASE_URL || 'http://localhost:3001';
   }
 
   public async addTag(tag: Tag): Promise<void> {

@@ -8,8 +8,6 @@
 import 'react-app-polyfill/ie11';
 import 'react-app-polyfill/stable';
 
-import * as dotenv from 'dotenv';
-
 import * as React from 'react';
 import * as ReactDOMClient from 'react-dom/client';
 import { Provider } from 'react-redux';
@@ -26,8 +24,6 @@ import { configureAppStore } from 'store/configureStore';
 
 // Initialize languages
 import './locales/i18n';
-
-dotenv.config();
 
 const store = configureAppStore();
 export type AppDispatch = typeof store.dispatch;

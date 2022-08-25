@@ -5,7 +5,8 @@ import axios from 'axios';
 
 class AppointmentServiceImpl implements IAppointmentService {
   constructor() {
-    axios.defaults.baseURL = process.env.SERVER_BASE_URL;
+    axios.defaults.baseURL =
+      process.env.SERVER_BASE_URL || 'http://localhost:3001';
   }
 
   public async addAppointment(appointment: Appointment): Promise<void> {
@@ -31,7 +32,7 @@ class AppointmentServiceImpl implements IAppointmentService {
     appointment: Appointment,
   ): Promise<Appointment | null> {
     return await axios
-      .put<Appointment>(`/appointment/${uuid}`, appointment)
+      .put<Appointment>(`/appointments/${uuid}`, appointment)
       .then(resp => resp.data);
   }
 }
