@@ -30,11 +30,12 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
     font-family: Roboto, sans-serif;
+    font-size: 16px;
+    color: var(--default-dark);
     min-height: 100vh;
     scroll-behavior: smooth;
     text-rendering: optimizeSpeed;
     line-height: 1.5;
-    color: white;
   }
   ul[class],
   ol[class] {

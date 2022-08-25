@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import Button from '../../components/buttons/Button';
+import RoundButton from '../../components/buttons/RoundButton';
 import { ReactComponent as EditSvg } from '../../components/buttons/assets/edit.svg';
 import { ReactComponent as DeleteSvg } from '../../components/buttons/assets/delete.svg';
-import Select, { SelectOption } from '../../components/selects/Select';
+import Radio, { RadioOption, RadioProps } from '../../components/radio/Radio';
+import RadioGroup from 'app/components/radio/RadioGroup';
 import { useState } from 'react';
-import Input from '../../components/inputs/Input';
 
 export function HomePage() {
-  const options: SelectOption[] = [
-    { name: 'sadssd', value: 'body' },
-    { name: 'sadssd123123', value: 'title' },
-  ];
-  const onChange = (selectedOption: SelectOption) => {
-    setSelectedOption(selectedOption);
+  const [selectedValue, setSelectedValue] = useState('');
+  const handleOnChange = selectedType => {
+    setSelectedValue(selectedType);
   };
-  const [selectedOption, setSelectedOption] = useState<SelectOption>(
-    options[0],
-  );
+  const options: RadioOption[] = [
+    { value: 'holiday', name: 'Событие' },
+    { value: 'event', name: 'Событие' },
+    { value: 'other', name: 'Событие' },
+  ];
   return (
     <div>
       <Button size={'large'} variant={'primary'}>
@@ -41,9 +41,10 @@ export function HomePage() {
         <DeleteSvg />
       </Button>
       <br />
-      <Select
-        onChange={onChange}
-        selectedOption={selectedOption}
+      <br />
+      <RadioGroup
+        selectedValue={selectedValue}
+        onChange={handleOnChange}
         options={options}
       />
     </div>
