@@ -1,8 +1,7 @@
 import { put, takeEvery, call } from 'redux-saga/effects';
 import { AppointmentService } from '../../../app/services/localstorage/appointment.service';
 import {
-  CREATE_APPOINTMENT_FAILURE,
-  createAppointment,
+  createAppointment as createAppointmentAction,
   createAppointmentSuccess,
   getAppointments as getAppointmentsAction,
   getAppointmentsSuccess,
@@ -17,7 +16,9 @@ import {
 } from '../../appointments/actions';
 import { Appointment } from '../../../app/models/Appointment';
 
-function* createAppointmentWorker(action) {
+function* createAppointmentWorker(
+  action: ReturnType<typeof createAppointmentAction>,
+) {
   try {
     const appointment = action.payload;
     yield call(AppointmentService.addAppointment, appointment);
@@ -27,7 +28,7 @@ function* createAppointmentWorker(action) {
   }
 }
 
-function* getAppointments(action) {
+function* getAppointments(action: ReturnType<typeof getAppointmentsAction>) {
   try {
     const appointments: Appointment[] = yield call(
       AppointmentService.getAppointments,
@@ -39,12 +40,14 @@ function* getAppointments(action) {
   }
 }
 
-function* updateAppointment(action) {
+function* updateAppointment(
+  action: ReturnType<typeof updateAppointmentAction>,
+) {
   try {
     const updatedAppointment = yield call(
       AppointmentService.updateAppointment,
       action.payload.uuid,
-      action.payload.appointments,
+      action.payload.appointment,
     );
     yield put(updateAppointmentSuccess(updatedAppointment));
   } catch (e) {
@@ -52,7 +55,9 @@ function* updateAppointment(action) {
   }
 }
 
-function* removeAppointment(action) {
+function* removeAppointment(
+  action: ReturnType<typeof removeAppointmentAction>,
+) {
   try {
     yield call(AppointmentService.removeAppointment, action.payload);
     yield put(removeAppointmentSuccess(action.payload));
@@ -62,7 +67,7 @@ function* removeAppointment(action) {
 }
 
 export function* createAppointmentWatcher() {
-  yield takeEvery(createAppointment, createAppointmentWorker);
+  yield takeEvery(createAppointmentAction, createAppointmentWorker);
 }
 
 export function* getAppointmentsWatcher() {

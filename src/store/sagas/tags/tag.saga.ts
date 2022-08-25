@@ -9,9 +9,10 @@ import {
 } from '../../tags/actions';
 import { TagService } from '../../../app/services/localstorage/tag.service';
 import { Tag } from '../../../app/models/Tag';
-function* createTag(action) {
+
+function* createTag(action: ReturnType<typeof createTagAction>) {
   try {
-    const tag = action.payload;
+    const tag = <Tag>action.payload;
     yield call(TagService.addTag, tag);
     yield put(createTagSuccess(tag));
   } catch (e) {
@@ -26,7 +27,7 @@ function* getTags() {
   } catch (e) {}
 }
 
-function* removeTag(action) {
+function* removeTag(action: ReturnType<typeof removeTagAction>) {
   try {
     yield call(TagService.removeTag, action.payload);
     yield put(removeTagSuccess(action.payload));

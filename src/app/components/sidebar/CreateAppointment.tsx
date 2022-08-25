@@ -10,12 +10,12 @@ import TagInput from '../tag-input/TagInput';
 import Button from '../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
-import { useDispatch } from 'react-redux';
 import {
   createAppointment,
   updateAppointment,
 } from '../../../store/appointments/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
 
 const Label = styled.div`
   margin-bottom: 0.625rem;
@@ -76,9 +76,8 @@ const CreateAppointment = ({
   appointmentToEdit,
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { date } = useAppSelector(state => state.selectedDateState);
-  console.log('date', date);
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
       case AppointmentType.Holiday: {
