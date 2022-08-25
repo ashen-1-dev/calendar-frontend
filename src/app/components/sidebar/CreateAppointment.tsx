@@ -77,7 +77,7 @@ const CreateAppointment = ({
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useDispatch();
-  const { date } = useAppSelector(state => state.selectedDate);
+  const { date } = useAppSelector(state => state.selectedDateState);
   console.log('date', date);
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {

@@ -7,8 +7,8 @@
 
 export interface RootState {
   // [INSERT NEW REDUCER KEY ABOVE] < Needed for generating containers seamlessly
-  selectedDate;
-  appointments;
-  tags;
-  filter;
+  selectedDateState;
+  appointmentState;
+  tagState;
+  filterState;
 }

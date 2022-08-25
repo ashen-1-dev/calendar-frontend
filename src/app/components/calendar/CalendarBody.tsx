@@ -9,11 +9,11 @@ import {
 import { Colors } from '../../../styles/colors';
 import { getAppointments } from '../../../store/appointments/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
-import { Appointment } from '../../models/Appointment';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { filterAppointmentsByDay } from './helpers/filter-appointments';
 import { AppointmentFilter } from '../../models/appointment-filter';
 import { filterAppointments } from '../../helpers/filter-appointments';
+import { AppointmentState } from '../../../store/appointments/types';
 
 interface CalendarBodyProps {
   dates: Date[];
@@ -41,13 +41,15 @@ const CalendarBody = (props: CalendarBodyProps) => {
   const { dates } = props;
   const dispatch = useAppDispatch();
   const {
-    appointments,
+    appointmentState,
     filter,
-  }: { appointments: Appointment[]; filter: AppointmentFilter } =
+  }: { appointmentState: AppointmentState; filter: AppointmentFilter } =
     useAppSelector(state => ({
-      appointments: state.appointments.appointments,
-      filter: state.filter.filter,
+      appointmentState: state.appointmentState,
+      filter: state.filterState.filter,
     }));
+  const { appointments, error, isError, isLoading } = appointmentState;
+
   useEffect(() => {
     dispatch(
       getAppointments({
@@ -56,6 +58,7 @@ const CalendarBody = (props: CalendarBodyProps) => {
       }),
     );
   }, [dates]);
+
   const filteredAppointments = filterAppointments(appointments, filter);
   return (
     <Wrapper>

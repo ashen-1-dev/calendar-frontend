@@ -18,6 +18,13 @@ export const createAppointment = createAction(
   }),
 );
 
+export const createAppointmentFailure = createAction(
+  'CREATE_APPOINTMENT_FAILURE',
+  (error: any) => ({
+    payload: error,
+  }),
+);
+
 export const getAppointments = createAction(
   'GET_APPOINTMENTS',
   (query: AppointmentQuery) => ({
@@ -29,6 +36,13 @@ export const getAppointmentsSuccess = createAction(
   'GET_APPOINTMENTS_SUCCESS',
   (appointments: Appointment[]) => ({
     payload: appointments,
+  }),
+);
+
+export const getAppointmentFailure = createAction(
+  'GET_APPOINTMENT_FAILURE',
+  (error: any) => ({
+    payload: error,
   }),
 );
 
@@ -46,6 +60,13 @@ export const updateAppointmentSuccess = createAction(
   }),
 );
 
+export const updateAppointmentFailure = createAction(
+  'UPDATE_APPOINTMENT_FAILURE',
+  (error: any) => ({
+    payload: error,
+  }),
+);
+
 export const removeAppointment = createAction(
   'REMOVE_APPOINTMENT',
   (uuid: string) => ({
@@ -57,5 +78,12 @@ export const removeAppointmentSuccess = createAction(
   'REMOVE_APPOINTMENT_SUCCESS',
   (uuid: string) => ({
     payload: uuid,
+  }),
+);
+
+export const removeAppointmentFailure = createAction(
+  'REMOVE_APPOINTMENT_FAILURE',
+  (error: any) => ({
+    payload: error,
   }),
 );

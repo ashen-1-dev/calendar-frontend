@@ -10,6 +10,10 @@ import {
   updateAppointment as updateAppointmentAction,
   removeAppointment as removeAppointmentAction,
   removeAppointmentSuccess,
+  createAppointmentFailure,
+  getAppointmentFailure,
+  updateAppointmentFailure,
+  removeAppointmentFailure,
 } from '../../appointments/actions';
 import { Appointment } from '../../../app/models/Appointment';
 
@@ -19,8 +23,7 @@ function* createAppointmentWorker(action) {
     yield call(AppointmentService.addAppointment, appointment);
     yield put(createAppointmentSuccess(appointment));
   } catch (e) {
-    console.log(e);
-    yield put({ type: CREATE_APPOINTMENT_FAILURE, payload: e });
+    yield put(createAppointmentFailure(e));
   }
 }
 
@@ -31,7 +34,9 @@ function* getAppointments(action) {
       action.payload,
     );
     yield put(getAppointmentsSuccess(appointments));
-  } catch (e) {}
+  } catch (e) {
+    yield put(getAppointmentFailure(e));
+  }
 }
 
 function* updateAppointment(action) {
@@ -43,7 +48,7 @@ function* updateAppointment(action) {
     );
     yield put(updateAppointmentSuccess(updatedAppointment));
   } catch (e) {
-    console.log(e);
+    yield put(updateAppointmentFailure(e));
   }
 }
 
@@ -52,7 +57,7 @@ function* removeAppointment(action) {
     yield call(AppointmentService.removeAppointment, action.payload);
     yield put(removeAppointmentSuccess(action.payload));
   } catch (e) {
-    console.log(e);
+    yield put(removeAppointmentFailure(e));
   }
 }
 

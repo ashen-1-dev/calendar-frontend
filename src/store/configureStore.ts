@@ -35,10 +35,10 @@ export function configureAppStore() {
   const store = configureStore({
     reducer: createReducer({
       //@ts-ignore
-      selectedDate: selectedDateReducer,
-      appointments: appointmentReducer,
-      tags: tagReducer,
-      filter: filterReducer,
+      selectedDateState: selectedDateReducer,
+      appointmentState: appointmentReducer,
+      tagState: tagReducer,
+      filterState: filterReducer,
     }),
     middleware: [...getDefaultMiddleware(), ...middlewares],
     devTools: process.env.NODE_ENV !== 'production',

@@ -23,7 +23,7 @@ export interface TagInputProps extends Omit<InputProps, 'value' | 'onChange'> {
 
 const TagInput: React.FC<TagInputProps> = props => {
   let { placeholder, showIcon = false, size, onChange, tags, ...rest } = props;
-  const allTags = useAppSelector(state => state.tags.tags);
+  const allTags = useAppSelector(state => state.tagState.tags);
   const [value, setValue] = useState('');
 
   const handleOnChange = (value: string) => {

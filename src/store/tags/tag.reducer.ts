@@ -1,13 +1,15 @@
 import { createReducer } from '@reduxjs/toolkit';
 import { createTagSuccess, getTagsSuccess, removeTagSuccess } from './actions';
-import { Tag } from '../../app/models/Tag';
+import { TagState } from './types';
 
-const initialState: { tags: Tag[]; error: any } = {
+const initialState: TagState = {
   tags: [],
   error: {},
+  isError: false,
+  isLoading: false,
 };
 
-export const tagReducer = createReducer(initialState, builder => {
+export const tagReducer = createReducer<TagState>(initialState, builder => {
   builder
     .addCase(createTagSuccess, (state, action) => {
       state.tags = [...state.tags, action.payload];

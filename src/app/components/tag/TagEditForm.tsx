@@ -26,7 +26,7 @@ const validation = (values: Omit<Tag, 'uuid'>) => {
 
 const TagEditForm = () => {
   const dispatch = useAppDispatch();
-  const tags: Tag[] = useAppSelector(state => state.tags.tags);
+  const tags: Tag[] = useAppSelector(state => state.tagState.tags);
 
   useEffect(() => {
     dispatch(getTags());
