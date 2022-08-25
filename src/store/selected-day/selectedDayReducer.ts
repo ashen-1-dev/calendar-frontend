@@ -5,12 +5,12 @@ const initialState: SelectedDate = {
   appointments: [],
 };
 
-export const selectedDateReducer = (
+export const selectedDayReducer = (
   state = initialState,
   action: selectedDateAction,
 ) => {
   switch (action.type) {
-    case 'SET_SELECTED_DATE': {
+    case 'SET_SELECTED_DAY': {
       return {
         ...state,
         date: action.payload.date,

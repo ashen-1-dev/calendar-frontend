@@ -1,6 +1,6 @@
 import { useAppSelector } from './useAppSelector';
-import { SelectedDate } from '../../store/selected-date/types';
+import { SelectedDate } from '../../store/selected-day/types';
 
 export default function useSelectedDate(): SelectedDate {
-  return useAppSelector(state => state.selectedDateState);
+  return useAppSelector(state => state.selectedDayState);
 }

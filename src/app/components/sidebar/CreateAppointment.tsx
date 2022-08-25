@@ -77,7 +77,7 @@ const CreateAppointment = ({
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useAppDispatch();
-  const { date } = useAppSelector(state => state.selectedDateState);
+  const { date } = useAppSelector(state => state.selectedDayState);
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
       case AppointmentType.Holiday: {

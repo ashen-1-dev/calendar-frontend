@@ -33,6 +33,7 @@ const Header = props => {
   const currentService = useAppSelector(
     state => state.usedServiceState.service,
   );
+  //TODO: Идея, при каждом добавлении/измнении/удалении событий диспатчить экшон, который берет из стейта все события за день, который выбран в selectedDay
   const [tags, setTags] = useState<Tag[]>([]);
   const handleOnClick = () => {
     dispatch(changeCurrentService());

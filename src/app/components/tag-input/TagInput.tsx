@@ -59,6 +59,7 @@ const TagInput: React.FC<TagInputProps> = props => {
   return (
     <Wrapper>
       <Input
+        autoComplete={'off'}
         placeholder={placeholder}
         showIcon={showIcon}
         size={size}

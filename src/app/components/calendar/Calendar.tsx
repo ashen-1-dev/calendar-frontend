@@ -7,10 +7,11 @@ import { fillDates } from '../../helpers/dates';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
 import capitalize from 'lodash/capitalize';
+import { useAppDispatch } from '../../hooks/useAppDispatch';
+import { setSelectedCalendarMonth } from '../../../store/selected-calendar-month/actions';
 
 interface CalendarProps extends HTMLProps<HTMLDivElement> {
   date: Date;
-  setDate: (date) => void;
   className?: string;
 }
 
@@ -22,31 +23,31 @@ const Wrapper = styled.div`
 `;
 
 const Calendar = (props: CalendarProps) => {
-  const { date, setDate, className } = props;
+  const { date, className } = props;
+  const dispatch = useAppDispatch();
   const formatDate = format(date, 'LLLL yyyy', { locale: ru });
   const dates = fillDates(date.getMonth(), date.getFullYear());
   const getPrevMonth = () => {
-    setDate(prev => {
-      if (prev.getMonth() === 0) {
-        return new Date(prev.getFullYear() - 1, 11, 1);
-      }
-      return new Date(prev.getFullYear(), prev.getMonth() - 1, 1);
-    });
+    if (date.getMonth() === 0) {
+      return new Date(date.getFullYear() - 1, 11, 1).getTime();
+    }
+    return new Date(date.getFullYear(), date.getMonth() - 1, 1).getTime();
   };
   const getNextMonth = () => {
-    setDate(prev => {
-      if (prev.getMonth() === 11) {
-        return new Date(prev.getFullYear() + 1, 0, 1);
-      }
-      return new Date(prev.getFullYear(), prev.getMonth() + 1, 1);
-    });
+    if (date.getMonth() === 11) {
+      return new Date(date.getFullYear() + 1, 0, 1).getTime();
+    }
+    return new Date(date.getFullYear(), date.getMonth() + 1, 1).getTime();
   };
   return (
     <Wrapper className={className}>
       <div
         style={{ alignSelf: 'center', padding: '2.5rem', userSelect: 'none' }}
       >
-        <span style={{ cursor: 'pointer' }} onClick={getPrevMonth}>
+        <span
+          style={{ cursor: 'pointer' }}
+          onClick={() => dispatch(setSelectedCalendarMonth(getPrevMonth()))}
+        >
           <BackSvg />
         </span>
         <span
@@ -58,7 +59,10 @@ const Calendar = (props: CalendarProps) => {
         >
           {capitalize(formatDate)}
         </span>
-        <span style={{ cursor: 'pointer' }} onClick={getNextMonth}>
+        <span
+          style={{ cursor: 'pointer' }}
+          onClick={() => dispatch(setSelectedCalendarMonth(getNextMonth()))}
+        >
           <ForwardSvg />
         </span>
       </div>

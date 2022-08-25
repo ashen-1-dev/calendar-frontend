@@ -11,12 +11,13 @@ import { createInjectorsEnhancer } from 'redux-injectors';
 import createSagaMiddleware from 'redux-saga';
 
 import { createReducer } from './reducers';
-import { selectedDateReducer } from './selected-date/selectedDateReducer';
+import { selectedDayReducer } from './selected-day/selectedDayReducer';
 import rootSaga from './sagas/root-saga';
 import { appointmentReducer } from './appointments/appointment.reducer';
 import { tagReducer } from './tags/tag.reducer';
 import { filterReducer } from './filter/filter.reducer';
 import { usedServiceReducer } from './used-service/used-service.reducer';
+import { selectedCalendarMonthReducer } from './selected-calendar-month/selected-calendar-month.reducer';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -36,7 +37,8 @@ export function configureAppStore() {
   const store = configureStore({
     reducer: createReducer({
       //@ts-ignore
-      selectedDateState: selectedDateReducer,
+      selectedDayState: selectedDayReducer,
+      selectedCalendarMonth: selectedCalendarMonthReducer,
       appointmentState: appointmentReducer,
       tagState: tagReducer,
       filterState: filterReducer,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
@@ -7,7 +7,7 @@ import useSelectedDate from '../../hooks/useSelectedDate';
 import { filterAppointmentsByDay } from './helpers/filter-appointments';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { CalendarElement } from './calendar-element.interface';
-import { setSelectedDate } from '../../../store/selected-date/actions';
+import { setSelectedDay } from '../../../store/selected-day/actions';
 
 const Wrapper = styled.div<Pick<CalendarCellProp, 'selected'>>`
   display: flex;
@@ -44,10 +44,19 @@ const CalendarCell = (props: CalendarCellProp) => {
   const { date, appointments } = element;
   const selected = date.getTime() === selectedDate;
   const formatDay = format(date, 'd');
+  console.log('render');
+  useEffect(() => {
+    dispatch(
+      setSelectedDay({
+        date: date.getTime(),
+        appointments: filterAppointmentsByDay(date, appointments),
+      }),
+    );
+  }, []);
 
   const handleOnClick = () => {
     dispatch(
-      setSelectedDate({
+      setSelectedDay({
         date: date.getTime(),
         appointments: filterAppointmentsByDay(date, appointments),
       }),
