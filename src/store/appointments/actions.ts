@@ -2,8 +2,6 @@ import { Appointment } from '../../app/models/Appointment';
 import { AppointmentQuery } from '../../app/services/appointment-query';
 import { createAction } from '@reduxjs/toolkit';
 
-export const CREATE_APPOINTMENT_FAILURE = 'CREATE_APPOINTMENT_FAILURE';
-
 export const createAppointmentSuccess = createAction(
   'CREATE_APPOINTMENT_SUCCESS',
   (appointment: Appointment) => ({
