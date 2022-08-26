@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { Colors } from '../../../styles/colors';
@@ -38,21 +38,11 @@ interface CalendarCellProp extends React.HTMLProps<HTMLDivElement> {
 
 const CalendarCell = (props: CalendarCellProp) => {
   const { element } = props;
+  const { date, appointments } = element;
   const dispatch = useAppDispatch();
   const { date: selectedDate } = useSelectedDate();
-
-  const { date, appointments } = element;
   const selected = date.getTime() === selectedDate;
   const formatDay = format(date, 'd');
-  console.log('render');
-  useEffect(() => {
-    dispatch(
-      setSelectedDay({
-        date: date.getTime(),
-        appointments: filterAppointmentsByDay(date, appointments),
-      }),
-    );
-  }, []);
 
   const handleOnClick = () => {
     dispatch(

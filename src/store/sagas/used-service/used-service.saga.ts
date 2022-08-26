@@ -1,10 +1,16 @@
 import { getAppointments } from '../../appointments/actions';
-import { put, takeEvery } from 'redux-saga/effects';
+import { put, select, takeEvery } from 'redux-saga/effects';
 import { changeCurrentService } from '../../used-service/actions';
+import { getCalendarDate } from '../../selected-period-month/selectors';
 
 function* changeService() {
-  //TODO: Создать стейт с текущим выбранным месяцем, оттуда можно брать данные для рендера календаря.
-  yield put(getAppointments({}));
+  const dates = yield select(getCalendarDate);
+  yield put(
+    getAppointments({
+      startDate: dates[0].getTime(),
+      endDate: dates[dates.length - 1].getTime(),
+    }),
+  );
 }
 
 export function* changeServiceWatcher() {

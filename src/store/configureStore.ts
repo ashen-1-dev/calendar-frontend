@@ -17,7 +17,7 @@ import { appointmentReducer } from './appointments/appointment.reducer';
 import { tagReducer } from './tags/tag.reducer';
 import { filterReducer } from './filter/filter.reducer';
 import { usedServiceReducer } from './used-service/used-service.reducer';
-import { selectedCalendarMonthReducer } from './selected-calendar-month/selected-calendar-month.reducer';
+import { selectedCalendarPeriodReducer } from './selected-period-month/selected-calendar-period.reducer';
 
 export function configureAppStore() {
   const reduxSagaMonitorOptions = {};
@@ -38,7 +38,7 @@ export function configureAppStore() {
     reducer: createReducer({
       //@ts-ignore
       selectedDayState: selectedDayReducer,
-      selectedCalendarMonth: selectedCalendarMonthReducer,
+      selectedCalendarPeriodState: selectedCalendarPeriodReducer,
       appointmentState: appointmentReducer,
       tagState: tagReducer,
       filterState: filterReducer,

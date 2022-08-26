@@ -1,3 +1,4 @@
 export interface SelectedCalendarMonthState {
-  dateTime: number;
+  dates: Date[];
+  currentMonth: Date;
 }
