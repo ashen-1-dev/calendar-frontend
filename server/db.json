@@ -52,18 +52,119 @@
           "description": "Это не важно"
         }
       ]
+    },
+    {
+      "date": 1660867200000,
+      "name": "1232134",
+      "state": {
+        "type": "holiday",
+        "value": "123"
+      },
+      "uuid": "I3_PYwK"
+    },
+    {
+      "date": 1660262400000,
+      "name": "1234",
+      "state": {
+        "type": "holiday",
+        "value": "123"
+      },
+      "uuid": "oTJYg79"
+    },
+    {
+      "date": 1660176000000,
+      "name": "123",
+      "state": {
+        "type": "holiday",
+        "value": "13"
+      },
+      "uuid": "an9oAii"
+    },
+    {
+      "date": 1660089600000,
+      "name": "sadsasda",
+      "state": {
+        "type": "holiday",
+        "value": "123"
+      },
+      "uuid": "cwnmwDV"
+    },
+    {
+      "date": 1661904000000,
+      "name": "123",
+      "state": {
+        "type": "holiday",
+        "value": "1"
+      },
+      "uuid": "5GwcZCu"
+    },
+    {
+      "date": 1661817600000,
+      "name": "Проверка",
+      "state": {
+        "type": "holiday"
+      },
+      "uuid": "6EczbiP"
+    },
+    {
+      "date": 1661990400000,
+      "name": "123",
+      "state": {
+        "type": "holiday",
+        "value": "1"
+      },
+      "uuid": "oOfRWy8"
+    },
+    {
+      "date": 1660003200000,
+      "state": {
+        "type": "event",
+        "value": "32dasds"
+      },
+      "name": "asddsa",
+      "uuid": "0mMudwp"
+    },
+    {
+      "date": 1660608000000,
+      "name": "sdadsdsa",
+      "state": {
+        "type": "other",
+        "value": "dassaddsa"
+      },
+      "uuid": "izdlq-F"
+    },
+    {
+      "date": 1659312000000,
+      "name": "Чек",
+      "state": {
+        "type": "holiday",
+        "value": "213"
+      },
+      "tags": [
+        {
+          "name": "Важно",
+          "description": "Это важно",
+          "uuid": "O_uMHM0"
+        },
+        {
+          "name": "Не важно",
+          "description": "Это не важно",
+          "uuid": "zas3Rsq"
+        }
+      ],
+      "uuid": "Krh88k-"
     }
   ],
   "tags": [
     {
-      "name": "Важно1",
-      "description": "Это важно1",
-      "uuid": "34cbc99e-18ed-4004-a701-5b10a72757f5"
+      "name": "dassad",
+      "description": "sadasd",
+      "uuid": "Ueiem4S"
     },
     {
-      "uuid": "1c203291-8009-4a00-97cd-7801723800e9",
-      "name": "Не важно",
-      "description": "Это не важно"
+      "name": "Важно",
+      "description": "Это важно",
+      "uuid": "O_uMHM0"
     }
   ]
 }

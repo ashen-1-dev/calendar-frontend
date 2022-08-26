@@ -28,8 +28,8 @@ function* createTag(action: ReturnType<typeof createTagAction>) {
         break;
       }
     }
-    const tag = <Tag>action.payload;
-    yield call(service.addTag, tag);
+
+    const tag = yield call(service.addTag, <Tag>action.payload);
     yield put(createTagSuccess(tag));
   } catch (e) {
     console.log(e);

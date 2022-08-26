@@ -9,6 +9,7 @@ import { Field, Form } from 'react-final-form';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { createTag, getTags } from '../../../../store/tags/actions';
 import { useAppSelector } from '../../../hooks/useAppSelector';
+import { selectAllTags } from '../../../../store/tags/selectors';
 
 const validation = (values: Omit<Tag, 'uuid'>) => {
   const errors: {
@@ -26,7 +27,7 @@ const validation = (values: Omit<Tag, 'uuid'>) => {
 
 const TagEditForm = () => {
   const dispatch = useAppDispatch();
-  const tags: Tag[] = useAppSelector(state => state.tagState.tags);
+  const { tags, isError, error, isLoading } = useAppSelector(selectAllTags);
 
   useEffect(() => {
     dispatch(getTags());

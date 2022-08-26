@@ -40,13 +40,13 @@ export function fillDates(monthIndex: number, year: number): Date[] {
   return dates;
 }
 
-export function convertDateToLastMidnight(date: Date) {
+export function getLastMidnightFromDate(date: Date) {
   const d = new Date(date);
   d.setHours(0, 0, 0, 0);
   return d;
 }
 
-export function convertDateToNextMidnight(date: Date) {
+export function getNextMidnightFromDate(date: Date) {
   const d = new Date(date);
   d.setHours(24, 0, 0, 0);
   return d;

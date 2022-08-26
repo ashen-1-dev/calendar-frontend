@@ -2,7 +2,6 @@ import { SelectedDate, selectedDateAction } from './types';
 
 const initialState: SelectedDate = {
   date: new Date().getTime(),
-  appointments: [],
 };
 
 export const selectedDayReducer = (
@@ -13,8 +12,7 @@ export const selectedDayReducer = (
     case 'SET_SELECTED_DAY': {
       return {
         ...state,
-        date: action.payload.date,
-        appointments: action.payload.appointments,
+        date: action.payload,
       };
     }
     default:

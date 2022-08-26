@@ -1,7 +1,7 @@
 import { Appointment } from '../../../models/Appointment';
 import {
-  convertDateToLastMidnight,
-  convertDateToNextMidnight,
+  getLastMidnightFromDate,
+  getNextMidnightFromDate,
 } from '../../../helpers/dates';
 
 export function filterAppointmentsByDay(
@@ -11,8 +11,8 @@ export function filterAppointmentsByDay(
   if (!appointments.length) {
     return [];
   }
-  const startOfTheDay = convertDateToLastMidnight(date);
-  const endOfTheDay = convertDateToNextMidnight(date);
+  const startOfTheDay = getLastMidnightFromDate(date);
+  const endOfTheDay = getNextMidnightFromDate(date);
 
   const result = appointments.filter(a => {
     return a.date > startOfTheDay.getTime() && a.date < endOfTheDay.getTime();

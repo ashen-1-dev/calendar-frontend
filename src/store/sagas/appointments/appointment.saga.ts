@@ -36,8 +36,11 @@ function* createAppointmentWorker(
         break;
       }
     }
-    const appointment = action.payload;
-    yield call(service.addAppointment, appointment);
+    const appointment: Appointment = yield call(
+      service.addAppointment,
+      action.payload,
+    );
+    console.log('saga', appointment);
     yield put(createAppointmentSuccess(appointment));
   } catch (e) {
     yield put(createAppointmentFailure(e));

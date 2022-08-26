@@ -1,13 +1,14 @@
 import { useMemo, useState } from 'react';
 import { Tag } from '../models/Tag';
 import { useAppSelector } from './useAppSelector';
+import { selectAllTags } from '../../store/tags/selectors';
 
 export const useSearchedTags = (
   tags: Tag[],
   onChange: (tags: Tag[]) => void,
 ) => {
   const [value, setValue] = useState('');
-  const allTags = useAppSelector(state => state.tagState.tags);
+  const { tags: allTags } = useAppSelector(selectAllTags);
   const handleOnChange = (value: string) => {
     setValue(value);
   };

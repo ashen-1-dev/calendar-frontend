@@ -10,6 +10,7 @@ import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { setSelectedCalendarMonth } from '../../../store/selected-period-month/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { getNextMonth, getPrevMonth } from '../../../helpers/dates/month';
+import { selectCurrentCalendarPeriod } from '../../../store/selected-period-month/selectors';
 
 interface CalendarProps extends HTMLProps<HTMLDivElement> {
   className?: string;
@@ -25,9 +26,7 @@ const Wrapper = styled.div`
 const Calendar = (props: CalendarProps) => {
   const { className } = props;
   const dispatch = useAppDispatch();
-  const { currentMonth, dates } = useAppSelector(
-    state => state.selectedCalendarPeriodState,
-  );
+  const { currentMonth, dates } = useAppSelector(selectCurrentCalendarPeriod);
   const formatDate = format(currentMonth, 'LLLL yyyy', { locale: ru });
   return (
     <Wrapper className={className}>

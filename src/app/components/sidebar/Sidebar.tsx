@@ -4,7 +4,6 @@ import { ru } from 'date-fns/locale';
 import Button from '../buttons/Button';
 import { ReactComponent as PlusSvg } from '../buttons/assets/plus.svg';
 import AppointmentList from './appointment-list/AppointmentList';
-import useSelectedDate from '../../hooks/useSelectedDate';
 import RoundButton from '../buttons/RoundButton';
 import Select from '../selects/Select';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
@@ -22,13 +21,14 @@ import {
   DateText,
   ReverseButton,
 } from './styled';
+import { useAppSelector } from '../../hooks/useAppSelector';
+import { selectActiveAppointments } from '../../../store/appointments/selectors';
 export interface SidebarProps {
   className?: string;
 }
 
 const Sidebar = (props: SidebarProps) => {
   const { className } = props;
-  const { date, appointments } = useSelectedDate();
   const [modalActive, setModalActive] = useState(false);
 
   const [closeModalActive, setCloseModalActive] = useState(false);
@@ -49,6 +49,7 @@ const Sidebar = (props: SidebarProps) => {
     setCloseModalActive(true);
   };
 
+  const { date, appointments } = useAppSelector(selectActiveAppointments);
   const [
     sortedAndOrderedAppointments,
     handleOnSortChange,

@@ -1,12 +1,12 @@
 import React from 'react';
 import format from 'date-fns/format';
 import CalendarCellAppointment from '../calendar-appointment/CalendarCellAppointment';
-import useSelectedDate from '../../../hooks/useSelectedDate';
-import { filterAppointmentsByDay } from '../helpers/filter-appointments';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { CalendarElement } from '../calendar-element.interface';
 import { setSelectedDay } from '../../../../store/selected-day/actions';
 import { AppointmentGroup, Date, Wrapper } from './styled';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { getSelectedDay } from '../../../../store/selected-day/selectors';
 
 interface CalendarCellProp extends React.HTMLProps<HTMLDivElement> {
   element: CalendarElement;
@@ -16,17 +16,12 @@ const CalendarCell = (props: CalendarCellProp) => {
   const { element } = props;
   const { date, appointments } = element;
   const dispatch = useAppDispatch();
-  const { date: selectedDate } = useSelectedDate();
+  const { date: selectedDate } = useAppSelector(getSelectedDay);
   const selected = date.getTime() === selectedDate;
   const formatDay = format(date, 'd');
 
   const handleOnClick = () => {
-    dispatch(
-      setSelectedDay({
-        date: date.getTime(),
-        appointments: filterAppointmentsByDay(date, appointments),
-      }),
-    );
+    dispatch(setSelectedDay(date.getTime()));
   };
 
   return (

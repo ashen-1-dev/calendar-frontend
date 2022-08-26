@@ -9,6 +9,7 @@ import { AppointmentFilter } from '../../../models/appointment-filter';
 import { filterAppointments } from '../../../helpers/filter-appointments';
 import { AppointmentState } from '../../../../store/appointments/types';
 import { Header, Wrapper } from './styled';
+import { selectAppointmentsWithFilter } from '../../../../store/appointments/selectors';
 
 interface CalendarBodyProps {
   dates: Date[];
@@ -21,10 +22,7 @@ const CalendarBody = (props: CalendarBodyProps) => {
     appointmentState,
     filter,
   }: { appointmentState: AppointmentState; filter: AppointmentFilter } =
-    useAppSelector(state => ({
-      appointmentState: state.appointmentState,
-      filter: state.filterState.filter,
-    }));
+    useAppSelector(selectAppointmentsWithFilter);
   const { appointments, error, isError, isLoading } = appointmentState;
 
   useEffect(() => {

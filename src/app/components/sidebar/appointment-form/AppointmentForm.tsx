@@ -16,6 +16,7 @@ import { useAppSelector } from '../../../hooks/useAppSelector';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
 import { validation } from './validation';
 import { radioOptions } from './radio-options';
+import { getSelectedDay } from '../../../../store/selected-day/selectors';
 
 export interface CreateAppointmentProps {
   onSuccess: () => void;
@@ -28,7 +29,7 @@ const AppointmentForm = ({
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
   const dispatch = useAppDispatch();
-  const { date } = useAppSelector(state => state.selectedDayState);
+  const { date } = useAppSelector(getSelectedDay);
   const handleOnChange = (type: AppointmentType) => {
     switch (type) {
       case AppointmentType.Holiday: {

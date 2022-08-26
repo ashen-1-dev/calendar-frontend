@@ -60,7 +60,6 @@ export class AppointmentServiceImpl implements IAppointmentService {
     const rawAppointments = localStorage.getItem(APPOINTMENTS);
     const appointments: Appointment[] =
       rawAppointments && JSON.parse(rawAppointments).filter(Boolean);
-    console.log('app', appointments);
     if (!appointments) {
       return;
     }

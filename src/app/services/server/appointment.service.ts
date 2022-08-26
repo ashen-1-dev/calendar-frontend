@@ -9,8 +9,10 @@ class AppointmentServiceImpl implements IAppointmentService {
       process.env.SERVER_BASE_URL || 'http://localhost:3001';
   }
 
-  public async addAppointment(appointment: Appointment): Promise<void> {
-    return await axios.post('/appointments', appointment);
+  public async addAppointment(appointment: Appointment): Promise<Appointment> {
+    return await axios
+      .post('/appointments', appointment)
+      .then(resp => resp.data);
   }
 
   public async getAppointments(

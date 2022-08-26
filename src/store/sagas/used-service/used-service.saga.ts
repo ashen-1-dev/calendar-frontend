@@ -1,10 +1,10 @@
 import { getAppointments } from '../../appointments/actions';
 import { put, select, takeEvery } from 'redux-saga/effects';
 import { changeCurrentService } from '../../used-service/actions';
-import { getCalendarDate } from '../../selected-period-month/selectors';
+import { selectCalendarDate } from '../../selected-period-month/selectors';
 
 function* changeService() {
-  const dates = yield select(getCalendarDate);
+  const dates = yield select(selectCalendarDate);
   yield put(
     getAppointments({
       startDate: dates[0].getTime(),
