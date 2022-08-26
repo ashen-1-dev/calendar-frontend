@@ -15,6 +15,7 @@ const Wrapper = styled.div`
 
 const Row = styled.div`
   display: flex;
+  justify-content: space-between;
   position: relative;
   padding: 1.875rem;
 `;

@@ -12,6 +12,14 @@
     opacity: 0.7;
 }
 
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn.btn-primary:active {
+    background-color: var(--dark-blue);
+}
+
 .btn-size-very-small {
     width: 1.875em;
     height: 1.875em;

@@ -47,6 +47,7 @@ export const appointmentReducer = createReducer<AppointmentState>(
       })
       .addCase(getAppointmentFailure, (state, action) => {
         state.isLoading = false;
+        state.isError = true;
         state.error = action.payload;
       })
       .addCase(updateAppointmentSuccess, (state, action) => {

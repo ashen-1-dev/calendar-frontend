@@ -37,6 +37,23 @@ const CalendarBody = (props: CalendarBodyProps) => {
   }, [dates]);
 
   const filteredAppointments = filterAppointments(appointments, filter);
+
+  if (isLoading) {
+    return (
+      <Wrapper>
+        <div>Идет загрузка..</div>
+      </Wrapper>
+    );
+  }
+
+  if (isError) {
+    return (
+      <Wrapper>
+        <div>Произошла ошибка</div>
+      </Wrapper>
+    );
+  }
+
   return (
     <Wrapper>
       {WEEK_DAYS.map(day => (
