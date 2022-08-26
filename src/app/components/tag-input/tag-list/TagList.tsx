@@ -1,16 +1,8 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Tag } from '../../models/Tag';
-import TagItem from './TagItem';
 
-const Wrapper = styled.div`
-  display: inline-flex;
-  gap: 10px;
-  :first-child {
-    padding-left: 0.313rem;
-  }
-`;
-
+import { Tag } from '../../../models/Tag';
+import TagItem from '../tag-item/TagItem';
+import { Wrapper } from './styled';
 const TagList: React.FC<{
   items: Tag[];
   onRemoval: (itemId: string) => void;

@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import { RadioBox, RadioCircle, Wrapper } from './styled';
-
-export type RadioType = 'holiday' | 'event' | 'other';
+import { RadioType } from './radio-type.interface';
 
 export interface RadioOption {
   name: string;

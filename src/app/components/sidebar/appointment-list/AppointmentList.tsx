@@ -1,24 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
-import { Appointment } from '../../models/Appointment';
-import SidebarAppointment from './SidebarAppointment';
-import { Colors } from '../../../styles/colors';
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
+import { Wrapper, VerticalLine } from './styled';
+import { Appointment } from '../../../models/Appointment';
+import SidebarAppointment from '../SidebarAppointment';
 
 interface AppointmentListProps {
   appointments: Appointment[];
   onDelete: (appointment: Appointment) => void;
   onEdit: (appointment: Appointment) => void;
 }
-
-const VerticalLine = styled.div`
-  width: inherit;
-  border: solid 2px ${Colors.LightGrey3};
-`;
 
 const AppointmentList = (props: AppointmentListProps) => {
   const { appointments, onDelete, onEdit } = props;

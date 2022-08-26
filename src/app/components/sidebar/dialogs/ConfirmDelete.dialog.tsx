@@ -2,32 +2,13 @@ import React from 'react';
 import Modal, { ModalProps } from '../../modal/Modal';
 import { Appointment } from '../../../models/Appointment';
 import Button from '../../buttons/Button';
-import styled from 'styled-components';
 import { removeAppointment } from '../../../../store/appointments/actions';
 import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { Wrapper, Text, ButtonContainer } from './styled-confirm-delete-dialog';
 
 interface ConfirmDeleteDialogProps extends ModalProps {
   appointment: Appointment;
 }
-
-const Wrapper = styled.div`
-  display: flex;
-  padding: 0 3.125rem 2.188rem 3.125rem;
-  flex-direction: column;
-  gap: 1.875rem;
-  justify-content: center;
-  align-items: center;
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  gap: 0.625rem;
-`;
-
-const Text = styled.div`
-  font-size: 1.25rem;
-  font-weight: bold;
-`;
 
 const ConfirmDeleteDialog = ({
   active,

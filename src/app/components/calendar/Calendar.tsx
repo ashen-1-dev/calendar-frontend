@@ -1,7 +1,7 @@
 import React, { HTMLProps } from 'react';
 import { ReactComponent as BackSvg } from './assets/back.svg';
 import { ReactComponent as ForwardSvg } from './assets/forward.svg';
-import CalendarBody from './CalendarBody';
+import CalendarBody from './calendar-body/CalendarBody';
 import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';

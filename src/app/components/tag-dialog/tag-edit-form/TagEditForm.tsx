@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
-import Input from '../inputs/Input';
-import Button from '../buttons/Button';
-import { Tag } from '../../models/Tag';
-import TagTable from './TagTable';
-import { StyledForm, Wrapper } from './styled-form';
-import { VerticalLine } from './styled-form';
+import Input from '../../inputs/Input';
+import Button from '../../buttons/Button';
+import { Tag } from '../../../models/Tag';
+import TagTable from '../tag-table/TagTable';
+import { Styled, Wrapper } from './styled';
+import { VerticalLine } from './styled';
 import { Field, Form } from 'react-final-form';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { createTag, getTags } from '../../../store/tags/actions';
-import { useAppSelector } from '../../hooks/useAppSelector';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { createTag, getTags } from '../../../../store/tags/actions';
+import { useAppSelector } from '../../../hooks/useAppSelector';
 
 const validation = (values: Omit<Tag, 'uuid'>) => {
   const errors: {
@@ -43,7 +43,7 @@ const TagEditForm = () => {
           validate={validation}
           onSubmit={onSubmit}
           render={({ handleSubmit, valid }) => (
-            <StyledForm onSubmit={handleSubmit}>
+            <Styled onSubmit={handleSubmit}>
               <Field name={'name'}>
                 {({ input }) => (
                   <Input
@@ -73,7 +73,7 @@ const TagEditForm = () => {
               >
                 Добавить тег
               </Button>
-            </StyledForm>
+            </Styled>
           )}
         />
         <TagTable tags={tags} />

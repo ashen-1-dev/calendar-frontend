@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Button from '../buttons/Button';
-import { ReactComponent as DeleteSvg } from '../buttons/assets/delete.svg';
-import { Tag } from '../../models/Tag';
-import { TableHeader, TableItem, TableRow } from './styled-table';
-import { Wrapper } from './styled-table';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-import { removeTag } from '../../../store/tags/actions';
+import Button from '../../buttons/Button';
+import { ReactComponent as DeleteSvg } from '../../buttons/assets/delete.svg';
+import { Tag } from '../../../models/Tag';
+import { TableHeader, TableItem, TableRow } from './styled';
+import { Wrapper } from './styled';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { removeTag } from '../../../../store/tags/actions';
 
 export interface TableRowProps {
   selected?: boolean;

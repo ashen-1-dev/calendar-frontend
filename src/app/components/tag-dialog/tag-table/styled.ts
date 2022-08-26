@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { ReactNode } from 'react';
-import { Colors } from '../../../styles/colors';
+import { Colors } from '../../../../styles/colors';
 import { TableRowProps } from './TagTable';
 
 export const Wrapper = styled.table<{ children: ReactNode | ReactNode[] }>`

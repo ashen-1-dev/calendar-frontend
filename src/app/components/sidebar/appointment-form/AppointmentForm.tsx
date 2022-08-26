@@ -1,78 +1,29 @@
 import React, { useState } from 'react';
-import Input from '../inputs/Input';
-import RadioGroup from '../radio/RadioGroup';
-import { RadioOption } from '../radio/Radio';
-import { Appointment, AppointmentType } from '../../models/Appointment';
-import MyDatetimePicker from '../datepicker/MyDatetimePicker';
-import styled from 'styled-components';
-import { Colors } from '../../../styles/colors';
-import TagInput from '../tag-input/TagInput';
-import Button from '../buttons/Button';
+import Input from '../../inputs/Input';
+import RadioGroup from '../../radio/RadioGroup';
+import { Appointment, AppointmentType } from '../../../models/Appointment';
+import MyDatetimePicker from '../../datepicker/MyDatetimePicker';
+import { Row, Wrapper, Label, ButtonContainer, VerticalLine } from './styled';
+import TagInput from '../../tag-input/TagInput';
+import Button from '../../buttons/Button';
 import { Field, Form } from 'react-final-form';
 import { OnChange } from 'react-final-form-listeners';
 import {
   createAppointment,
   updateAppointment,
-} from '../../../store/appointments/actions';
-import { useAppSelector } from '../../hooks/useAppSelector';
-import { useAppDispatch } from '../../hooks/useAppDispatch';
-
-const Label = styled.div`
-  margin-bottom: 0.625rem;
-  font-size: 0.875rem;
-  color: ${Colors.DefaultDark};
-  font-weight: 500;
-`;
-
-const Wrapper = styled.div`
-  padding: 2.188rem 1.875rem;
-`;
-
-const VerticalLine = styled.div`
-  margin: 1.563rem 0 0;
-  border: solid 2px ${Colors.LightGrey3};
-`;
-
-const Row = styled.div`
-  padding-bottom: 1.875rem;
-`;
-
-const ButtonContainer = styled.div`
-  padding-top: calc(2.188rem - 1.875rem);
-`;
-
-const radioOptions: RadioOption[] = [
-  { value: 'holiday', name: 'Праздник' },
-  { value: 'event', name: 'Мероприятие' },
-  { value: 'other', name: 'Другое' },
-];
-
-const validation = (values: Appointment) => {
-  const errors: {
-    name?: string;
-    date?: string;
-    state?: { value?: string; type?: string };
-  } = {};
-  if (!values.name) {
-    errors.name = 'Обязательное поле';
-  }
-  if (!values.date) {
-    errors.date = 'Обязательное поле';
-  }
-  if (!values.state?.type) {
-    errors.state = {};
-    errors.state.type = 'Обязательное поле';
-  }
-  return errors;
-};
+} from '../../../../store/appointments/actions';
+import { useAppSelector } from '../../../hooks/useAppSelector';
+import { useAppDispatch } from '../../../hooks/useAppDispatch';
+import { validation } from './validation';
+import { radioOptions } from './radio-options';
 
 export interface CreateAppointmentProps {
-  onCreate: () => void;
+  onSuccess: () => void;
   appointmentToEdit?: Appointment;
 }
 
-const CreateAppointment = ({
-  onCreate,
+const AppointmentForm = ({
+  onSuccess,
   appointmentToEdit,
 }: CreateAppointmentProps) => {
   const [input, setInput] = useState({ label: 'Бюджет', inputProps: {} });
@@ -105,7 +56,7 @@ const CreateAppointment = ({
   };
 
   const onSubmit = data => {
-    onCreate();
+    onSuccess();
     const appointment: Appointment = data;
     appointment.date = data.date.getTime();
     !appointmentToEdit
@@ -227,4 +178,4 @@ const CreateAppointment = ({
   );
 };
 
-export default CreateAppointment;
+export default AppointmentForm;

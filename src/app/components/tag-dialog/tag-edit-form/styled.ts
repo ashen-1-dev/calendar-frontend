@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { Colors } from '../../../styles/colors';
+import { Colors } from '../../../../styles/colors';
 
-export const StyledForm = styled.form`
+export const Styled = styled.form`
   display: flex;
   padding-top: 2.188rem;
   padding-bottom: 2.188rem;

@@ -1,31 +1,15 @@
 import React, { useState } from 'react';
 import TagInput from '../tag-input/TagInput';
 import Button from '../buttons/Button';
-import styled from 'styled-components';
-import { Colors } from '../../../styles/colors';
 import CurrentTime from './CurrentTime';
 import Modal from '../modal/Modal';
-import TagEditForm from '../tag/TagEditForm';
+import TagEditForm from '../tag-dialog/tag-edit-form/TagEditForm';
 import { useAppDispatch } from '../../hooks/useAppDispatch';
 import { Tag } from '../../models/Tag';
 import { addFilter } from '../../../store/filter/actions';
 import { useAppSelector } from '../../hooks/useAppSelector';
 import { changeCurrentService } from '../../../store/used-service/actions';
-
-const Wrapper = styled.div`
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: 6.25rem;
-  width: 100%;
-`;
-
-const Logo = styled.div`
-  font-size: 1.625rem;
-  color: ${Colors.Blue2};
-  padding-left: 1.875rem;
-`;
+import { Logo, Wrapper } from './styled';
 
 const Header = props => {
   const { className } = props;
@@ -33,7 +17,6 @@ const Header = props => {
   const currentService = useAppSelector(
     state => state.usedServiceState.service,
   );
-  //TODO: Идея, при каждом добавлении/измнении/удалении событий диспатчить экшон, который берет из стейта все события за день, который выбран в selectedDay
   const [tags, setTags] = useState<Tag[]>([]);
   const handleOnClick = () => {
     dispatch(changeCurrentService());

@@ -1,5 +1,5 @@
 import React from 'react';
-import CreateAppointment from '../CreateAppointment';
+import AppointmentForm from '../appointment-form/AppointmentForm';
 import Modal from '../../modal/Modal';
 import { Appointment } from '../../../models/Appointment';
 
@@ -20,7 +20,7 @@ const AppointmentDialog = ({
   const labelName = !appointment ? 'Добавить событие' : 'Редактировать событие';
   return (
     <Modal active={active} label={labelName} setActive={setActive}>
-      <CreateAppointment appointmentToEdit={appointment} onCreate={onCreate} />
+      <AppointmentForm appointmentToEdit={appointment} onSuccess={onCreate} />
     </Modal>
   );
 };

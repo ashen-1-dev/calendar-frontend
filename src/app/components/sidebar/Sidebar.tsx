@@ -1,74 +1,27 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import format from 'date-fns/format';
 import { ru } from 'date-fns/locale';
 import Button from '../buttons/Button';
 import { ReactComponent as PlusSvg } from '../buttons/assets/plus.svg';
-import AppointmentList from './AppointmentList';
+import AppointmentList from './appointment-list/AppointmentList';
 import useSelectedDate from '../../hooks/useSelectedDate';
 import RoundButton from '../buttons/RoundButton';
 import Select from '../selects/Select';
-import { Colors } from '../../../styles/colors';
 import { ReactComponent as ReverseOrderSvg } from '../buttons/assets/reverse-order.svg';
 import useSortedAppointments from '../../hooks/useSortedAppointments';
 import AppointmentDialog from './dialogs/Appointment.dialog';
 import { Appointment } from '../../models/Appointment';
 import ConfirmDeleteDialog from './dialogs/ConfirmDelete.dialog';
 import { appointmentSortOptions } from './sort-options';
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-`;
-
-const DateText = styled.span`
-  font-weight: bold;
-  font-size: 1.25rem;
-  text-align: center;
-`;
-
-const NoAppointments = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 25.625rem 5.375rem;
-`;
-
-const AppointmentContainer = styled.div`
-  height: 100%;
-  border-radius: 10px;
-  padding-top: 2.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-`;
-
-const ButtonContainer = styled.div`
-  margin-left: auto;
-  margin-top: auto;
-  position: sticky;
-  padding-bottom: 1.25rem;
-  padding-right: 0.688rem;
-  bottom: 0;
-`;
-
-const SelectContainer = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 0.625rem;
-  padding: 1.25rem 0;
-`;
-
-const ReverseButton = styled(Button)`
-  && {
-    width: 3.125rem;
-    border-radius: 5px;
-    background-color: ${Colors.LightGrey3};
-  }
-`;
-
+import {
+  SelectContainer,
+  ButtonContainer,
+  Container,
+  AppointmentContainer,
+  NoAppointments,
+  DateText,
+  ReverseButton,
+} from './styled';
 export interface SidebarProps {
   className?: string;
 }
