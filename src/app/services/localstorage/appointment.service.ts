@@ -24,14 +24,15 @@ export class AppointmentServiceImpl implements IAppointmentService {
     return result;
   }
 
-  public addAppointment(appointment: Appointment): void {
+  public addAppointment(appointment: Appointment): Appointment {
     const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
     appointment.uuid = generateId();
     const appointments: Appointment[] = JSON.parse(allRawAppointments);
-    return localStorage.setItem(
+    localStorage.setItem(
       APPOINTMENTS,
       JSON.stringify([...appointments, appointment]),
     );
+    return appointment;
   }
 
   public updateAppointment(
@@ -43,7 +44,6 @@ export class AppointmentServiceImpl implements IAppointmentService {
       return null;
     }
     const appointments = JSON.parse(rawAppointments);
-    //TODO: не работает apps становится undefined
     const appointmentToUpdateIndex = appointments.findIndex(
       x => x.uuid === uuid,
     );

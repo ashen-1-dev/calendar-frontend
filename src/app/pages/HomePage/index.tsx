@@ -4,6 +4,18 @@ import Header from '../../components/header/Header';
 import styled from 'styled-components';
 import Sidebar from '../../components/sidebar/Sidebar';
 
+export function HomePage() {
+  return (
+    <Wrapper>
+      <Header />
+      <Row>
+        <CustomCalendar />
+        <Sidebar />
+      </Row>
+    </Wrapper>
+  );
+}
+
 const CustomCalendar = styled(Calendar)`
   margin-right: 1.875rem;
 `;
@@ -18,15 +30,5 @@ const Row = styled.div`
   justify-content: space-between;
   position: relative;
   padding: 1.875rem;
+  max-height: 90vh;
 `;
-export function HomePage() {
-  return (
-    <Wrapper>
-      <Header />
-      <Row>
-        <CustomCalendar />
-        <Sidebar />
-      </Row>
-    </Wrapper>
-  );
-}

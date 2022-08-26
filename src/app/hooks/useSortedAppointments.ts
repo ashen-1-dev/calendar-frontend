@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import { SelectOption } from '../components/selects/Select';
 
 export interface SortOption {
-  sort: 'date' | 'tag' | 'name';
+  sort: string;
   reverse: boolean;
 }
 
@@ -18,9 +18,9 @@ export default function useSortedAppointments(
 ] {
   const [selectedSortOption, setSelectedSortOption] =
     useState<SelectOption>(initialSortOption);
-  const [sortAndOrder, setSortAndOrder] = useState({
+  const [sortAndOrder, setSortAndOrder] = useState<SortOption>({
     sort: selectedSortOption.value,
-    asc: false,
+    reverse: false,
   });
 
   const handleOnSortChange = (selectedOption: SelectOption) => {
@@ -34,7 +34,7 @@ export default function useSortedAppointments(
   const handleOnReverseOrder = () => {
     setSortAndOrder(prev => ({
       ...prev,
-      asc: !prev.asc,
+      reverse: !prev.reverse,
     }));
   };
 
@@ -47,13 +47,13 @@ export default function useSortedAppointments(
       }
       case 'tag': {
         result = appointments.sort((a, b) => {
-          if (!a.tags) {
+          if (!a.tags || !a.tags.length) {
+            return 1;
+          }
+          if (!b.tags || !b.tags.length) {
             return -1;
           }
-          if (!b.tags) {
-            return -1;
-          }
-          return b.tags?.length - a.tags?.length;
+          return b.tags.length - a.tags.length;
         });
         break;
       }
@@ -69,8 +69,8 @@ export default function useSortedAppointments(
       }
     }
 
-    return !sortAndOrder.asc ? result : result.slice().reverse();
-  }, [sortAndOrder, appointments, sortAndOrder.asc]);
+    return !sortAndOrder.reverse ? result : result.slice().reverse();
+  }, [sortAndOrder, appointments, sortAndOrder.reverse]);
 
   return [
     sortedAndOrderedAppointments,
