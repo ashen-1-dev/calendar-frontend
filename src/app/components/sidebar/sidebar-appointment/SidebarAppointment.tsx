@@ -15,6 +15,7 @@ import {
   RemainingTime,
 } from './styled';
 import { msToTime } from '../../../helpers/dates';
+import { useRemainingTimeUntilNow } from '../../../hooks/useRemainingUntilNow';
 
 interface AppointmentProps {
   appointment: Appointment;
@@ -25,8 +26,8 @@ interface AppointmentProps {
 const SidebarAppointment = (props: AppointmentProps) => {
   const { appointment, onDelete, onEdit } = props;
   const [onMouseOver, onMouseOut, isHover] = useHover();
-  const remainingTime =
-    new Date(appointment.date).getTime() - new Date().getTime();
+  const remainingTime = useRemainingTimeUntilNow(new Date(appointment.date));
+  console.log(remainingTime);
   const isLessThanOneDay = remainingTime / 1000 / 60 / 60 / 24 < 1;
   const formatRemainingTime = msToTime(remainingTime);
 
