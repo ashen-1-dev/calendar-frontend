@@ -64,3 +64,11 @@ export const Circle = styled.div<{ type: AppointmentType }>`
     }
   }};
 `;
+
+export const RemainingTime = styled.div`
+  margin-left: auto;
+  color: ${Colors.Blue};
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-style: italic;
+`;

@@ -12,7 +12,9 @@ import {
   TagContainer,
   ColoredText,
   Wrapper,
+  RemainingTime,
 } from './styled';
+import { msToTime } from '../../../helpers/dates';
 
 interface AppointmentProps {
   appointment: Appointment;
@@ -23,6 +25,10 @@ interface AppointmentProps {
 const SidebarAppointment = (props: AppointmentProps) => {
   const { appointment, onDelete, onEdit } = props;
   const [onMouseOver, onMouseOut, isHover] = useHover();
+  const remainingTime =
+    new Date(appointment.date).getTime() - new Date().getTime();
+  const isLessThanOneDay = remainingTime / 1000 / 60 / 60 / 24 < 1;
+  const formatRemainingTime = msToTime(remainingTime);
 
   const formatDate = format(appointment.date, 'HH:mm');
   return (
@@ -41,6 +47,9 @@ const SidebarAppointment = (props: AppointmentProps) => {
         >
           {appointment.name}
         </ColoredText>
+        {remainingTime > 0 && isLessThanOneDay && (
+          <RemainingTime>Осталось {formatRemainingTime}</RemainingTime>
+        )}
       </Row>
       <Row style={{ fontSize: '0.875rem', paddingLeft: '1.5rem' }}>
         <ColoredText style={{ opacity: 0.7 }} type={appointment.state.type}>
