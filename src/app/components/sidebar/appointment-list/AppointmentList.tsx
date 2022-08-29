@@ -1,7 +1,7 @@
 import React from 'react';
 import { Wrapper, VerticalLine } from './styled';
 import { Appointment } from '../../../models/Appointment';
-import SidebarAppointment from '../SidebarAppointment';
+import SidebarAppointment from '../sidebar-appointment/SidebarAppointment';
 
 interface AppointmentListProps {
   appointments: Appointment[];

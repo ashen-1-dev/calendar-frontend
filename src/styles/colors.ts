@@ -18,4 +18,6 @@ export enum Colors {
 
   Pink = '#f87b98',
   DullPink = '#c96780',
+
+  Scrollbar = '#dce5f8',
 }

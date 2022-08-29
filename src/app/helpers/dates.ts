@@ -51,3 +51,13 @@ export function getNextMidnightFromDate(date: Date) {
   d.setHours(24, 0, 0, 0);
   return d;
 }
+
+export function msToTime(duration: number): string {
+  let minutes: string | number = Math.floor((duration / (1000 * 60)) % 60);
+  let hours: string | number = Math.floor((duration / (1000 * 60 * 60)) % 24);
+
+  hours = hours < 10 ? '0' + hours : hours;
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+
+  return hours + ':' + minutes;
+}

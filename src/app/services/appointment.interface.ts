@@ -4,7 +4,7 @@ import { AppointmentQuery } from './appointment-query';
 export interface IAppointmentService {
   addAppointment: (
     appointment: Appointment,
-  ) => void | Promise<void | Appointment>;
+  ) => void | Promise<void | Appointment> | Appointment;
   getAppointments: (
     query: AppointmentQuery,
   ) => Appointment[] | Promise<Appointment[]>;
