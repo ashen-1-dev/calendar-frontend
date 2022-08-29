@@ -21,7 +21,7 @@ const ConfirmDeleteDialog = ({
     return null;
   }
   const handleOnClick = () => {
-    dispatch(removeAppointment(appointment.uuid));
+    dispatch(removeAppointment(appointment.id));
     setActive(false);
   };
   return (

@@ -52,9 +52,7 @@ export const appointmentReducer = createReducer<AppointmentState>(
       })
       .addCase(updateAppointmentSuccess, (state, action) => {
         const appointments = state.appointments;
-        const index = appointments.findIndex(
-          x => x.uuid === action.payload.uuid,
-        );
+        const index = appointments.findIndex(x => x.id === action.payload.id);
         appointments[index] = action.payload;
         state.appointments = [...appointments];
       })
@@ -65,7 +63,7 @@ export const appointmentReducer = createReducer<AppointmentState>(
       })
       .addCase(removeAppointmentSuccess, (state, action) => {
         state.appointments = [
-          ...state.appointments.filter(x => x.uuid !== action.payload),
+          ...state.appointments.filter(x => x.id !== action.payload),
         ];
       })
       .addCase(removeAppointmentFailure, (state, action) => {

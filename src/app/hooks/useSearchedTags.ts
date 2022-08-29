@@ -26,7 +26,7 @@ export const useSearchedTags = (
   }, [value, allTags]);
 
   const removeTag = (uuid: string) => {
-    onChange(tags.filter(tag => tag.uuid !== uuid));
+    onChange(tags.filter(tag => tag.id !== uuid));
   };
 
   const addTag = (tag: Tag) => {

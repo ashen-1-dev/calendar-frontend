@@ -21,13 +21,13 @@ export class TagServiceImpl implements ITagService {
     }
     return localStorage.setItem(
       TAGS,
-      JSON.stringify(tags.filter(x => x.uuid !== id)),
+      JSON.stringify(tags.filter(x => x.id !== id)),
     );
   }
 
   public addTag(tag: Tag): void {
     const allRawTags = localStorage.getItem(TAGS) || '[]';
-    tag.uuid = generateId();
+    tag.id = generateId();
     const tags: Tag[] = JSON.parse(allRawTags);
     return localStorage.setItem(TAGS, JSON.stringify([...tags, tag]));
   }

@@ -18,6 +18,6 @@ export const tagReducer = createReducer<TagState>(initialState, builder => {
       state.tags = [...action.payload];
     })
     .addCase(removeTagSuccess, (state, action) => {
-      state.tags = [...state.tags.filter(x => x.uuid !== action.payload)];
+      state.tags = [...state.tags.filter(x => x.id !== action.payload)];
     });
 });

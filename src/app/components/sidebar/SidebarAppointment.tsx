@@ -112,7 +112,7 @@ const SidebarAppointment = (props: AppointmentProps) => {
       <Row style={{ paddingLeft: '1.5rem' }}>
         {appointment.tags &&
           appointment.tags.map(tag => (
-            <TagContainer key={tag.uuid}>{tag.name}</TagContainer>
+            <TagContainer key={tag.id}>{tag.name}</TagContainer>
           ))}
         {isHover && (
           <ButtonContainer>

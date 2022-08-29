@@ -10,12 +10,9 @@ export const getTagsSuccess = createAction(
   }),
 );
 
-export const createTag = createAction(
-  'CREATE_TAG',
-  (Tag: Omit<Tag, 'uuid'>) => ({
-    payload: Tag,
-  }),
-);
+export const createTag = createAction('CREATE_TAG', (Tag: Omit<Tag, 'id'>) => ({
+  payload: Tag,
+}));
 
 export const createTagSuccess = createAction(
   'CREATE_TAG_SUCCESS',

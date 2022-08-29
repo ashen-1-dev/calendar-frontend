@@ -7,12 +7,12 @@ export const filterAppointments = (
 ) => {
   const { tags } = filter;
   if (tags && tags.length !== 0) {
-    const searchTagIds = tags.map(tag => tag.uuid);
+    const searchTagIds = tags.map(tag => tag.id);
     appointment = appointment.filter(appointment => {
       if (!appointment.tags) {
         return false;
       }
-      const appointmentTagsIds = appointment.tags.map(tag => tag.uuid);
+      const appointmentTagsIds = appointment.tags.map(tag => tag.id);
       return searchTagIds.every(v => appointmentTagsIds.includes(v));
     });
   }

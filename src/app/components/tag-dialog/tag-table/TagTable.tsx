@@ -20,7 +20,7 @@ const TagTable: React.FC<TagTableProps> = props => {
   const dispatch = useAppDispatch();
   const [selectedTagId, setSelectedTagId] = useState<string>();
   const handleOnClick = (tag: Tag) => {
-    dispatch(removeTag(tag.uuid));
+    dispatch(removeTag(tag.id));
   };
   return (
     <Wrapper>
@@ -30,12 +30,12 @@ const TagTable: React.FC<TagTableProps> = props => {
       </TableRow>
       {tags &&
         tags.map(tag => {
-          const isRowSelected = selectedTagId === tag.uuid;
+          const isRowSelected = selectedTagId === tag.id;
           return (
             <TableRow
-              key={tag.uuid}
+              key={tag.id}
               selected={isRowSelected}
-              onClick={() => setSelectedTagId(tag.uuid)}
+              onClick={() => setSelectedTagId(tag.id)}
             >
               <TableItem style={{ fontWeight: 'bold' }}>
                 <span>{tag.name}</span>

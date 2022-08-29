@@ -62,7 +62,7 @@ const AppointmentForm = ({
     appointment.date = data.date.getTime();
     !appointmentToEdit
       ? dispatch(createAppointment(appointment))
-      : dispatch(updateAppointment(appointmentToEdit.uuid, appointment));
+      : dispatch(updateAppointment(appointmentToEdit.id, appointment));
   };
 
   return (

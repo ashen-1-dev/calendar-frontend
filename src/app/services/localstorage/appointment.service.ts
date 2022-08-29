@@ -26,7 +26,7 @@ export class AppointmentServiceImpl implements IAppointmentService {
 
   public addAppointment(appointment: Appointment): void {
     const allRawAppointments = localStorage.getItem(APPOINTMENTS) || '[]';
-    appointment.uuid = generateId();
+    appointment.id = generateId();
     const appointments: Appointment[] = JSON.parse(allRawAppointments);
     return localStorage.setItem(
       APPOINTMENTS,
@@ -65,7 +65,7 @@ export class AppointmentServiceImpl implements IAppointmentService {
     }
     return localStorage.setItem(
       APPOINTMENTS,
-      JSON.stringify(appointments.filter(x => x.uuid !== uuid)),
+      JSON.stringify(appointments.filter(x => x.id !== uuid)),
     );
   }
 }

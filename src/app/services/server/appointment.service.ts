@@ -6,7 +6,7 @@ import axios from 'axios';
 class AppointmentServiceImpl implements IAppointmentService {
   constructor() {
     axios.defaults.baseURL =
-      process.env.SERVER_BASE_URL || 'http://localhost:3001';
+      process.env.SERVER_BASE_URL || 'http://localhost:5000';
   }
 
   public async addAppointment(appointment: Appointment): Promise<Appointment> {

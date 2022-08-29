@@ -1,5 +1,5 @@
 export interface Tag {
-  uuid: string;
+  id: string;
   name: string;
   description: string;
 }

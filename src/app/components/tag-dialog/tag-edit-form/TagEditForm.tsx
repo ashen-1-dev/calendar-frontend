@@ -11,7 +11,7 @@ import { createTag, getTags } from '../../../../store/tags/actions';
 import { useAppSelector } from '../../../hooks/useAppSelector';
 import { selectAllTags } from '../../../../store/tags/selectors';
 
-const validation = (values: Omit<Tag, 'uuid'>) => {
+const validation = (values: Omit<Tag, 'id'>) => {
   const errors: {
     name?: string;
     description?: string;
@@ -32,7 +32,7 @@ const TagEditForm = () => {
   useEffect(() => {
     dispatch(getTags());
   }, []);
-  const onSubmit = (tag: Omit<Tag, 'uuid'>, form) => {
+  const onSubmit = (tag: Omit<Tag, 'id'>, form) => {
     dispatch(createTag(tag));
     form.reset();
   };

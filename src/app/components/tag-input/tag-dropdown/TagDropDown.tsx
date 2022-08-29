@@ -10,7 +10,7 @@ const TagDropDown: React.FC<{
   return (
     <Wrapper>
       {items.map(tag => (
-        <DropDownTagItem key={tag.uuid} onClick={() => onItemClick(tag)}>
+        <DropDownTagItem key={tag.id} onClick={() => onItemClick(tag)}>
           <div>{tag.name}</div>
         </DropDownTagItem>
       ))}

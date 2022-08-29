@@ -12,8 +12,8 @@ const TagList: React.FC<{
     <Wrapper>
       {items.map(item => (
         <TagItem
-          key={item.uuid}
-          onRemoval={() => onRemoval(item.uuid)}
+          key={item.id}
+          onRemoval={() => onRemoval(item.id)}
           item={item}
         />
       ))}
